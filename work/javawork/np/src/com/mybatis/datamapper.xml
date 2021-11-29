@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.DataMapper">
+	
+	<insert id="insert" parameterType="data">
+		INSERT INTO DATA VALUES (NO_SEQ.NEXTVAL,#{btn},#{temp})
+	</insert>
+	
+	<update id="update" parameterType="data">
+		UPDATE DATA SET BTN = (#{btn}), TEMP = (#{temp}) WHERE NO = 1
+	</update>
+	
+	<select id="select" parameterType="String" 
+	resultType="data">
+		SELECT * FROM DATA WHERE NO=#{NO}	
+	</select>
+	
+	<select id="selectall" resultType="data">
+		SELECT * FROM DATA ORDER BY NO DESC
+	</select>
+</mapper>
+
+
+
+
+
+
