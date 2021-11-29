@@ -1,3 +1,10 @@
 git test
 12asd23122ads
 zz
+1. 테이블 생성
+create table 테이블명(
+컬럼명 varchar2(20), 컬럼명 varchar2(20));
+
+2. 데이터 삽입
+insert into 테이블명 values(
+'값1', '값2')
