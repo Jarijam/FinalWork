@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.ContactMapper">
+	
+	<insert id="insert" parameterType="contact">
+		INSERT INTO CONTACT VALUES (NO_SEQ.NEXTVAL,#{X},#{Y})
+	</insert>
+	
+	<update id="update" parameterType="contact">
+		UPDATE CONTACT SET X = (#{X}), Y = (#{Y}) WHERE NO = 1
+	</update>
+	
+	<select id="select" parameterType="String" 
+	resultType="contact">
+		SELECT * FROM CONTACT WHERE NO=#{NO}	
+	</select>
+	
+	<select id="selectall" resultType="contact">
+		SELECT * FROM CONTACT ORDER BY NO DESC
+	</select>
+</mapper>
+
+
+
+
+
+
