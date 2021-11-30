@@ -2,7 +2,6 @@ package com.frame;
 
 import java.util.ArrayList;
 
-import com.vo.DataVO;
 
 public interface Dao<K,V> {
 	public void insert(V v) throws Exception;
