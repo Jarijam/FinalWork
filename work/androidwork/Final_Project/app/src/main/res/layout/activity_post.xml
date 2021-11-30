@@ -4,47 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back"
+    android:background="@drawable/fire3"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="497dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <ImageView
-        android:layout_width="220dp"
-        android:layout_height="190dp"
-        android:src="@drawable/control"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="1dp"
-        android:layout_marginTop="10dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="120dp"
-            android:text="HOME\nCONTROLLER"
-            android:textColor="#FFFFFF"
-            android:textSize="100sp"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="122dp"
-            tools:layout_editor_absoluteY="1dp" />
-
-        <ImageView
-            android:layout_width="500dp"
-            android:layout_height="400dp"
-            android:src="@drawable/iot"
-            tools:layout_editor_absoluteX="543dp"
-            tools:layout_editor_absoluteY="-39dp"
-            />
-
-    </LinearLayout>
-
-    <ImageView
-        android:layout_width="400dp"
-        android:layout_height="300dp"
-        android:layout_gravity="right|bottom"
-        android:src="@drawable/robot" />
+        android:gravity="bottom"
+        android:text="Fire\nFIGHTER"
+        android:textColor="#433F3F"
+        android:textSize="100sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="122dp"
+        tools:layout_editor_absoluteY="1dp" />
 
 
 </LinearLayout>
