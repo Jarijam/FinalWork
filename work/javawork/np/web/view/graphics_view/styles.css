@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	padding: 30px;
+	font-size: 14px;
+	font-family: sens-serif;
+	color: #000;
+	background-color: #eee;
+}
+
+#canvas {
+	background-color: rgb(253, 248, 232);
+	border: 5px solid #333;
+}
