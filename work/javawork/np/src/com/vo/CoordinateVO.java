@@ -18,7 +18,7 @@ public class CoordinateVO {
 	}
 	
 	public String toString() {
-		return "CoordinateVO [X=" + X +"Y="+Y+ "]";
+		return "CoordinateVO [X=" + X + "Y=" + Y + "]";
 	}
 	
 	public String getX() {
