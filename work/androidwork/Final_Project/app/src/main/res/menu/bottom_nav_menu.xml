@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_control"
+        android:enabled="true"
+        android:icon="@drawable/control"
+        android:title="Controller" />
+
+    <item
+        android:id="@+id/navigation_web"
+        android:enabled="true"
+        android:icon="@drawable/sensor"
+        android:title="Information" />
+
+    <item
+        android:id="@+id/navigation_infor"
+        android:enabled="true"
+        android:icon="@drawable/chrome"
+        android:title="Web" />
+
+</menu>
