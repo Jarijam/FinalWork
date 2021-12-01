@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 	#container{
 		width: 960px;
@@ -36,6 +37,19 @@
 		padding: 20px;
 		border: 1px solid #5D5D5D;
 	}
+	@media(max-width: 550px){
+		#container{
+			width: auto;
+		}
+		#content{
+			float: none;
+			width: auto;
+		}
+		#sidebar{
+			float: none;
+			width: auto;
+		}
+	}
 </style>
 </head>
 <body>
@@ -52,6 +66,7 @@
 			<h2>참고 사이트</h2>
 			<ol>
 				<li><a href="/np/view/sample_view/senser_table.jsp">테이블</a></li>
+				<li><a href="/np/view/sample_view/homeTest.jsp">home</a></li>
 				<li><a href="https://www.naver.com/">네이버</a></li>
 				<li><a href="https://www.daum.net/">다음</a></li>
 			</ol>
