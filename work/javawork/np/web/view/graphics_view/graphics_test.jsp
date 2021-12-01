@@ -12,6 +12,7 @@
 	<meta charset="UTF-8">
 	<title>Graphics Test</title>
 	<link rel="stylesheet" href="/np/view/graphics_view/styles.css">
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<!-- <script src="/np/view/graphics_view/animation.js"></script> -->
@@ -34,68 +35,61 @@
 	           })
 	     } */
 	     
-	     function getData() {
-	         $.ajax({
-	            url:'uu.mc',
-	            success:function(data){
-	            	console.log("data뻥션들어왔니?")
-	               console.log(data);
-	               $(data).each(function(idx,item){
-	                  console.log(item.X+": XVAl");
-	                  $('#X').html(item.X);
-	               });
-	            }
-	         });
-	               return data;
-	      };
-	    /*   $(document).ready(function(){
-	         setInterval(function(){
-	            getData();
-	         }, 1000);
-	      });  */
+	
+	    
+	   
 
-		
-		var data = getData();
-		console.log(data);
 	
 	
 		document.addEventListener( 'DOMContentLoaded', function(){
 		/**@type {HTMLCanvasElement} */
 		
-		const canvas = document.getElementById('canvas');
-		const ctx = canvas.getContext('2d');
-
+		     function codi(x,y) {
+			     const canvas = document.getElementById('canvas');
+			 	 const ctx = canvas.getContext('2d');
+			 		/* ctx.lineWidth = 10;
+					ctx.lineCap = 'round';
+					ctx.lineJoin = 'bevel';
+					ctx.beginPath();
+					ctx.moveTo(x,y);
+					ctx.lineTo(x,y);
+					//ctx.lineTo(100,450);
+					ctx.stroke();*/
+					ctx.beginPath();
+					ctx.fillStyle = 'red';
+					ctx.rect(x,y,10,10);
+					ctx.fill();
+					}
 		
-		// fill style
-		ctx.fillStyle = 'red';
-		// starting point
-		let x = 0;
-		let y = 200;
-		let z = data;
-		console.log(z+"값넘어가요?");
-
+		
+		function getData() {
+	 	         $.ajax({
+		            url:'uu.mc',
+		            success:function(data){
+		            	console.log("data뻥션들어왔니?")
+		               console.log(data);
+		               $(data).each(function(idx,item){
+		                codi(item.X,item.Y);
+		                //codi(item.Y);
+		                
+		                
+		               });
+		            }
+		         });
+		      };
+		      
+		  var data = getData();
+		  $(document).ready(function(){
+				setInterval(function(){
+					getData();
+				}, 50);
+			});
 			
-		//create a draw function to draw each frame
-		function draw() {
-			//if 'x' is greater than 500px, stop animation
-			if(x>500) {
-				return;
-			}
-			if(y>500) {
-				return;
-			}
-			/* ctx.clearRect(0,0,canvas.width,canvas.height); */
-			ctx.fillRect(x,y,50,50);
-			//increase 'x' value by '5px'
-			x += 10;
-			/* y += 10; */
-			//register 'draw()' call before next paint
-			requestAnimationFrame(draw);
-		}
 
-		requestAnimationFrame(draw);
 		
-	});
+			}); 
+		
+
 	
 		
 		

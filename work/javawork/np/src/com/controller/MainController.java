@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
@@ -72,11 +73,28 @@ public class MainController {
 			for(CoordinateVO u:list) {
 				JSONObject jo = new JSONObject();
 				jo.put("X", u.getX()+"");
+				jo.put("Y", u.getY()+"");
 				ja.add(jo);
 			}
 			out.print(ja.toJSONString());
 			out.close();
 		}
+	  
+	  @RequestMapping("/iot1.mc")
+		@ResponseBody
+		public void iotdata(HttpServletRequest request, CoordinateVO coord) throws Exception {
+			String temp = request.getParameter("temp");
+			String humi = request.getParameter("humi");
+			int f_temp = Integer.parseInt(temp);
+			int f_humi = Integer.parseInt(humi);
+			System.out.println(f_temp+" : "+f_humi);
+			CoordinateVO coord1 = new CoordinateVO(temp, humi);
+			
+			cdservice.register(coord1);
+			//data_log.debug(f_temp+" : "+f_humi);
+		}
+	  
+	 
 	  
 	
 }
