@@ -4,11 +4,19 @@ PUBLIC "-//mybatis.org/DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-	    <typeAlias type="com.vo.DataVO" alias="data"/>
+	    <typeAlias type="com.vo.CoordinateVO" alias="coordinate"/>
+	    <typeAlias type="com.vo.ContactVO" alias="contact"/>
+	    <typeAlias type="com.vo.CamVO" alias="cam"/>
+	    <typeAlias type="com.vo.SonicVO" alias="sonic"/>
+	    <typeAlias type="com.vo.DustVO" alias="dust"/>
 	</typeAliases>
 	
 	<mappers>
-		<mapper resource="com/mybatis/datamapper.xml"/>
+		<mapper resource="com/mybatis/coordinatemapper.xml"/>
+		<mapper resource="com/mybatis/contactmapper.xml"/>
+		<mapper resource="com/mybatis/cammapper.xml"/>
+		<mapper resource="com/mybatis/sonicmapper.xml"/>
+		<mapper resource="com/mybatis/dustmapper.xml"/>
 	</mappers>
 </configuration>
 

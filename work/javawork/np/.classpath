@@ -22,7 +22,7 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/a/Downloads/org.eclipse.paho.client.mqttv3-1.2.2.jar"/>
 	<classpathentry kind="lib" path="web/WEB-INF/lib/ojdbc6_g.jar"/>
+	<classpathentry kind="lib" path="web/lib/org.eclipse.paho.client.mqttv3-1.2.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

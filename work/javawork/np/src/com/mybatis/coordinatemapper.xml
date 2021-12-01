@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.CoordinateMapper">
+	
+	<insert id="insert" parameterType="coordinate">
+		INSERT INTO COORDINATE VALUES (COORD_NO.NEXTVAL,#{X},#{Y})
+	</insert>
+	
+	<update id="update" parameterType="coordinate">
+		UPDATE COORDINATE SET X = (#{X}), Y = (#{Y}) WHERE COORD_NO = 1
+	</update>
+	
+	<select id="select" parameterType="String" 
+	resultType="coordinate">
+		SELECT * FROM COORDINATE WHERE COORD_NO=#{COORD_NO}	
+	</select>
+	
+	<select id="selectall" resultType="coordinate">
+		SELECT * FROM COORDINATE ORDER BY COORD_NO DESC
+	</select>
+</mapper>
+
+
+
+
+
+

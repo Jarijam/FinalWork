@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.CamMapper">
+	
+	<insert id="insert" parameterType="cam">
+		INSERT INTO CAM VALUES (NO_SEQ.NEXTVAL,#{X},#{Y})
+	</insert>
+	
+	<update id="update" parameterType="cam">
+		UPDATE CAM SET X = (#{X}), Y = (#{Y}) WHERE NO = 1
+	</update>
+	
+	<select id="select" parameterType="cam" 
+	resultType="cam">
+		SELECT * FROM CAM WHERE NO=#{NO}	
+	</select>
+	
+	<select id="selectall" resultType="cam">
+		SELECT * FROM CAM ORDER BY NO DESC
+	</select>
+</mapper>
+
+
+
+
+
+

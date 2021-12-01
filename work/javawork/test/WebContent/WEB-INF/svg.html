@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="kr">
+	<head>
+	<meta charset="UTF-8">
+	<title>http://www.blueb.co.kr</title>
+
+<style rel="stylesheet">
+* {
+  outline: none;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 10px;
+  min-height: 400px;
+  font-family: sans-serif;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  font: 16px sans-serif;
+  background: -webkit-radial-gradient(#b3b1cb, #e1defe);
+  background: radial-gradient(#b3b1cb, #e1defe);
+}
+@media (min-height: 500px) {
+  body {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+
+.component {
+  position: relative;
+  color: white;
+  background-color: #3D3D4A;
+  border-radius: 10px;
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.5), 0px -2px 40px rgba(0, 0, 0, 0.3);
+  min-width: 280px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+@media (min-width: 800px) {
+  .component {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
+.component:before, .component:after {
+  content: '';
+  background-color: transparent;
+  position: absolute;
+  z-index: -1;
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
+  top: 100%;
+  bottom: -5px;
+  left: 8%;
+  right: 8%;
+  border-radius: 50%;
+}
+.component:after {
+  box-shadow: 0 25px 20px rgba(0, 0, 0, 0.6);
+  left: 12%;
+  right: 12%;
+}
+.component aside {
+  position: relative;
+  display: block;
+  background: #373641;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+@media (min-width: 800px) {
+  .component aside {
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 10px;
+    min-width: 140px;
+  }
+}
+.component aside .preamp {
+  height: 70px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+@media (min-width: 800px) {
+  .component aside .preamp {
+    height: 100px;
+  }
+}
+.component aside .preamp > label {
+  color: #DEDFE4;
+  text-transform: uppercase;
+  display: block;
+  font-weight: 700;
+}
+.component main {
+  position: relative;
+  display: block;
+  padding-bottom: 50px;
+}
+@media (min-width: 800px) {
+  .component main {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+.component main .presets {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 10px;
+  padding-left: calc(40px/2 - .5em);
+  height: 100px;
+  color: #8e8e9b;
+  font-weight: 700;
+  border-color: #4F4F62;
+  background: transparent;
+}
+@media (min-width: 800px) {
+  .component main .presets {
+    padding-left: calc(80px/2 - .5em);
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+  }
+}
+.component main .presets > label {
+  display: inline-block;
+  margin-right: 20px;
+}
+.component main .presets > select {
+  -webkit-appearance: none;
+  border-radius: 8px;
+  border: 2px solid currentColor;
+  max-width: 200px;
+  padding: 4px;
+  color: inherit;
+  background: transparent;
+  border-color: inherit;
+  height: 30px;
+  margin-right: 10px;
+}
+@media (min-width: 800px) {
+  .component main .presets > select {
+    min-width: 200px;
+    padding-left: 10px;
+  }
+}
+.component main .presets > select option {
+  background-color: #3D3D4A;
+}
+.component main .presets > button {
+  height: 30px;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  border: 2px solid currentColor;
+  border-color: inherit;
+  padding: 4px 10px;
+  cursor: pointer;
+  outline: none;
+}
+@media (min-width: 800px) {
+  .component main .presets > button {
+    min-width: 80px;
+  }
+}
+.component main .sliders {
+  position: relative;
+  display: inline-block;
+}
+.component main .sliders .range-slider {
+  display: inline-block;
+  width: 40px;
+  position: relative;
+  height: 300px;
+  float: left;
+}
+@media (min-width: 800px) {
+  .component main .sliders .range-slider {
+    width: 80px;
+  }
+}
+.component main .sliders .range-slider::after {
+  position: absolute;
+  bottom: -24px;
+  left: calc(50% - 2em);
+  font-size: 80%;
+  color: #8e8e9b;
+  content: '32';
+  width: 4em;
+  text-align: center;
+}
+.component main .sliders .range-slider:nth-child(2)::after {
+  content: '32';
+}
+.component main .sliders .range-slider:nth-child(3)::after {
+  content: '64';
+}
+.component main .sliders .range-slider:nth-child(4)::after {
+  content: '128';
+}
+.component main .sliders .range-slider:nth-child(5)::after {
+  content: '256';
+}
+.component main .sliders .range-slider:nth-child(6)::after {
+  content: '512';
+}
+.component main .sliders .range-slider:nth-child(7)::after {
+  content: '1K';
+}
+.component main .sliders .range-slider:nth-child(8)::after {
+  content: '2K';
+}
+.component main .sliders .range-slider__thumb {
+  opacity: 1;
+  position: absolute;
+  left: 10px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  background-color: white;
+  color: #8376FF;
+  text-align: center;
+  font-size: 40%;
+  box-shadow: 0 0 2px #373641;
+  border-radius: 50%;
+  pointer-events: none;
+  cursor: pointer;
+  z-index: 2;
+}
+@media (min-width: 800px) {
+  .component main .sliders .range-slider__thumb {
+    left: 30px;
+  }
+}
+.component main .sliders .range-slider__bar {
+  left: 18px;
+  bottom: 0;
+  position: absolute;
+  background: -webkit-linear-gradient(#9791B8, #8376FF);
+  background: linear-gradient(#9791B8, #8376FF);
+  pointer-events: none;
+  width: 4px;
+  border-radius: 10px;
+  opacity: 1;
+}
+@media (min-width: 800px) {
+  .component main .sliders .range-slider__bar {
+    left: 38px;
+  }
+}
+.component main .sliders .range-slider input[type=range][orient=vertical] {
+  position: relative;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+  position: relative;
+  -webkit-writing-mode: bt-lr;
+      -ms-writing-mode: bt-lr;
+          writing-mode: bt-lr;
+  -webkit-appearance: slider-vertical;
+}
+.component main .sliders .range-slider input[type=range][orient=vertical]::-webkit-slider-runnable-track, .component main .sliders .range-slider input[type=range][orient=vertical]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+.component main .sliders .range-slider input[type=range][orient=vertical]::-webkit-slider-runnable-track {
+  border: none;
+  background: #343440;
+  width: 4px;
+  border-color: #343440;
+  border-radius: 10px;
+  box-shadow: 0 0 0 2px #3D3D4A;
+}
+.component main .sliders .range-slider input[type=range][orient=vertical]::-moz-range-track {
+  border: none;
+  background: #343440;
+  width: 4px;
+  border-color: #343440;
+  border-radius: 10px;
+  box-shadow: 0 0 0 2px #3D3D4A;
+}
+.component main .sliders .range-slider input[type=range][orient=vertical]::-ms-track {
+  border: none;
+  background: #343440;
+  width: 4px;
+  border-color: #343440;
+  border-radius: 10px;
+  box-shadow: 0 0 0 2px #3D3D4A;
+  color: transparent;
+  height: 100%;
+}
+.component main .sliders .range-slider input[type=range][orient=vertical]::-ms-fill-lower, .component main .sliders .range-slider input[type=range][orient=vertical]::-ms-fill-upper, .component main .sliders .range-slider input[type=range][orient=vertical]::-ms-tooltip {
+  display: none;
+}
+.component main .sliders .range-slider input[type=range][orient=vertical]::-webkit-slider-thumb {
+  left: -20px;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+}
+.component main .sliders .range-slider input[type=range][orient=vertical]::-moz-range-thumb {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+}
+.component main .sliders .range-slider input[type=range][orient=vertical]::-ms-thumb {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+}
+.component main .sliders svg {
+  z-index: 1;
+  overflow: visible;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke-width: 1;
+}
+.component main .sliders svg .line {
+  stroke: #F7ED7D;
+}
+.component main .sliders svg .line-shadow {
+  z-index: 1;
+  stroke-width: 2;
+  stroke: #252525;
+  opacity: .35;
+  display: none;
+}
+@media (min-width: 800px) {
+  .component main .sliders svg .line-shadow {
+    display: block;
+  }
+}
+
+.design-reference {
+  position: fixed;
+  bottom: 6px;
+  right: 6px;
+  color: #8e8e9b;
+  font-size: 70%;
+  display: none;
+}
+@media (min-height: 600px) {
+  .design-reference {
+    display: block;
+  }
+}
+
+</style>
+</head>
+<body>
+
+
+
+<div class="component">
+
+  <aside>
+    <div class="preamp">
+      <label>preamp</label>
+    </div>
+  </aside>
+
+  <main>
+    <div class="presets">
+      <label>Presets:</label>
+      <select name="Custom" onchange="app.selectPreset(this)">
+        <option value="custom">Custom</option>
+        <option value="rock">Rock</option>
+        <option value="pop">Pop</option>
+        <option value="pop">Classical</option>
+        <option value="pop">Disco</option>
+      </select>
+      <button class="reset" onclick="app.reset()">Reset</button>
+    </div>
+
+    <div class="sliders">
+      
+      <svg preserveAspectRatio="none" viewBox="0 0 140 100">
+        <path d="" class="line-shadow"></path>
+        <path d="" class="line"></path>        
+      </svg>
+
+      <div class="range-slider">
+        <input type="range" orient="vertical" min="0" max="100" />
+        <div class="range-slider__bar"></div>
+        <div class="range-slider__thumb"></div>
+      </div>
+
+      <div class="range-slider">
+        <input type="range" orient="vertical" min="0" max="100" />
+        <div class="range-slider__bar"></div>
+        <div class="range-slider__thumb"></div>
+      </div>
+
+      <div class="range-slider">
+        <input type="range" orient="vertical" min="0" max="100" />
+        <div class="range-slider__bar"></div>
+        <div class="range-slider__thumb"></div>
+      </div>
+
+      <div class="range-slider">
+        <input type="range" orient="vertical" min="0" max="100" />
+        <div class="range-slider__bar"></div>
+        <div class="range-slider__thumb"></div>
+      </div>
+
+      <div class="range-slider">
+        <input type="range" orient="vertical" min="0" max="100" />
+        <div class="range-slider__bar"></div>
+        <div class="range-slider__thumb"></div>
+      </div>
+
+      <div class="range-slider">
+        <input type="range" orient="vertical" min="0" max="100" />
+        <div class="range-slider__bar"></div>
+        <div class="range-slider__thumb"></div>
+      </div>
+
+      <div class="range-slider">
+        <input type="range" orient="vertical" min="0" max="100" />
+        <div class="range-slider__bar"></div>
+        <div class="range-slider__thumb"></div>
+      </div>
+
+    </div>
+  </main>    
+</div>
+
+
+
+<script type="text/javascript">
+'use strict';
+if (!String.prototype.format) {
+    String.prototype.format = function () {
+        var args = arguments;
+        return this.replace(/{(\d+)}/g, function (match, number) {
+            return typeof args[number] != 'undefined' ? args[number] : match;
+        });
+    };
+}
+var app = function () {
+    var $svgLine = document.querySelector('svg .line');
+    var $svgLineShadow = document.querySelector('svg .line-shadow');
+    var sliderThumbSize = 20;
+    var sliderHeight = 300;
+    var svgViewBoxHeight = 100;
+    var svgViewBoxThumbLimit = sliderThumbSize / 2 * (svgViewBoxHeight / sliderHeight);
+    var svgViewBoxGraphMax = svgViewBoxHeight - svgViewBoxThumbLimit;
+    var svgViewBoxGraphMin = svgViewBoxThumbLimit;
+    var ranges = {
+        range1: null,
+        range2: null,
+        range3: null,
+        range4: null,
+        range5: null,
+        range6: null,
+        range7: null
+    };
+    var points = {
+        begin: {
+            x: 10,
+            y: 0
+        },
+        point1: {
+            x: 10,
+            y: 0
+        },
+        control1: {
+            x: 20,
+            y: 10
+        },
+        control2: {
+            x: 20,
+            y: 0
+        },
+        point2: {
+            x: 30,
+            y: 0
+        },
+        control3: {
+            x: 40,
+            y: 0
+        },
+        point3: {
+            x: 50,
+            y: 0
+        },
+        control4: {
+            x: 60,
+            y: 0
+        },
+        point4: {
+            x: 70,
+            y: 0
+        },
+        control5: {
+            x: 80,
+            y: 0
+        },
+        point5: {
+            x: 90,
+            y: 0
+        },
+        control6: {
+            x: 100,
+            y: 0
+        },
+        point6: {
+            x: 110,
+            y: 0
+        },
+        control7: {
+            x: 120,
+            y: 0
+        },
+        point7: {
+            x: 130,
+            y: 0
+        }
+    };
+    function mapDataRange(value) {
+        return (value - 0) * (svgViewBoxGraphMax - svgViewBoxGraphMin) / (svgViewBoxHeight - 0) + svgViewBoxGraphMin;
+    }
+    function updateSlider($element) {
+        if ($element) {
+            var rangeIndex = $element.getAttribute('data-slider-index'), range = ranges[rangeIndex], value = $element.value;
+            if (range === value) {
+                return;
+            }
+            ranges[rangeIndex] = value;
+            var parent = $element.parentElement, $thumb = parent.querySelector('.range-slider__thumb'), $bar = parent.querySelector('.range-slider__bar'), pct = value * ((sliderHeight - sliderThumbSize) / sliderHeight);
+            $thumb.style.bottom = pct + '%';
+            $bar.style.height = 'calc(' + pct + '% + ' + sliderThumbSize / 2 + 'px)';
+            renderSliderGraph();
+        }
+    }
+    function updatePoints() {
+        points.point1.y = svgViewBoxHeight - svgViewBoxHeight * ranges.range1 / 100 | 0;
+        points.point2.y = svgViewBoxHeight - svgViewBoxHeight * ranges.range2 / 100 | 0;
+        points.point3.y = svgViewBoxHeight - svgViewBoxHeight * ranges.range3 / 100 | 0;
+        points.point4.y = svgViewBoxHeight - svgViewBoxHeight * ranges.range4 / 100 | 0;
+        points.point5.y = svgViewBoxHeight - svgViewBoxHeight * ranges.range5 / 100 | 0;
+        points.point6.y = svgViewBoxHeight - svgViewBoxHeight * ranges.range6 / 100 | 0;
+        points.point7.y = svgViewBoxHeight - svgViewBoxHeight * ranges.range7 / 100 | 0;
+        var max = svgViewBoxGraphMax;
+        var min = svgViewBoxGraphMin;
+        points.point1.y = mapDataRange(points.point1.y);
+        points.point2.y = mapDataRange(points.point2.y);
+        points.point3.y = mapDataRange(points.point3.y);
+        points.point4.y = mapDataRange(points.point4.y);
+        points.point5.y = mapDataRange(points.point5.y);
+        points.point6.y = mapDataRange(points.point6.y);
+        points.point7.y = mapDataRange(points.point7.y);
+        points.begin.y = points.point1.y;
+        points.control1.y = points.point1.y;
+        points.control2.y = points.point2.y;
+        points.control3.y = points.point3.y;
+        points.control4.y = points.point4.y;
+        points.control5.y = points.point5.y;
+        points.control6.y = points.point6.y;
+        points.control7.y = points.point7.y;
+    }
+    function getInterpolatedLine(type) {
+        var shadowOffset = 0;
+        if (type === 'shadow') {
+            shadowOffset = 10;
+        }
+        return 'M {0},{1} L {2},{3} C {4},{5} {6},{7} {8},{9} S {10} {11}, {12} {13} S {14} {15}, {16} {17} S {18} {19}, {20} {21} S {22} {23}, {24} {25} S {26} {27}, {28} {29}'.format(points.begin.x, points.begin.y, points.point1.x, points.point1.y, points.control1.x, points.control1.y, points.control2.x, points.control2.y + shadowOffset, points.point2.x, points.point2.y + shadowOffset, points.control3.x, points.control3.y, points.point3.x, points.point3.y, points.control4.x, points.control4.y + shadowOffset, points.point4.x, points.point4.y + shadowOffset, points.control5.x, points.control5.y, points.point5.x, points.point5.y, points.control6.x, points.control6.y + shadowOffset, points.point6.x, points.point6.y + shadowOffset, points.control7.x, points.control7.y, points.point7.x, points.point7.y);
+    }
+    function reset() {
+        var inputs = app.inputs;
+        inputs.forEach(function (input) {
+            return input.value = 50;
+        });
+        inputs.forEach(function (input) {
+            return app.updateSlider(input);
+        });
+    }
+    function renderSliderGraph() {
+        updatePoints();
+        $svgLine.setAttribute('d', getInterpolatedLine());
+        $svgLineShadow.setAttribute('d', getInterpolatedLine('shadow'));
+    }
+    function selectPreset(type) {
+        var inputs = app.inputs;
+        inputs.forEach(function (input) {
+            return input.value = Math.random() * 100 | 0;
+        });
+        inputs.forEach(function (input) {
+            return app.updateSlider(input);
+        });
+    }
+    return {
+        inputs: [].slice.call(document.querySelectorAll('.sliders input')),
+        updateSlider: updateSlider,
+        reset: reset,
+        selectPreset: selectPreset
+    };
+}();
+(function initAndSetupTheSliders() {
+    var inputs = app.inputs;
+    var index = 1;
+    inputs.forEach(function (input) {
+        return input.setAttribute('data-slider-index', 'range' + index++);
+    });
+    inputs.forEach(function (input) {
+        return input.value = 50;
+    });
+    inputs.forEach(function (input) {
+        return app.updateSlider(input);
+    });
+    inputs.forEach(function (input) {
+        return input.addEventListener('input', function (element) {
+            return app.updateSlider(input);
+        });
+    });
+    inputs.forEach(function (input) {
+        return input.addEventListener('change', function (element) {
+            return app.updateSlider(input);
+        });
+    });
+    app.selectPreset('custom');
+}());
+</script>
+</body>
+</html>
