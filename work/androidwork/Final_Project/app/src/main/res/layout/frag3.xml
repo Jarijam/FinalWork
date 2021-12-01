@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@drawable/back_1"
     android:orientation="vertical">
 
     <LinearLayout
@@ -53,14 +53,14 @@
                 android:layout_marginLeft="100dp"
                 android:layout_marginTop="100dp"
                 android:layout_marginRight="100dp"
-                android:src="@drawable/clean" />
+                android:src="@drawable/firesensor" />
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="30dp"
                 android:layout_gravity="right"
                 android:layout_marginRight="100dp"
-                android:text="오염도"
+                android:text="화재 감지"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="20dp" />
@@ -70,10 +70,10 @@
                 android:layout_height="50dp"
                 android:layout_gravity="right"
                 android:layout_marginRight="100dp"
-                android:text="70%"
+                android:text="Warring!!"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="30dp" />
+                android:textSize="22dp" />
 
         </LinearLayout>
 
@@ -137,6 +137,138 @@
                 android:layout_gravity="right"
                 android:layout_marginRight="100dp"
                 android:text="Warring!!"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="22dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="552dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="right"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginRight="100dp"
+                android:src="@drawable/gassensor" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="100dp"
+                android:text="가스 감지"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="100dp"
+                android:text="Warring!!"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="22dp" />
+
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="right"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginRight="100dp"
+                android:src="@drawable/wifi" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="100dp"
+                android:text="wifi"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="100dp"
+                android:text="ON"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="22dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="552dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="right"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginRight="100dp"
+                android:src="@drawable/call" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="100dp"
+                android:text="긴급 전화"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="100dp"
+                android:text="call-119"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="22dp" />
+
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="right"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginRight="100dp"
+                android:src="@drawable/controller" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="100dp"
+                android:text="무선Mode"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="100dp"
+                android:text="ON"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="22dp" />

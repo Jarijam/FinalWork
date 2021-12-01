@@ -8,11 +8,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/final_luncher"
+        android:label="불IT났어"
+        android:roundIcon="@mipmap/final_luncher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Final_Project">
+        android:theme="@style/Theme.Final_Project"
+        android:usesCleartextTraffic="true">
         <activity android:name=".MainActivity" />
         <activity android:name=".PostActivity">
             <intent-filter>
