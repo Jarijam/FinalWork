@@ -36,7 +36,7 @@
 						<figcaption>
 							<h3>Game Center</h3>
 							<span>Jacob Cummings</span>
-							<a href="/np/view/senser_table.jsp">Take a look</a>
+							<a href="/np/view/sample_view/layout_test.jsp">Take a look</a>
 						</figcaption>
 					</figure>
 				</li>
