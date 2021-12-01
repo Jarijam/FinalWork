@@ -13,6 +13,10 @@
 		<link rel="stylesheet" type="text/css" href="/np/css/default.css" />
 		<link rel="stylesheet" type="text/css" href="/np/css/component.css" />
 		<script src="/np/js/custom.js"></script>
+		
+		<style>
+			h1{font-family: "Comic Sans MS";}
+		</style>
 	</head>
 	<body>
 		<div class="container demo-7">
