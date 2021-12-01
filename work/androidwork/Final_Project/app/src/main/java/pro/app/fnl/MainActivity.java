@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity
         frag1=new Frag1();
         frag2=new Frag2();
         frag3=new Frag3();
-        setFrag(0); // 첫 프래그먼트 화면 지정
+        setFrag(2); // 첫 프래그먼트 화면 지정
     }
 
     // 프레그먼트 교체
