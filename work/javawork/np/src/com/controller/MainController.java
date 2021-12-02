@@ -39,13 +39,6 @@ public class MainController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/getX", method = RequestMethod.GET,
-			produces = "application/text;charset=utf-8")
-	public @ResponseBody String coords(String x) {
-		System.out.println("ajax 통신: "+x);
-		return x;
-		
-	}
 	
 	  @RequestMapping("/graphics.mc") 
 	   public ModelAndView coords() throws Exception { 
@@ -58,7 +51,7 @@ public class MainController {
 	   
 	   }
 	  
-	  @RequestMapping("/uu.mc")
+	  @RequestMapping("/crddata.mc")
 		@ResponseBody
 		public void uu(HttpServletResponse response) throws IOException {
 			response.setContentType("text/json;charset=UTF-8");
@@ -79,7 +72,7 @@ public class MainController {
 			out.print(ja.toJSONString());
 			out.close();
 		}
-	  
+	  //test용 (sendhttp)
 	  @RequestMapping("/iot1.mc")
 		@ResponseBody
 		public void iotdata(HttpServletRequest request, CoordinateVO coord) throws Exception {
@@ -93,6 +86,16 @@ public class MainController {
 			cdservice.register(coord1);
 			//data_log.debug(f_temp+" : "+f_humi);
 		}
+	  @RequestMapping("/data.mc")
+			@ResponseBody
+			public void data(HttpServletRequest request) throws Exception {
+				String btn = request.getParameter("btn");
+				System.out.println(btn);
+				CoordinateVO coord1 = new CoordinateVO(btn);
+				
+				cdservice.register(coord1);
+				//data_log.debug(f_temp+" : "+f_humi);
+			}
 	  
 	 
 	  
