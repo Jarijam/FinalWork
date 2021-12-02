@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@page import="com.vo.DataVO"%>
+<%@page import="com.vo.CoordinateVO"%>
 <%@page import="java.util.ArrayList"%>    
 <!DOCTYPE html>
 <html>

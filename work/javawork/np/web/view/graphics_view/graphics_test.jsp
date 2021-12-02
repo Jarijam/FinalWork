@@ -12,117 +12,76 @@
 	<meta charset="UTF-8">
 	<title>Graphics Test</title>
 	<link rel="stylesheet" href="/np/view/graphics_view/styles.css">
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<!-- <script src="/np/view/graphics_view/animation.js"></script> -->
 	<script type="text/javascript">
-/* 		function test(name){
-	          addr = $("#"+name).closest("div").find(".placeaddr").text(); 
-	         
-	         x = $("#"+name).closest("div").find(".x").text();
-	         alert(x)
-	         setMap(addr)
-	         $.ajax({
-	              url:"/uu.mc",
-	              type:"get",
-	              data:{"X":x},
-	              success:function(data){
-	                 
-	                 $("#test").empty();
-	                 $("#test").append(data)
-	              }
-	           })
-	     } */
-	     
-	     function getData() {
-	         $.ajax({
-	            url:'uu.mc',
-	            success:function(data){
-	            	console.log("data뻥션들어왔니?")
-	               console.log(data);
-	               $(data).each(function(idx,item){
-	                  console.log(item.X+": XVAl");
-	                  $('#X').html(item.X);
-	               });
-	            }
-	         });
-	               return data;
-	      };
-	    /*   $(document).ready(function(){
-	         setInterval(function(){
-	            getData();
-	         }, 1000);
-	      });  */
 
-		
-		var data = getData();
-		console.log(data);
-	
-	
 		document.addEventListener( 'DOMContentLoaded', function(){
 		/**@type {HTMLCanvasElement} */
 		
-		const canvas = document.getElementById('canvas');
-		const ctx = canvas.getContext('2d');
-
+		     function codi(x,y,x1,y1) {
+			     const canvas = document.getElementById('canvas');
+			 	 const ctx = canvas.getContext('2d');
+			 	    ctx.beginPath();
+					ctx.fillStyle = 'rgba(251,192,45,0.5)';
+					if (x<100) {
+					ctx.rect(x,y,20,20);
+						
+					}
+					ctx.fill();
+					
+			 	 	ctx.lineWidth = 1;
+					ctx.lineCap = 'round';
+					ctx.lineJoin = 'bevel';
+					ctx.beginPath();
+					ctx.moveTo(x,y);
+					ctx.lineTo(x1,y1);
+					ctx.stroke();
+					
+					}
 		
-		// fill style
-		ctx.fillStyle = 'red';
-		// starting point
-		let x = 0;
-		let y = 200;
-		let z = data;
-		console.log(z+"값넘어가요?");
-
+		
+		function getData() {
+	 	         $.ajax({
+		            url:'crddata.mc',
+		            success:function(data){
+		            	console.log("data뻥션들어왔니?")
+		               console.log(data);
+		        
+		               for (var i=0; i < data.length-1; i++) {
+		            	   codi(data[i].X,data[i].Y,data[i+1].X,data[i+1].Y);
+		               }
+		            }
+		         });
+		      };
+		      
+		  var data = getData();
+		  $(document).ready(function(){
+				setInterval(function(){
+					getData();
+				}, 50);
+			});
 			
-		//create a draw function to draw each frame
-		function draw() {
-			//if 'x' is greater than 500px, stop animation
-			if(x>500) {
-				return;
-			}
-			if(y>500) {
-				return;
-			}
-			/* ctx.clearRect(0,0,canvas.width,canvas.height); */
-			ctx.fillRect(x,y,50,50);
-			//increase 'x' value by '5px'
-			x += 10;
-			/* y += 10; */
-			//register 'draw()' call before next paint
-			requestAnimationFrame(draw);
-		}
 
-		requestAnimationFrame(draw);
 		
-	});
+			}); 
+		
+
 	
 		
 		
 	</script>
 	</head>
 	<body>
-	<% ArrayList<CoordinateVO> coordlist = (ArrayList<CoordinateVO>) request.getAttribute("coordlist"); %>
+	
 		<canvas id="canvas" width="800" height="500">
 			does it work??
 		</canvas>
 		
 		
-		<!-- rendering logic -->
-		<!-- <script src="./index.js"></script> -->
-		<!-- <script src="./firstdraw.js"></script> -->
-         <div>
-		<%        	                       
-           for(int i = 0; i < coordlist.size() ; i++) { 
-           CoordinateVO coord = coordlist.get(i);
-         %>
-		<%-- <div class="coord_x" ><%= coord.getX() %></div> --%>
-		<a id="x"></a>
-		<!-- <button class="coordbtn" type="button" id="coordbtn1" onclick="test('coordbtn')">개객기</button> -->
-		</div>
-		<%
-           }
-		%>
+	
 		
 	</body>
 </html>
