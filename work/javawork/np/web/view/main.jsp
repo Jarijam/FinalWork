@@ -3,16 +3,20 @@
 <html lang="en" class="no-js">
 	<head>
 		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">  -->
 		<title>Caption Hover Effects - Demo 7</title>
-		<meta name="description" content="" />
+		<!-- <meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<meta name="author" content="Codrops" />
-		<link rel="shortcut icon" href="../favicon.ico"> 
+		<link rel="shortcut icon" href="../favicon.ico">  -->
 		<link rel="stylesheet" type="text/css" href="/np/css/default.css" />
 		<link rel="stylesheet" type="text/css" href="/np/css/component.css" />
 		<script src="/np/js/custom.js"></script>
+		
+		<style>
+			h1{font-family: "Comic Sans MS";}
+		</style>
 	</head>
 	<body>
 		<div class="container demo-7">
@@ -88,6 +92,6 @@
 				</li>
 			</ul>
 		</div><!-- /container -->
-		<script src="js/toucheffects.js"></script>
+		<script src="/np/js/toucheffects.js"></script>
 	</body>
 </html>
