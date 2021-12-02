@@ -13,7 +13,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,7 +34,7 @@ public class MainController {
 	@RequestMapping("/main.mc")
 	public ModelAndView main() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("main");
+		mv.setViewName("main2");
 		return mv;
 	}
 	
@@ -96,6 +95,7 @@ public class MainController {
 				cdservice.register(coord1);
 				//data_log.debug(f_temp+" : "+f_humi);
 			}
+	  
 	  
 	 
 	  

@@ -6,12 +6,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/np/view/sample_view/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 </head>
 <body>
 <!-- header -->
 <header>
 	<div class="container">
-		<div class="logo"><img src="/np/img/logo1.png"></div>
+		<div class="logo"></div>
 			<ul class="sidemenu">
 				<li><a href="#">Home</a></li>
 				<li><a href="#">SiteMap</a></li>
@@ -49,30 +54,12 @@
 	</div>
 </nav>
 <!-- section -->
-<section id="section1">
-	<div class="container">
-		<div class="leftBox">
-			<div class="graph1"><img src="/np/img/graph1.png">
-				<!-- 그래프1 추가 -->
-			</div>
-			<div class="graph2"><img src="/np/img/graph2.png">				
-				<!-- 그래프2 추가 -->
-			</div>
-		</div>
-		<div class="rightBox">
-			<div class="imgBox"><img src="/np/img/img1.png">
-				
-				<!-- 이미지 추가예정 -->
-			</div>
-			<div class="table"><img src="/np/img/graph3.jpg">
-				
-				<!-- 테이블 추가예정 -->
-			</div>
-		</div>
-	</div>
+<section>		
+		
 </section>
 <div class="clear"></div>
 <!-- footer -->
+
 <footer>
 	<div class="top">
 		<div class="container">

@@ -48,8 +48,8 @@
 						<h1>Off-Canvas Menu Effects <span>Showing (off-canvas) menus stylishly</span></h1>
 						<nav class="codrops-demos">
 							<a class="current-demo" href="index.html">Top Side</a>
-							<a href="sideslide.html">Side Slide</a>
-							<a href="cornerbox.html">Corner Box</a>
+							<a href="test01.mc">Side Slide</a>
+							<a href="/np/view/sample_view/layout_test.jsp">Corner Box</a>
 							<a href="cornerbox_nested.html">Nested Corner Box</a>
 							<a href="topexpand.html">Top Expand</a>
 							<a href="cornermorph.html">Corner Morph</a>

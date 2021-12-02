@@ -1,6 +1,3 @@
-/**
- * 
- */
 function initialize(){
 	graph1.width=document.getElementById('gr1').offsetWidth;
 	gragh1.height=document.getElementById('gr1').offsetHeight;
