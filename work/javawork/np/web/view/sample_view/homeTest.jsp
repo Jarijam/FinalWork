@@ -28,7 +28,7 @@
 				<a href="#">게시판</a>
 				<span class="dropmenu">
 					<span><a href="/np/view/sample_view/practice01.jsp">자유 게시판</a></span>
-					<span><a href="#">문의 게시판</a></span>
+					<span><a href="/np/view/sample_view/picture_test.jsp">문의 게시판</a></span>
 					<span><a href="#">건의 게시판</a></span>
 				</span>
 			</li>
