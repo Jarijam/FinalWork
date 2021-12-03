@@ -25,6 +25,8 @@ public class CoordinateDao implements Dao<String, CoordinateVO> {
 		cdm.update(v);		
 	}
 	
+	
+	
 	@Override
 	public CoordinateVO select(String k) throws Exception {
 		return cdm.select(k);
@@ -34,7 +36,11 @@ public class CoordinateDao implements Dao<String, CoordinateVO> {
 	public ArrayList<CoordinateVO> select() throws Exception {
 		return cdm.selectall();
 	}
-	
-	
 
+	@Override
+	public void delete(String k) throws Exception {
+		cdm.delete(k);
+	}
+
+	
 }

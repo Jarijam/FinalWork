@@ -26,6 +26,11 @@ public class CoordinateService implements Service<String, CoordinateVO> {
 	}
 	
 	@Override
+	public void remove(String k) throws Exception {
+		dao.delete(k);
+	}
+	
+	@Override
 	public CoordinateVO get(String k) throws Exception {
 		return dao.select(k);
 	}
@@ -34,6 +39,8 @@ public class CoordinateService implements Service<String, CoordinateVO> {
 	public ArrayList<CoordinateVO> get() throws Exception {
 		return dao.select();
 	}
+
+	
 
 
 
