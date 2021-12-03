@@ -38,7 +38,6 @@ public class Frag2 extends Fragment {
         webSettings.setSaveFormData(false);
         web.loadUrl("http://naver.com");
 
-
         conn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,6 +46,7 @@ public class Frag2 extends Fragment {
         });
         return view;
     }
+
     private class ViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(final WebView view, final String url) {

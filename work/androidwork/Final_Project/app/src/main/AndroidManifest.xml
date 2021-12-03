@@ -7,7 +7,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.DIAL_PHONE" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/final_luncher"
@@ -17,16 +18,17 @@
         android:theme="@style/Theme.Final_Project"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".RequestActivity"/>
+        <activity android:name=".MainActivity" />
         <activity android:name=".PostActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />
-
         <service
             android:name=".MyFirebaseMessagingService"
             android:enabled="true"
@@ -37,5 +39,4 @@
             </intent-filter>
         </service>
     </application>
-
 </manifest>

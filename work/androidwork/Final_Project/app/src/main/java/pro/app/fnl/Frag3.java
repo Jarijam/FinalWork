@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
@@ -37,7 +38,25 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.List;
+
+import cz.msebera.android.httpclient.HttpEntity;
+import cz.msebera.android.httpclient.HttpRequest;
+import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.NameValuePair;
+import cz.msebera.android.httpclient.client.HttpClient;
+import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
+import cz.msebera.android.httpclient.client.methods.HttpPost;
+import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
+import cz.msebera.android.httpclient.message.BasicNameValuePair;
+import cz.msebera.android.httpclient.util.EntityUtils;
+
 public class Frag3 extends Fragment  {
+    String urlStr = "http://192.168.0.29:80/np/data.mc";
     private static final int CALL_PERMISSION_REQUEST_CODE = 1234;
     private View view;
     ViewGroup viewGroup;
@@ -45,10 +64,8 @@ public class Frag3 extends Fragment  {
     ImageView pow_img;
     ImageButton call_btn;
     ToggleButton pow_btn, con_btn;
-    String channelId = "channel";
-    String channelName = "Channel_name";
-    NotificationManagerCompat notificationManager;
-    int importance = NotificationManager.IMPORTANCE_LOW;
+    String sensorInfo;
+    Handler handler;
 
     @Nullable
     @Override
@@ -63,19 +80,8 @@ public class Frag3 extends Fragment  {
         con_txt = view.findViewById(R.id.con_txt);
         sonar_txt = view.findViewById(R.id.sonar_txt);
 
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w("Main", "토큰 가져오는 데 실패함", task.getException());
-                            return;
-                        }
+        
 
-                        String newToken = task.getResult();
-                        println("등록 id--------------------------------------- : " + newToken);
-                    }
-                });
 
         pow_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,9 +95,29 @@ public class Frag3 extends Fragment  {
 
                 if (pow_btn.isChecked()) {
                     pow_txt.setText("ON");
+                    Log.d("pow", "1");
+
                 } else {
                     pow_txt.setText("OFF");
-               }
+                    Log.d("pow", "0");
+                   }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String msg = " ";
+                        if(pow_btn.isChecked()){
+                            msg = "ON" ;
+                        }else {
+                            msg = "OFF" ;
+                        }
+                        try {
+                            signUPHttp2(msg);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+
             }
         });
 
@@ -106,9 +132,27 @@ public class Frag3 extends Fragment  {
                 }
                 if (con_btn.isChecked()) {
                     con_txt.setText("ON");
+                    Log.d("con", "1");
                 } else {
                     con_txt.setText("OFF");
+                    Log.d("con", "0");
                 }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String msg = " ";
+                        if(con_btn.isChecked()){
+                            msg = "Wireless" ;
+                        }else {
+                            msg = "flowinglines" ;
+                        }
+                        try {
+                            signUPHttp(msg);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
             }
         });
 
@@ -121,44 +165,10 @@ public class Frag3 extends Fragment  {
         return view;
 
     }
-    public void println(String data1) {
-        Log.d("FMS", data1);
-    }
 
 
-    private void processIntent(Intent intent) {
-        String from = intent.getStringExtra("from");
 
-        if (from == null) {
-            println("from is null.");
-            return;
-        }
 
-        String c1 = intent.getStringExtra("c1");
-        String channelId = "channel";
-        String title = intent.getStringExtra("title");
-        String body = intent.getStringExtra("body");
-        Log.d("c1",c1);
-        sonar_txt.setText(c1+"M" );
-        
-            Intent intent2 = new Intent(getContext(), Frag3.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 101, intent2, PendingIntent.FLAG_UPDATE_CURRENT);
-
-            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getContext(), "channel")
-                    .setSmallIcon(R.drawable.firefighter)
-                    .setContentTitle(title)
-                    .setContentText(body)
-                    .setAutoCancel(true)
-                    .setContentIntent(pendingIntent)
-                    .setVibrate(new long[]{1000, 1000});
-            notificationManager = NotificationManagerCompat.from(getContext());
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                NotificationChannel mChannel = new NotificationChannel(channelId, channelName, importance);
-                notificationManager.createNotificationChannel(mChannel);
-            }
-            notificationManager.notify(0, mBuilder.build());
-
-    }
     void call() {
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
             Intent callIntent = new Intent(Intent.ACTION_CALL);
@@ -176,5 +186,33 @@ public class Frag3 extends Fragment  {
         }
     }
 
+    public void signUPHttp(String SensorInfo) throws IOException {
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost("http://192.168.0.29:80/np/androidmode.mc");
+        ArrayList<NameValuePair> sensorInfo = new ArrayList<NameValuePair>();
+        try {
+            sensorInfo.add(new BasicNameValuePair("con_txt", URLDecoder.decode(SensorInfo, "UTF-8")));
+            post.setEntity(new UrlEncodedFormEntity(sensorInfo, "UTF-8"));
+        } catch (UnsupportedEncodingException ex) {
+            Log.d("signUp", ex.toString());
+        }
+        HttpResponse response = client.execute(post);
+        Log.d("signUp", "response StatusCode:"+response.getStatusLine().getStatusCode()); // response StatusCode: 200
+    }
+
+    public void signUPHttp2(String SensorInfo2) throws IOException {
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost("http://192.168.0.29:80/np/androidpower.mc");
+        ArrayList<NameValuePair> sensorInfo2 = new ArrayList<NameValuePair>();
+        try {
+            sensorInfo2.add(new BasicNameValuePair("pow_txt", URLDecoder.decode(SensorInfo2, "UTF-8")));
+            post.setEntity(new UrlEncodedFormEntity(sensorInfo2, "UTF-8"));
+        } catch (UnsupportedEncodingException ex) {
+            Log.d("signUp", ex.toString());
+        }
+        HttpResponse response = client.execute(post);
+
+        Log.d("signUp", "response StatusCode:"+response.getStatusLine().getStatusCode()); // response StatusCode: 200
+    }
 }
 

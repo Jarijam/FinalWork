@@ -19,13 +19,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     NotificationManagerCompat notificationManager;
 
     public MyFirebaseMessagingService() {
-
     }
 
     @Override
     public void onNewToken(String token) {
         super.onNewToken(token);
-
         Log.d(TAG, "onNewToken 호출됨 : " + token);
     }
 
@@ -34,25 +32,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.d(TAG, "onMessageReceived 호출됨.");
 
         String from = remoteMessage.getFrom();
-      //  String from2 = remoteMessage.getFrom();
         Map<String, String> data = remoteMessage.getData();
         String contents1 = data.get("c1");
         String title = remoteMessage.getNotification().getTitle();
         String body = remoteMessage.getNotification().getBody();
         Log.d(TAG, "from : " + from + ", contents : " + contents1+", title : "+title+", body : "+ body);
-        /*if(body.equals("Button ON")){
-            sendToActivity(getApplicationContext(), from, title, body);
-        }else if(body.equals("LED ON")){
-            sendToActivity(getApplicationContext(), from, title, body);
-
-        }*/
         sendToActivity(getApplicationContext(), from, contents1,title, body);
-        //sendToActivity2(getApplicationContext(), from2, contents1,title, body);
     }
 
-
     private void sendToActivity(Context context, String from, String contents1,String title, String body) {
-        Intent intent = new Intent(context, Frag3.class);
+        Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra("from", from);
         intent.putExtra("title", title);
         intent.putExtra("body", body);
