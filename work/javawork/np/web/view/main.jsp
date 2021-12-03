@@ -3,95 +3,78 @@
 <html lang="en" class="no-js">
 	<head>
 		<meta charset="UTF-8" />
-		<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">  -->
-		<title>Caption Hover Effects - Demo 7</title>
-		<!-- <meta name="description" content="" />
-		<meta name="keywords" content="" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<title>Off-Canvas Menu Effects - Top Side</title>
+		<meta name="description" content="Modern effects and styles for off-canvas navigation with CSS transitions and SVG animations using Snap.svg" />
+		<meta name="keywords" content="sidebar, off-canvas, menu, navigation, effect, inspiration, css transition, SVG, morphing, animation" />
 		<meta name="author" content="Codrops" />
-		<link rel="shortcut icon" href="../favicon.ico">  -->
-		<link rel="stylesheet" type="text/css" href="/np/css/default.css" />
-		<link rel="stylesheet" type="text/css" href="/np/css/component.css" />
-		<script src="/np/js/custom.js"></script>
-		
-		<style>
-			h1{font-family: "Comic Sans MS";}
-		</style>
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="/np/css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="/np/css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="/np/css/font.css" />
+		<link rel="stylesheet" type="text/css" href="/np/css/menu_topside.css" />
+		<!--[if IE]>
+  		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
 	</head>
 	<body>
-		<div class="container demo-7">
-			<!-- Top Navigation -->
-			<div class="codrops-top clearfix">
-				<a class="codrops-icon codrops-icon-prev" href="http://tympanus.net/Development/CreativeButtons/"><span>Previous Demo</span></a>
-				<span class="right"><a class="codrops-icon codrops-icon-drop" href="http://tympanus.net/codrops/?p=15469"><span>Back to the Codrops Article</span></a></span>
+		<div class="container">
+			<div class="menu-wrap">
+				<nav class="menu-top">
+					<div class="profile"><img src="img/user1.png" alt="Matthew Greenberg"/><span>Matthew Greenberg</span></div>
+					<div class="icon-list">
+						<a href="#"><i class="fa fa-fw fa-star-o"></i></a>
+						<a href="#"><i class="fa fa-fw fa-bell-o"></i></a>
+						<a href="#"><i class="fa fa-fw fa-envelope-o"></i></a>
+						<a href="#"><i class="fa fa-fw fa-comment-o"></i></a>
+					</div>
+				</nav>
+				<nav class="menu-side">
+					<a href="#">Recent Stories</a>
+					<a href="#">Reading List</a>
+					<a href="#">My Stories</a>
+					<a href="#">Categories</a>
+				</nav>
 			</div>
-			<header>
-				<h1>Final Project</h1>	
-			
-			</header>
-			<ul class="grid cs-style-7">
-				<li>
-					<figure>
-						<img src="/np/img/led_on.png" >
-						<figcaption>
-							<h3>Game Center</h3>
-							<span>Jacob Cummings</span>
-							<a href="http://dribbble.com/shots/1118904-Game-Center">Take a look</a>
-						</figcaption>
-					</figure>
-				</li>
-				<li>
-					<figure>
-						<img src="/np/img/led_off.png" >
-						<figcaption>
-							<h3>Settings</h3>
-							<span>Jacob Cummings</span>
-							<a href="http://dribbble.com/shots/1116685-Settings">Take a look</a>
-						</figcaption>
-					</figure>
-				</li>
-				<li>
-					<figure>
-						<img src="/np/img/btn_push.png" >
-						<figcaption>
-							<h3>Music</h3>
-							<span>Jacob Cummings</span>
-							<a href="http://dribbble.com/shots/1115960-Music">Take a look</a>
-						</figcaption>
-					</figure>
-				</li>
-				<li>
-					<figure>
-						<img src="/np/img/btn_off.png">
-						<figcaption>
-							<h3>Safari</h3>
-							<span>Jacob Cummings</span>
-							<a href="http://dribbble.com/shots/1116775-Safari">Take a look</a>
-						</figcaption>
-					</figure>
-				</li>
-				<li>
-					<figure>
-						<img src="/np/img/temp1.png">
-						<figcaption>
-							<h3>Camera</h3>
-							<span>Jacob Cummings</span>
-							<a href="http://dribbble.com/shots/1115632-Camera">Take a look</a>
-						</figcaption>
-					</figure>
-				</li>
-				<li>
-					<figure>
-						<img src="/np/img/temp2.png">
-						<figcaption>
-							<h3>Phone</h3>
-							<span>Jacob Cummings</span>
-							<a href="http://dribbble.com/shots/1117308-Phone">Take a look</a>
-						</figcaption>
-					</figure>
-				</li>
-			</ul>
+			<button class="menu-button" id="open-button">Open Menu</button>
+			<div class="content-wrap">
+				<div class="content">
+					<header class="codrops-header">
+						<div class="codrops-links">
+							<a class="codrops-icon codrops-icon-prev" href="http://tympanus.net/Development/TabStylesInspiration/"><span>Previous Demo</span></a>
+							<a class="codrops-icon codrops-icon-drop" href="http://tympanus.net/codrops/?p=20100"><span>Back to the Codrops Article</span></a>
+						</div>
+						<h1>Off-Canvas Menu Effects <span>Showing (off-canvas) menus stylishly</span></h1>
+						<nav class="codrops-demos">
+							<a class="current-demo" href="index.html">Top Side</a>
+							<a href="sideslide.html">Side Slide</a>
+							<a href="cornerbox.html">Corner Box</a>
+							<a href="cornerbox_nested.html">Nested Corner Box</a>
+							<a href="topexpand.html">Top Expand</a>
+							<a href="cornermorph.html">Corner Morph</a>
+							<a href="elastic.html">Elastic</a>
+							<a href="bubble.html">Bubble</a>
+							<a href="wave.html">Wave</a>
+						</nav>
+						<p>Based on the <a href="https://dribbble.com/shots/1663008-Old-Designspiration-Menu-Concept">Dribble shot by Michael Martinho</a></p>
+					</header>
+					<!-- Related demos -->
+					<section class="related">
+						<p>If you enjoyed this demo you might also like:</p>
+						<a href="http://tympanus.net/Development/SidebarTransitions/">
+							<img src="img/related/sidebartransitions.png" />
+							<h3>Transitions for Off-Canvas Navigations</h3>
+						</a>
+						<a href="http://tympanus.net/Development/PerspectivePageViewNavigation/">
+							<img src="img/related/PerspectiveNavigation.png" />
+							<h3>Perspective Page View Navigation</h3>
+						</a>
+					</section>
+				</div>
+			</div><!-- /content-wrap -->
 		</div><!-- /container -->
-		<script src="/np/js/toucheffects.js"></script>
+		<script src="/np/js/classie.js"></script>
+		<script src="/np/js/main.js"></script>
 	</body>
 </html>

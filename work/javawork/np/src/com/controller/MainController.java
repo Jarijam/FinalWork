@@ -91,14 +91,14 @@ public class MainController {
 			public void data(HttpServletRequest request) throws Exception {
 				String btn = request.getParameter("btn");
 				System.out.println(btn);
-				CoordinateVO coord1 = new CoordinateVO(btn);
-				
-				cdservice.register(coord1);
-				//data_log.debug(f_temp+" : "+f_humi);
+				if(btn.equals(1+"")) 
+					 cdservice.remove(btn);
+				}
+				//data_log.debug(btn);
 			}
 	  
 	 
 	  
 	
-}
+
 

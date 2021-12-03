@@ -20,6 +20,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="selectall" resultType="coordinate">
 		SELECT * FROM COORDINATE ORDER BY COORD_NO DESC
 	</select>
+	
+	<delete id="delete" parameterType="String" >
+		DELETE FROM COORDINATE
+	</delete>
 </mapper>
 
 
