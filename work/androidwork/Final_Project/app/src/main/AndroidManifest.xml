@@ -18,9 +18,10 @@
         android:theme="@style/Theme.Final_Project"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".RequestActivity"/>
+        <activity android:name=".RequestActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".PostActivity">
+        <activity android:name=".PostActivity"/>
+        <activity android:name=".testActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,4 +40,5 @@
             </intent-filter>
         </service>
     </application>
+
 </manifest>
