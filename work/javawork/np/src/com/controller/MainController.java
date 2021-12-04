@@ -98,16 +98,26 @@ public class MainController {
 			String gas = request.getParameter("gas");
 			String flame = request.getParameter("flame");
 			String dis = request.getParameter("dis");
+			String temp = request.getParameter("temp");
 			
 			
 //			System.out.println(btn+","+gas+","+flame+","+dis);
 			
-			data_log.debug(btn+","+gas+","+flame+","+dis);
+			data_log.debug(btn+","+gas+","+flame+","+dis+","+temp);
 
 				if(btn.equals(1+"")) {
 					cdservice.remove(btn);
 				}
 		}
+	    
+	    
+	    @RequestMapping("/rchartpage.mc")
+		public ModelAndView rchart() {
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("center", "rchart"); 
+			mv.setViewName("rchart"); 
+			return mv;
+			}
 	}
 	  
 	 
