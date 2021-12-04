@@ -20,8 +20,8 @@
 
         <activity android:name=".RequestActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".PostActivity"/>
-        <activity android:name=".testActivity">
+        <activity android:name=".testActivity"/>
+        <activity android:name=".PostActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

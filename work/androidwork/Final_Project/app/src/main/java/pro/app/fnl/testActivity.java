@@ -39,14 +39,11 @@ public class testActivity extends AppCompatActivity {
 //    String urlStr = "http://192.168.0.25:8088/bigdataERP/product/show_json";
     String urlStr = "http://192.168.0.29:80/np/crddata.mc";
 
-    String[] permisson_list = {Manifest.permission.INTERNET};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
         handler = new Handler(Looper.myLooper());
-        cheackPermission();
-
     }
     public void HttpRequestBtn(View v){
         HttpPermissionChecker(v);
@@ -71,18 +68,7 @@ public class testActivity extends AppCompatActivity {
             return;
         }
     }
-    public void cheackPermission(){
-        if(Build.VERSION.SDK_INT<Build.VERSION_CODES.M){
-            return;
-        }
-        for(String permission:permisson_list){
-            int chk = checkCallingOrSelfPermission(permission);
-            if(chk == PackageManager.PERMISSION_DENIED){
-                requestPermissions(permisson_list, 0);
-                break;
-            }
-        }
-    }
+
     public void HttpRequest(String urlStr){
         Log.d("erp","httprequest들어갔니?");
         StringBuilder response = new StringBuilder();
@@ -98,15 +84,7 @@ public class testActivity extends AppCompatActivity {
                 int resCode = con.getResponseCode();
                 BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
-//                String str = "";
-//                str = in.readLine();
-//            System.out.println(str);
-//            while ((str = in.readLine()) != null) {
-//               if(str.equals("")) {
-//                  continue;
-//               }
-//               System.out.println(str.trim());
-//            }
+
 
                 Log.d("erp",in+"??");
                 String JsonData = "";

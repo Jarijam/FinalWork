@@ -6,6 +6,7 @@ import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -31,6 +32,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.PermissionChecker;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -38,8 +40,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +68,7 @@ public class Frag3 extends Fragment  {
     private static final int CALL_PERMISSION_REQUEST_CODE = 1234;
     private View view;
     ViewGroup viewGroup;
-    TextView call_txt, pow_txt, con_txt, sonar_txt;
-    ImageView pow_img;
+    TextView call_txt, pow_txt, con_txt, temp_txt;
     ImageButton call_btn;
     ToggleButton pow_btn, con_btn;
     String sensorInfo;
@@ -78,10 +85,7 @@ public class Frag3 extends Fragment  {
         call_btn = view.findViewById(R.id.call_btn);
         con_btn = view.findViewById(R.id.con_btn);
         con_txt = view.findViewById(R.id.con_txt);
-        sonar_txt = view.findViewById(R.id.sonar_txt);
-
-        
-
+        temp_txt = view.findViewById(R.id.temp_txt);
 
         pow_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,9 +169,6 @@ public class Frag3 extends Fragment  {
         return view;
 
     }
-
-
-
 
     void call() {
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
