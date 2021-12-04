@@ -18,9 +18,11 @@
         android:theme="@style/Theme.Final_Project"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".RequestActivity" />
+        <activity android:name=".WebActivity" android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity android:name=".MainActivity" />
-        <activity android:name=".testActivity"/>
+        <activity android:name=".testActivity" />
+        <activity android:name=".ConsoleActivity"/>
+        <activity android:name=".ControllerActivity"/>
         <activity android:name=".PostActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

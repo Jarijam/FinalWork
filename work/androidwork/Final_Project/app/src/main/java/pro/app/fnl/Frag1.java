@@ -13,8 +13,6 @@ public class Frag1 extends Fragment // Fragment 클래스를 상속받아야한�
 {
 
     private View view;
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
