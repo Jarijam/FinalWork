@@ -65,14 +65,31 @@ public class ChartController {
 //			     ]
 //		}
 		
+//		ArrayList<ArrayList<String>> jarrs = new ArrayList<ArrayList<String>>();
+//		ArrayList<String> jarr = new ArrayList<>();
+//		long sec = 116760960;
+//		for (double num2:n1) {
+//			sec+=1;
+//			jarr.add(sec+","+num2);
+//		}
+////		for (double num2:n3) {
+////			jarr.add((long) num2);
+////		}
+//		jarrs.add(jarr);
+//		out.print(jarrs);
 		
-		
-		JSONObject jo = new JSONObject();
+		//JSONObject jo = new JSONObject();
+		JSONArray tdatas = new JSONArray();
 		JSONArray tdata = new JSONArray();
+		long sec = 116760960;
 		for(double num:n1) {
-			tdata.add(num);
+			sec+=1;
+			tdata.add(sec);
 		}
-		jo.put("datetime",tdata);
+		//jo.put("",tdata);
+		tdatas.add(tdata);
+		out.print(tdatas);
+		
 		
 		
 		JSONObject jo2 = new JSONObject();
@@ -96,10 +113,11 @@ public class ChartController {
 		jj2.put("data", tdata3);
 		ja2.add(jj2);
 		
-		jo.put("data", ja2);
+		//jo.put("data", ja2);
 		
 		
-		out.print(jo.toJSONString());
+		//out.print(jo.toJSONString());
+		
 		out.close();
 		rconn.close();
 	}
