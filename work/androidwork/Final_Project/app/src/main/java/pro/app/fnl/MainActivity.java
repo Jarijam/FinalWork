@@ -63,15 +63,15 @@ public class MainActivity extends AppCompatActivity
                         setFrag(0);
                         break;
                     case R.id.navigation_infor:
-                        setFrag(1);
-                        break;
-                    case R.id.navigation_web:
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
                                 HttpRequest(urlStr);
                             }
                         }).start();
+                        setFrag(1);
+                        break;
+                    case R.id.navigation_web:
                         setFrag(2);
                         break;
                 }
