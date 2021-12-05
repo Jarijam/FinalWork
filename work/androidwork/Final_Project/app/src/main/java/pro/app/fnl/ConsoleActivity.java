@@ -14,9 +14,11 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -24,7 +26,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,6 +36,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -40,7 +47,11 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.NameValuePair;
@@ -55,10 +66,11 @@ import static java.sql.DriverManager.println;
 public class ConsoleActivity extends AppCompatActivity {
     String urlStr = "http://192.168.0.29:80/np/crddata.mc";
     private static final int CALL_PERMISSION_REQUEST_CODE = 1234;
-    ViewGroup viewGroup;
-    TextView call_txt, pow_txt, con_txt, temp_txt;
-    ImageButton call_btn, move_console, move_controller, move_web;
+    TextView call_txt, pow_txt, con_txt, temp_txt, date_txt;
+    ImageButton call_btn, move_console, move_controller, move_web, cap_btn;
     ToggleButton pow_btn, con_btn;
+    LinearLayout container;
+    Timer mTimer;
     String sensorInfo;
     Handler handler;
     NotificationManagerCompat notificationManager;
@@ -73,6 +85,7 @@ public class ConsoleActivity extends AppCompatActivity {
         pow_btn = findViewById(R.id.pow_btn);
         call_btn = findViewById(R.id.call_btn);
         con_btn = findViewById(R.id.con_btn);
+        cap_btn = findViewById(R.id.cap_btn);
         move_console = findViewById(R.id.move_console);
         move_controller = findViewById(R.id.move_controller);
         move_web = findViewById(R.id.move_web);
@@ -80,6 +93,42 @@ public class ConsoleActivity extends AppCompatActivity {
         call_txt = findViewById(R.id.call_txt);
         con_txt = findViewById(R.id.con_txt);
         temp_txt = findViewById(R.id.temp_txt);
+        date_txt = findViewById(R.id.date_txt);
+        container = findViewById(R.id.container);
+        MainTimerTask timerTask = new MainTimerTask();
+        mTimer = new Timer();
+        mTimer.schedule(timerTask, 500, 1000);
+
+        cap_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               View rootview  = getWindow().getDecorView();
+               File screenShot = ScreenShot(rootview);
+               if(screenShot!=null) {
+                   sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(screenShot)));
+               }
+            }
+            public File ScreenShot(View view) {
+                view.setDrawingCacheEnabled(true);
+                Bitmap screenBitmap = view.getDrawingCache();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmm");
+                Date currentTime_1 = new Date();
+                String filename = formatter.format(currentTime_1)+".jpg";
+                File file = new File(Environment.getExternalStorageDirectory()+"/Pictures", filename);
+                FileOutputStream os = null;
+                try{
+                    os = new FileOutputStream(file);
+                    screenBitmap.compress(Bitmap.CompressFormat.JPEG, 90, os);
+                    os.close();
+                }catch (IOException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+                Toast.makeText(getApplicationContext(), filename + "저장", Toast.LENGTH_LONG).show();
+                view.setDrawingCacheEnabled(false);
+                return file;
+            }
+        });
 
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
@@ -89,7 +138,6 @@ public class ConsoleActivity extends AppCompatActivity {
                             Log.w("Main", "토큰 가져오는 데 실패함", task.getException());
                             return;
                         }
-
                         String newToken = task.getResult();
                         println("등록 id--------------------------------------- : " + newToken);
                     }
@@ -323,4 +371,37 @@ public class ConsoleActivity extends AppCompatActivity {
                 .setVibrate(new long[]{1000, 1000});
         notificationManager.notify(0, mBuilder.build());
     }
+
+    Handler mHandler = new Handler();
+    Runnable mUpdateTimeTask = new Runnable() {
+        @Override
+        public void run() {
+            Date rightNow = new Date();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+            String dateString = formatter.format(rightNow);
+            date_txt.setText(dateString);
+        }
+    };
+    class MainTimerTask extends TimerTask {
+        @Override
+        public void run() {
+            mHandler.post(mUpdateTimeTask);
+        }
+    }
+        @Override
+        protected void onDestroy() {
+            mTimer.cancel();
+            super.onDestroy();
+        }
+        @Override
+        protected void onPause() {
+            mTimer.cancel();
+            super.onPause();
+        }
+        @Override
+        protected void onPostResume() {
+            MainTimerTask timerTask = new MainTimerTask();
+            mTimer.schedule(timerTask, 500, 3000);
+            super.onPostResume();
+        }
 }

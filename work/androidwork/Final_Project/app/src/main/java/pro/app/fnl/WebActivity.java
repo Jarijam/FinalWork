@@ -20,7 +20,6 @@ public class WebActivity extends AppCompatActivity {
     Button conn;
     ImageButton move_console, move_controller, move_web;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
