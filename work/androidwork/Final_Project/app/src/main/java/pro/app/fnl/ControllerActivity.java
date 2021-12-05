@@ -35,6 +35,5 @@ public class ControllerActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 }
