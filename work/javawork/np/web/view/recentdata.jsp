@@ -25,6 +25,10 @@
 		h3 {
 			margin : 20px;
 		}
+		.content {
+			background-color: #e7dcfc;
+		
+		}
 		#container_tot {
 		    height: 525px;
 		    border: 2px solid blue;
@@ -83,6 +87,7 @@
 					</div>
 				</nav>
 				<nav class="menu-side">
+					<a href="main.mc">Main</a>
 					<a href="rchartgaspage.mc">Recent Data</a>
 					<a href="#">Accumulated Data</a>
 					<a href="#">Iot Coverage</a>
