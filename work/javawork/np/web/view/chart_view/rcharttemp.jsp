@@ -92,7 +92,7 @@ $(document).ready(function(){
 });
 </script>
 
-<h1>R_CHART</h1>
+<h3>Temperature Info.</h3>
 
 	
 <figure class="highcharts-figure">
