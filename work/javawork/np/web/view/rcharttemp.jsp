@@ -6,7 +6,13 @@
     border: 2px solid blue;
 }
 </style>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/annotations.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script>
 function display(d){
 	Highcharts.getJSON(
@@ -65,13 +71,11 @@ function display(d){
 			      series: [{
 			        type: 'area',
 			        name: 'USD to EUR',
-			        data: data
+			        data: d
 			      }]
 			    });
-			  }
-			);
-
-
+			  });
+}
 function getdata(){
 	$.ajax({
 		url:'rchart.mc',
@@ -80,22 +84,15 @@ function getdata(){
 			//alert(d);
 		}
 	});
-}
-
+};
 $(document).ready(function(){
-	$('#c1').click(function(){
-		getdata();
-	});
-	$('#c2').click(function(){
-		getdata2();
-	});
-	});
-
+	getdata();
+});
 </script>
 
 <h1>R_CHART</h1>
 
-	<button id="c1">Chart</button>
-	<button id="c2">Chart</button>
+	
 
 <div id="container"></div>
+
