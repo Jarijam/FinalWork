@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
-#container {
-    height: 400px;
-    border: 2px solid blue;
-}
+
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -14,17 +12,17 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script>
-function display2(d){
+function display(d){
 			Highcharts.getJSON(
 			  'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
 			  function(data) {
 
-				  var chart1 = new Highcharts.chart('container_temp', {
+				  var chart2 = new Highcharts.chart('container_gas', {
 			      chart: {
 			        zoomType: 'x'
 			      },
 			      title: {
-			        text: 'Temperature over time'
+			        text: 'Gas over time'
 			      },
 			      subtitle: {
 			        text: document.ontouchstart === undefined ?
@@ -35,7 +33,7 @@ function display2(d){
 			      },
 			      yAxis: {
 			        title: {
-			          text: 'Temperature'
+			          text: 'Gas'
 			        }
 			      },
 			      legend: {
@@ -70,32 +68,33 @@ function display2(d){
 
 			      series: [{
 			        type: 'area',
-			        name: 'Temperature',
+			        name: 'Gas',
 			        data: d
 			      }]
 			    });
 			  });
 }
-function getdata2(){
+function getdata(){
 	$.ajax({
-		url:'rcharttemp.mc',
+		url:'rchartgas.mc',
 		success:function(d){
-			display2(d);
+			display(d);
 			setInterval(function(){
-			display2(d);
+			display(d);
 			}, 5000);
 		}
 	});
 };
 $(document).ready(function(){
-	getdata2();
+	getdata();
 });
 </script>
 
 <h1>R_CHART</h1>
 
 	
+
 <figure class="highcharts-figure">
-	<div id="container_temp"></div>
+    <div id="container_gas"></div>
 </figure>
 

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="d" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html lang="en" class="no-js">
 	<head>
 		<meta charset="UTF-8" />
@@ -60,7 +63,7 @@
 						<p>Based on the <a href="https://dribbble.com/shots/1663008-Old-Designspiration-Menu-Concept">Dribble shot by Michael Martinho</a></p>
 					</header>
 					<!-- Related demos -->
-					<section class="related">
+					<!-- <section class="related">
 						<p>If you enjoyed this demo you might also like:</p>
 						<a href="http://tympanus.net/Development/SidebarTransitions/">
 							<img src="img/related/sidebartransitions.png" />
@@ -70,7 +73,31 @@
 							<img src="img/related/PerspectiveNavigation.png" />
 							<h3>Perspective Page View Navigation</h3>
 						</a>
-					</section>
+					</section> -->
+					
+					
+						<%-- <c:choose>
+							<c:when test="${center == null }">
+								<jsp:include page="chart_view/rchartgas.jsp"/>
+							</c:when>
+							<c:otherwise>
+								<jsp:include page="chart_view/rchartgas.jsp"/>
+							</c:otherwise>
+						</c:choose> --%>
+					<jsp:include page="chart_view/rchartgas.jsp"/>
+					
+					
+					
+						<d:choose>
+							<d:when test="${center2 == null }">
+								<jsp:include page="chart_view/rcharttemp.jsp"/>
+							</d:when>
+							<d:otherwise>
+								<jsp:include page="chart_view/rcharttemp.jsp"/>
+							</d:otherwise>
+						</d:choose>
+					
+					
 				</div>
 			</div><!-- /content-wrap -->
 		</div><!-- /container -->
