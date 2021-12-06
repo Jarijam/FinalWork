@@ -15,19 +15,18 @@
         android:allowBackup="true"
         android:icon="@mipmap/final_luncher"
         android:label="불IT났어"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/final_luncher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Final_Project"
-        android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true">
+        android:usesCleartextTraffic="true">
 
         <activity
             android:name=".WebActivity"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".testActivity" />
-        <activity android:name=".ConsoleActivity" />
-        <activity android:name=".ControllerActivity" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".testActivity"/>
+        <activity android:name=".ConsoleActivity"/>
+        <activity android:name=".ControllerActivity"/>
         <activity android:name=".PostActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
