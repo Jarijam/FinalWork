@@ -31,11 +31,12 @@ public class ChartController {
 
 	}
 	
-	@RequestMapping("/rchart.mc")
+	@RequestMapping("/rcharttemp.mc")
 	@ResponseBody
 	public void ruu(HttpServletResponse response) throws IOException, RserveException, REXPMismatchException {
 		response.setContentType("text/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
+		
 		RConnection rconn = new RConnection("192.168.0.158");
 		rconn.setStringEncoding("utf8");
 
@@ -65,41 +66,60 @@ public class ChartController {
 //			     ]
 //		}
 		
+//		ArrayList<ArrayList<String>> jarrs = new ArrayList<ArrayList<String>>();
+//		ArrayList<String> jarr = new ArrayList<>();
+//		long sec = 116760960;
+//		for (double num2:n1) {
+//			sec+=1;
+//			jarr.add(sec+","+num2);
+//		}
+////		for (double num2:n3) {
+////			jarr.add((long) num2);
+////		}
+//		jarrs.add(jarr);
+//		out.print(jarrs);
 		
-		
-		JSONObject jo = new JSONObject();
-		JSONArray tdata = new JSONArray();
-		for(double num:n1) {
-			tdata.add(num);
-		}
-		jo.put("datetime",tdata);
-		
-		
-		JSONObject jo2 = new JSONObject();
-		
-		JSONArray ja2 = new JSONArray();
-		JSONObject jj = new JSONObject();
-		jj.put("name", "gas");
-		JSONArray tdata2 = new JSONArray();
-		for(double num:n2) {
-			tdata2.add(num);
-		}
-//		jj.put("data", tdata2);
-		jj.put("", tdata2);
-		ja2.add(jj);
-		JSONObject jj2 = new JSONObject();
-		jj2.put("name", "temp");
-		JSONArray tdata3 = new JSONArray();
+		//JSONObject jo = new JSONObject();
+		JSONArray tdatas = new JSONArray();
+		long sec = 116760960;
 		for(double num:n3) {
-			tdata3.add(num);
+			JSONArray tdata = new JSONArray();
+				sec+=1;
+				tdata.add(sec);
+				tdata.add(num);
+				tdatas.add(tdata);
 		}
-		jj2.put("data", tdata3);
-		ja2.add(jj2);
-		
-		jo.put("data", ja2);
+		//jo.put("",tdata);
+		out.print(tdatas);
 		
 		
-		out.print(jo.toJSONString());
+		
+//		JSONObject jo2 = new JSONObject();
+//		
+//		JSONArray ja2 = new JSONArray();
+//		JSONObject jj = new JSONObject();
+//		jj.put("name", "gas");
+//		JSONArray tdata2 = new JSONArray();
+//		for(double num:n2) {
+//			tdata2.add(num);
+//		}
+////		jj.put("data", tdata2);
+//		jj.put("", tdata2);
+//		ja2.add(jj);
+//		JSONObject jj2 = new JSONObject();
+//		jj2.put("name", "temp");
+//		JSONArray tdata3 = new JSONArray();
+//		for(double num:n3) {
+//			tdata3.add(num);
+//		}
+//		jj2.put("data", tdata3);
+//		ja2.add(jj2);
+		
+		//jo.put("data", ja2);
+		
+		
+		//out.print(jo.toJSONString());
+		
 		out.close();
 		rconn.close();
 	}
