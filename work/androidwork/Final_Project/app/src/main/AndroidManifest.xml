@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/final_luncher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Final_Project"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true">
 
         <activity
             android:name=".WebActivity"
