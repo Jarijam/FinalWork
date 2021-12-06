@@ -66,13 +66,10 @@ import static java.sql.DriverManager.println;
 public class ConsoleActivity extends AppCompatActivity {
     String urlStr = "http://192.168.0.29:80/np/crddata.mc";
     private static final int CALL_PERMISSION_REQUEST_CODE = 1234;
-    TextView call_txt, pow_txt, con_txt, temp_txt, date_txt;
+    TextView call_txt, pow_txt, con_txt, temp_txt;
     ImageButton call_btn, move_console, move_controller, move_web, cap_btn;
     ToggleButton pow_btn, con_btn;
     LinearLayout container;
-    Timer mTimer;
-    String sensorInfo;
-    Handler handler;
     NotificationManagerCompat notificationManager;
     String channelId = "channel";
     String channelName = "Channel_name";
@@ -93,11 +90,7 @@ public class ConsoleActivity extends AppCompatActivity {
         call_txt = findViewById(R.id.call_txt);
         con_txt = findViewById(R.id.con_txt);
         temp_txt = findViewById(R.id.temp_txt);
-        date_txt = findViewById(R.id.date_txt);
         container = findViewById(R.id.container);
-        MainTimerTask timerTask = new MainTimerTask();
-        mTimer = new Timer();
-        mTimer.schedule(timerTask, 500, 1000);
 
         cap_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -371,37 +364,4 @@ public class ConsoleActivity extends AppCompatActivity {
                 .setVibrate(new long[]{1000, 1000});
         notificationManager.notify(0, mBuilder.build());
     }
-
-    Handler mHandler = new Handler();
-    Runnable mUpdateTimeTask = new Runnable() {
-        @Override
-        public void run() {
-            Date rightNow = new Date();
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd hh:mm");
-            String dateString = formatter.format(rightNow);
-            date_txt.setText(dateString);
-        }
-    };
-    class MainTimerTask extends TimerTask {
-        @Override
-        public void run() {
-            mHandler.post(mUpdateTimeTask);
-        }
-    }
-        @Override
-        protected void onDestroy() {
-            mTimer.cancel();
-            super.onDestroy();
-        }
-        @Override
-        protected void onPause() {
-            mTimer.cancel();
-            super.onPause();
-        }
-        @Override
-        protected void onPostResume() {
-            MainTimerTask timerTask = new MainTimerTask();
-            mTimer.schedule(timerTask, 500, 3000);
-            super.onPostResume();
-        }
 }
