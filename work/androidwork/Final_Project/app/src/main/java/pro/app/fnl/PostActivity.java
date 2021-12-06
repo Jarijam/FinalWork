@@ -12,7 +12,7 @@ public class PostActivity extends AppCompatActivity {
     Runnable delayThread = new Runnable() {
         @Override
         public void run() {
-            Intent intent = new Intent(PostActivity.this, MainActivity.class);
+            Intent intent = new Intent(PostActivity.this, ConsoleActivity.class);
             startActivity(intent);
             finish();
         }

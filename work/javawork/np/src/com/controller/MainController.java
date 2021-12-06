@@ -111,11 +111,11 @@ public class MainController {
 		}
 	    
 	    
-	    @RequestMapping("/rchartpage.mc")
+	    @RequestMapping("/rcharttemppage.mc")
 		public ModelAndView rchart() {
 			ModelAndView mv = new ModelAndView();
-			mv.addObject("center", "rchart"); 
-			mv.setViewName("rchart"); 
+			//mv.addObject("container", "rchart"); 
+			mv.setViewName("rcharttemp"); 
 			return mv;
 			}
 	}

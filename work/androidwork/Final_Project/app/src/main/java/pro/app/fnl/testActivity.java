@@ -59,7 +59,7 @@ public class testActivity extends AppCompatActivity {
         int chk = PermissionChecker.checkSelfPermission(this,Manifest.permission.INTERNET);
         if(chk==PackageManager.PERMISSION_GRANTED){
             Log.d("erp","성공");
-            Intent intent = new Intent(testActivity.this, RequestActivity.class);
+            Intent intent = new Intent(testActivity.this, MainActivity.class);
             startActivity(intent);
             Toast.makeText(this,"요청 성공! Logcat을 확인해 주세요!",Toast.LENGTH_LONG).show();
         }else {
