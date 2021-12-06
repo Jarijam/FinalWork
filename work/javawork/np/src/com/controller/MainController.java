@@ -115,7 +115,7 @@ public class MainController {
 		public ModelAndView rchart_temp() {
 			ModelAndView mv = new ModelAndView();
 			//mv.addObject("container", "rchart"); 
-			mv.setViewName("rcharttemp"); 
+			mv.setViewName("chart_view/rcharttemp"); 
 			return mv;
 			}
 	    

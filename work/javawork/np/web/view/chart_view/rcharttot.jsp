@@ -168,9 +168,10 @@ function getdata(){
 	$.ajax({
 		url:'rchart_tot.mc',
 		success:function(d){
-			setInterval(function(){
 			display(d);
-			}, 20000);
+			setInterval(function(){		
+			display(d);
+			}, 5000);
 		}
 	});
 };

@@ -37,7 +37,7 @@ public class ChartController {
 		response.setContentType("text/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		RConnection rconn = new RConnection("192.168.0.29");
+		RConnection rconn = new RConnection("192.168.0.8");
 		rconn.setStringEncoding("utf8");
 
 		rconn.eval("source('C:/logs/final_test.R',encoding='UTF-8')");
@@ -174,7 +174,7 @@ public class ChartController {
 		public void ruu_tot(HttpServletResponse response) throws IOException, RserveException, REXPMismatchException {
 			response.setContentType("text/json;charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			RConnection rconn = new RConnection("192.168.0.29");
+			RConnection rconn = new RConnection("192.168.0.8");
 			rconn.setStringEncoding("utf8");
 
 			rconn.eval("source('C:/logs/final_test.R',encoding='UTF-8')");
