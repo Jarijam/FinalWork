@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,10 @@ import com.vo.CoordinateVO;
 
 @Controller
 public class MainController {
+	
+	private Logger data_log = 
+			Logger.getLogger("data");
+	
 	MyMqtt_Pub_client client;
 	
 	public MainController() {
@@ -86,19 +91,54 @@ public class MainController {
 			cdservice.register(coord1);
 			//data_log.debug(f_temp+" : "+f_humi);
 		}
-	  @RequestMapping("/data.mc")
-			@ResponseBody
-			public void data(HttpServletRequest request) throws Exception {
-				String btn = request.getParameter("btn");
-				System.out.println(btn);
-				CoordinateVO coord1 = new CoordinateVO(btn);
-				
-				cdservice.register(coord1);
-				//data_log.debug(f_temp+" : "+f_humi);
+	    @RequestMapping("/data.mc")
+		@ResponseBody
+		public void data(HttpServletRequest request) throws Exception {
+			String btn = request.getParameter("btn");
+			String gas = request.getParameter("gas");
+			String flame = request.getParameter("flame");
+			String dis = request.getParameter("dis");
+			String temp = request.getParameter("temp");
+			
+			
+//			System.out.println(btn+","+gas+","+flame+","+dis);
+			
+			data_log.debug(btn+","+gas+","+flame+","+dis+","+temp);
+
+				if(btn.equals(1+"")) {
+					cdservice.remove(btn);
+				}
+		}
+	    
+	    
+	    @RequestMapping("/rcharttemppage.mc")
+		public ModelAndView rchart_temp() {
+			ModelAndView mv = new ModelAndView();
+			//mv.addObject("center2", "rcharttemp"); 
+			mv.setViewName("chart_view/rcharttemp"); 
+			return mv;
 			}
+	    
+	    @RequestMapping("/rchartgaspage.mc")
+		public ModelAndView rchart_gas() {
+			ModelAndView mv = new ModelAndView();
+			//mv.addObject("center", "rchartgas"); 
+			mv.setViewName("chart_view/rchartgas"); 
+			return mv;
+			}
+	    
+	    @RequestMapping("/rchartpage_tot.mc")
+		public ModelAndView rchart_tot() {
+			ModelAndView mv = new ModelAndView();
+			//mv.addObject("center", "rchart"); 
+			mv.setViewName("chart_view/rcharttot"); 
+			return mv;
+			}
+	}
+	
 	  
 	 
 	  
 	
-}
+
 
