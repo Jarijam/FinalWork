@@ -37,7 +37,7 @@ public class WebActivity extends AppCompatActivity {
         webSettings.setUseWideViewPort(true);
         webSettings.setBuiltInZoomControls(false);
         webSettings.setSaveFormData(false);
-        web.loadUrl("http://naver.com");
+        web.loadUrl("http://192.168.0.29:80/np/recentdata.mc");
 
         move_controller.setOnClickListener(new View.OnClickListener() {
             @Override
