@@ -83,7 +83,7 @@
 					</div>
 				</nav>
 				<nav class="menu-side">
-					<a href="recentdata.mc">Recent Data</a>
+					<a href="rchartgaspage.mc">Recent Data</a>
 					<a href="#">Accumulated Data</a>
 					<a href="#">Iot Coverage</a>
 					<a href="#">About Us</a>
@@ -100,9 +100,45 @@
 						<h1>불IT났어<span>Showing (off-canvas) menus stylishly</span></h1>
 						<p>Based on the <a href="https://dribbble.com/shots/1663008-Old-Designspiration-Menu-Concept">Dribble shot by Michael Martinho</a></p>
 					</header>
-					<h1>hello main</h1>
+					<!-- Related demos -->
+					<!-- <section class="related">
+						<p>If you enjoyed this demo you might also like:</p>
+						<a href="http://tympanus.net/Development/SidebarTransitions/">
+							<img src="img/related/sidebartransitions.png" />
+							<h3>Transitions for Off-Canvas Navigations</h3>
+						</a>
+						<a href="http://tympanus.net/Development/PerspectivePageViewNavigation/">
+							<img src="img/related/PerspectiveNavigation.png" />
+							<h3>Perspective Page View Navigation</h3>
+						</a>
+					</section> -->
+					
+					
+						<%-- <c:choose>
+							<c:when test="${center == null }">
+								<jsp:include page="chart_view/rchartgas.jsp"/>
+							</c:when>
+							<c:otherwise>
+								<jsp:include page="chart_view/rchartgas.jsp"/>
+							</c:otherwise>
+						</c:choose> --%>
+						
+						<div class="ex-layout">
+							<div class="main">
+								<div class="left-menu">
+									<jsp:include page="chart_view/rcharttot.jsp"/>	
+								</div>
+								<div class="contents">
+									<div class="article">
+										 <jsp:include page="chart_view/rchartgas.jsp"/> 
+									</div>
+									<div class="comment">
+										<jsp:include page="chart_view/rcharttemp.jsp"/>
+									</div>
+							   </div>
+							</div>
+						</div>	
 				</div>
-				
 			</div><!-- /content-wrap -->
 		</div><!-- /container -->
 		<script src="/np/js/classie.js"></script>

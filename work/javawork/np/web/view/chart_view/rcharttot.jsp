@@ -12,23 +12,20 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <style>
-#container {
-    height: 400px;
-    border: 2px solid blue;
-}
+
 </style>
 <script>
-function display(d){
-	Highcharts.chart('container', {
+function display3(d){
+	var chart3 = new Highcharts.chart('container_tot', {
 	    chart: {
 	        zoomType: 'xy'
 	    },
 	    title: {
-	        text: 'Average Monthly Weather Data for Tokyo',
+	        text: 'Sensored Average Data',
 	        align: 'left'
 	    },
 	    subtitle: {
-	        text: 'Source: WorldClimate.com',
+	        text: '',
 	        align: 'left'
 	    },
 	    xAxis: [{
@@ -53,13 +50,13 @@ function display(d){
 	    }, { // Secondary yAxis
 	        gridLineWidth: 0,
 	        title: {
-	            text: 'Rainfall',
+	            text: 'Gas',
 	            style: {
 	                color: Highcharts.getOptions().colors[0]
 	            }
 	        },
 	        labels: {
-	            format: '{value} mm',
+	            format: '{value} mm?',
 	            style: {
 	                color: Highcharts.getOptions().colors[0]
 	            }
@@ -164,14 +161,14 @@ function display(d){
 
 
 
-function getdata(){
+function getdata3(){
 	$.ajax({
 		url:'rchart_tot.mc',
 		success:function(d){
-			display(d);
+			display3(d);
 			setInterval(function(){
-			display(d);
-			}, 20000);
+			display3(d);
+			},5000);
 		}
 	});
 };
@@ -179,19 +176,16 @@ function getdata(){
 
 
 $(document).ready(function(){
-	$('#c1').click(function(){
-			getdata();
+			getdata3();
 	});
-});
+
 
 </script>
 </head>
 <body>
-<h1>R_CHART</h1>
+<h3>Overall Info.</h3>
 
-	<button id="c1">Chart</button>
-	<button id="c2">Chart</button>
 
-<div id="container"></div>
+<div id="container_tot"></div>
 </body>
 </html>

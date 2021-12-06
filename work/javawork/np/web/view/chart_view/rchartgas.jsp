@@ -90,7 +90,7 @@ $(document).ready(function(){
 });
 </script>
 
-<h1>R_CHART</h1>
+<h3>Gas Info.</h3>
 
 	
 
