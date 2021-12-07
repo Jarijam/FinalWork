@@ -17,7 +17,9 @@
 		<link rel="stylesheet" type="text/css" href="/np/css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="/np/css/font.css" />
 		<link rel="stylesheet" type="text/css" href="/np/css/menu_topside.css" />
-		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="https://code.highcharts.com/highcharts.js"></script>
 		<script src="https://code.highcharts.com/highcharts-3d.js"></script>
@@ -33,7 +35,7 @@
 			margin : 20px;
 		}
 		.content {
-			background-color: white;
+			background-color: #E7E9EB;
 		
 		}
 		
@@ -87,10 +89,12 @@
 		background: skyblue;
 		}
 		
+	
+		
 		</style>
 	</head>
 	<body>
-		<div class="container">
+		<div class="box">
 			<div class="menu-wrap">
 				<nav class="menu-top">
 					<div class="profile"><img src="img/user1.png" alt="Matthew Greenberg"/><span>Matthew Greenberg</span></div>
