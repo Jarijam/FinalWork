@@ -168,10 +168,7 @@ function getdata(){
 	$.ajax({
 		url:'rchart_tot.mc',
 		success:function(d){
-			display3(d);
-			setInterval(function(){		
-			display3(d);
-			}, 5000);
+			
 		}
 	});
 };
