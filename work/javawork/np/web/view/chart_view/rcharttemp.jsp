@@ -68,21 +68,21 @@ function getdata2(){
 		url:'rcharttemp.mc',
 		success:function(d){
 			display2(d);
-			setInterval(function(){
-			display2(d);
-			}, 5000);
 		}
 	});
 };
+
 $(document).ready(function(){
-	getdata2();
+		getdata2();
+	setInterval(function(){
+		getdata2();
+	},5000);
+	
 });
 </script>
 
-<h3>Temperature Info.</h3>
-
-	
-<figure class="highcharts-figure">
-	<div id="container_temp"></div>
-</figure>
+<div class="cbox">
+    <h3 class="cbox-body">Temperature Info.</h3>
+    <div id="container_temp"></div>
+  </div>
 
