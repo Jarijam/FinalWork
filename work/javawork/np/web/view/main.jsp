@@ -17,6 +17,13 @@
 		<link rel="stylesheet" type="text/css" href="/np/css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="/np/css/font.css" />
 		<link rel="stylesheet" type="text/css" href="/np/css/menu_topside.css" />
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script src="https://code.highcharts.com/modules/export-data.js"></script>
+		<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 		<!--[if IE]>
   		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -73,7 +80,13 @@
 			height: 200px;
 			
 		}
-	
+		.section{
+		margin:0 auto;
+		width: 1500px;
+		height: 500px;
+		background: skyblue;
+		}
+		
 		</style>
 	</head>
 	<body>
@@ -92,7 +105,9 @@
 					<a href="main.mc">Main</a>
 					<a href="recentdata.mc">Recent Data</a>
 					<a href="#">Accumulated Data</a>
-					<a href="#">Iot Coverage</a>
+					<a href="testgraph.mc">testgraph</a>
+					<a href="testgraph2.mc">testgrapgh2</a>
+					<a href="testgraph3.mc">testgrapgh3</a>
 					<a href="#">About Us</a>
 				</nav>
 			</div>
@@ -104,14 +119,25 @@
 							<a class="codrops-icon codrops-icon-prev" href="http://tympanus.net/Development/TabStylesInspiration/"><span>Previous Demo</span></a>
 							<a class="codrops-icon codrops-icon-drop" href="http://tympanus.net/codrops/?p=20100"><span>Back to the Codrops Article</span></a>
 						</div>
-						<h1>불IT났어<span>Showing (off-canvas) menus stylishly</span></h1>
-						<p>Based on the <a href="https://dribbble.com/shots/1663008-Old-Designspiration-Menu-Concept">Dribble shot by Michael Martinho</a></p>
+						<h1>불IT났어<span>test중입니다.</span></h1>
+						<p>바로가기 주소입니다.<a href="https://dribbble.com/shots/1663008-Old-Designspiration-Menu-Concept">Dribble shot by Michael Martinho</a></p>
 					</header>
-					<h1>hello main</h1>
+					<section>
+						<c:choose>
+							<c:when test="${center == null }">
+								<jsp:include page="center.jsp"/>
+							</c:when>
+							<c:otherwise>			
+									<jsp:include page="${center }.jsp"/>		
+							</c:otherwise>
+						</c:choose>
+					</section>
+		
 				</div>
 				
 			</div><!-- /content-wrap -->
 		</div><!-- /container -->
+		
 		<script src="/np/js/classie.js"></script>
 		<script src="/np/js/main.js"></script>
 	</body>
