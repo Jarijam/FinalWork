@@ -58,7 +58,7 @@ public class MainController {
 	      List<CoordinateVO> coordlist = cdservice.get(); 
 	     mv.addObject("coordlist", coordlist);
 	     mv.setViewName("graphics_view/graphics_test");
-	     
+	     //abc
 	     return mv; 
 	   
 	   }
