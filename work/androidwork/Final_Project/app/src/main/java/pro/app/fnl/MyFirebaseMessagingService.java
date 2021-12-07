@@ -12,8 +12,6 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Map;
 
-import pro.app.fnl.MainActivity;
-
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "FMS";
     NotificationManagerCompat notificationManager;

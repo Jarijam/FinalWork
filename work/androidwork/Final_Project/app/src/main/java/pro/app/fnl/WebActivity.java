@@ -18,7 +18,7 @@ public class WebActivity extends AppCompatActivity {
     WebView web;
     EditText text;
     Button conn;
-    ImageButton move_console, move_controller, move_web;
+    ImageButton move_console, move_controller, move_web, move_gallery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,7 @@ public class WebActivity extends AppCompatActivity {
         move_console = findViewById(R.id.move_console);
         move_controller = findViewById(R.id.move_controller);
         move_web = findViewById(R.id.move_web);
+        move_gallery = findViewById(R.id.move_gallery);
 
         WebSettings webSettings = web.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -37,7 +38,15 @@ public class WebActivity extends AppCompatActivity {
         webSettings.setUseWideViewPort(true);
         webSettings.setBuiltInZoomControls(false);
         webSettings.setSaveFormData(false);
-        web.loadUrl("http://naver.com");
+        web.loadUrl("http://192.168.0.29:80/np/recentdata.mc");
+
+        move_gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WebActivity.this, GalleryActivity.class);
+                startActivity(intent);
+            }
+        });
 
         move_controller.setOnClickListener(new View.OnClickListener() {
             @Override
