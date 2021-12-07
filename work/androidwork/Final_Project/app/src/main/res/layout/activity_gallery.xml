@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back_1"
-    android:orientation="vertical">
+    android:background="@drawable/back_1">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/web_id"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="연결"/>
+        android:layout_margin="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="0 개"
+        android:textColor="#000000"
+        android:textSize="16dp"/>
 
-        <EditText
-            android:id="@+id/web_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Url"/>
-    </LinearLayout>
-
-    <WebView
-        android:id="@+id/webview"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="586dp" />
+        android:layout_height="582dp"
+        android:layout_marginBottom="49dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="85dp"
+        android:layout_height="86dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-5dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -37,28 +33,28 @@
             android:id="@+id/move_controller"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:background="@drawable/button1"
-            android:scaleType="fitCenter"
             android:adjustViewBounds="true"
-            />
+            android:background="@drawable/button1"
+            android:scaleType="fitCenter" />
 
         <ImageButton
             android:id="@+id/move_console"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginLeft="100dp"
+            android:adjustViewBounds="true"
             android:background="@drawable/button2"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"/>
+            android:onClick="move_console"
+            android:scaleType="fitCenter" />
 
         <ImageButton
             android:id="@+id/move_web"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginLeft="100dp"
+            android:adjustViewBounds="true"
             android:background="@drawable/button3"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"/>
+            android:scaleType="fitCenter" />
 
         <ImageButton
             android:id="@+id/move_gallery"
@@ -69,4 +65,6 @@
             android:background="@drawable/button4"
             android:scaleType="fitCenter" />
     </LinearLayout>
-</LinearLayout>
+
+
+</RelativeLayout>

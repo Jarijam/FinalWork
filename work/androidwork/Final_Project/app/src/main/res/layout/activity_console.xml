@@ -323,5 +323,14 @@
             android:adjustViewBounds="true"
             android:background="@drawable/button3"
             android:scaleType="fitCenter" />
+
+        <ImageButton
+            android:id="@+id/move_gallery"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="100dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/button4"
+            android:scaleType="fitCenter" />
     </LinearLayout>
 </LinearLayout>

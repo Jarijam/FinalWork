@@ -52,5 +52,6 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     compile group: 'cz.msebera.android' , name: 'httpclient' , version: '4.4.1.2'
+    implementation 'com.yanzhenjie:permission:2.0.3'
 
 }
