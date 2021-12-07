@@ -44,12 +44,6 @@ public class MainController {
 		return mv;
 	}
 	
-	@RequestMapping("/recentdata.mc")
-	public ModelAndView recentdata() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("recentdata");
-		return mv;
-	}
 	
 	
 	  @RequestMapping("/graphics.mc") 
@@ -141,6 +135,14 @@ public class MainController {
 			mv.setViewName("chart_view/recentdata"); 
 			return mv;
 			}
+	    
+	    @RequestMapping("/recentdata.mc")
+	    public ModelAndView recentdata() {
+	    	ModelAndView mv = new ModelAndView();
+	    	mv.addObject("center","recentdata");
+	    	mv.setViewName("main");
+	    	return mv;
+	    }
 	    
 	}
 	
