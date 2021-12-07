@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="d" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html lang="en" class="no-js">
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1"> 
-		<title>Off-Canvas Menu Effects - Top Side</title>
+		<title>불IT났어</title>
 		<meta name="description" content="Modern effects and styles for off-canvas navigation with CSS transitions and SVG animations using Snap.svg" />
 		<meta name="keywords" content="sidebar, off-canvas, menu, navigation, effect, inspiration, css transition, SVG, morphing, animation" />
 		<meta name="author" content="Codrops" />
@@ -17,6 +20,61 @@
 		<!--[if IE]>
   		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
+		
+		<style type="text/css">
+		h3 {
+			margin : 20px;
+		}
+		.content {
+			background-color: white;
+		
+		}
+		
+		
+		#container_tot {
+		    height: 525px;
+		    border: 2px solid blue;
+		    margin : auto 20px;
+		}
+		#container_gas {
+		    height: 230px;
+		    border: 2px solid red;
+		    margin : auto 20px;
+		}
+		#container_temp {
+		    height: 230px;
+		    border: 2px solid purple;
+		    margin : auto 20px;
+		}
+
+		.ex-layout{ height: 100%;}
+		.menu{
+			width: 100%;
+			height: 30px;
+			border:2px solid #09c;
+			background: #d7f5ff;
+		}
+		.main .left-menu{
+			float: left;
+			width: 50%;
+			height: 500px;
+		}
+		.main .contents {
+			float: left;
+			width: 50%;
+			height: 250px;
+		}
+		
+		.main .contents .arcticle{
+			height: 200px;
+			
+		}
+		.main .contents .comment{
+			height: 200px;
+			
+		}
+	
+		</style>
 	</head>
 	<body>
 		<div class="container">
@@ -31,10 +89,11 @@
 					</div>
 				</nav>
 				<nav class="menu-side">
-					<a href="#">Recent Stories</a>
-					<a href="#">Reading List</a>
-					<a href="#">My Stories</a>
-					<a href="#">Categories</a>
+					<a href="main.mc">Main</a>
+					<a href="recentdata.mc">Recent Data</a>
+					<a href="#">Accumulated Data</a>
+					<a href="#">Iot Coverage</a>
+					<a href="#">About Us</a>
 				</nav>
 			</div>
 			<button class="menu-button" id="open-button">Open Menu</button>
@@ -45,33 +104,12 @@
 							<a class="codrops-icon codrops-icon-prev" href="http://tympanus.net/Development/TabStylesInspiration/"><span>Previous Demo</span></a>
 							<a class="codrops-icon codrops-icon-drop" href="http://tympanus.net/codrops/?p=20100"><span>Back to the Codrops Article</span></a>
 						</div>
-						<h1>Off-Canvas Menu Effects <span>Showing (off-canvas) menus stylishly</span></h1>
-						<nav class="codrops-demos">
-							<a class="current-demo" href="index.html">Top Side</a>
-							<a href="sideslide.html">Side Slide</a>
-							<a href="cornerbox.html">Corner Box</a>
-							<a href="cornerbox_nested.html">Nested Corner Box</a>
-							<a href="topexpand.html">Top Expand</a>
-							<a href="cornermorph.html">Corner Morph</a>
-							<a href="elastic.html">Elastic</a>
-							<a href="bubble.html">Bubble</a>
-							<a href="wave.html">Wave</a>
-						</nav>
+						<h1>불IT났어<span>Showing (off-canvas) menus stylishly</span></h1>
 						<p>Based on the <a href="https://dribbble.com/shots/1663008-Old-Designspiration-Menu-Concept">Dribble shot by Michael Martinho</a></p>
 					</header>
-					<!-- Related demos -->
-					<section class="related">
-						<p>If you enjoyed this demo you might also like:</p>
-						<a href="http://tympanus.net/Development/SidebarTransitions/">
-							<img src="img/related/sidebartransitions.png" />
-							<h3>Transitions for Off-Canvas Navigations</h3>
-						</a>
-						<a href="http://tympanus.net/Development/PerspectivePageViewNavigation/">
-							<img src="img/related/PerspectiveNavigation.png" />
-							<h3>Perspective Page View Navigation</h3>
-						</a>
-					</section>
+					<h1>hello main</h1>
 				</div>
+				
 			</div><!-- /content-wrap -->
 		</div><!-- /container -->
 		<script src="/np/js/classie.js"></script>

@@ -14,28 +14,28 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script>
-function display(d){
-	Highcharts.getJSON(
+function display2(d){
+			Highcharts.getJSON(
 			  'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
 			  function(data) {
 
-			    Highcharts.chart('container', {
+				  var chart1 = new Highcharts.chart('container_temp', {
 			      chart: {
 			        zoomType: 'x'
 			      },
 			      title: {
-			        text: 'USD to EUR exchange rate over time'
+			        text: 'Temperature over time'
 			      },
 			      subtitle: {
 			        text: document.ontouchstart === undefined ?
-			          'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+			          'Click and drag to zoom in' : 'Pinch the chart to zoom in'
 			      },
 			      xAxis: {
 			        type: 'datetime'
 			      },
 			      yAxis: {
 			        title: {
-			          text: 'Exchange rate'
+			          text: 'Temperature'
 			        }
 			      },
 			      legend: {
@@ -70,29 +70,32 @@ function display(d){
 
 			      series: [{
 			        type: 'area',
-			        name: 'USD to EUR',
+			        name: 'Temperature',
 			        data: d
 			      }]
 			    });
 			  });
 }
-function getdata(){
+function getdata2(){
 	$.ajax({
-		url:'rchart.mc',
+		url:'rcharttemp.mc',
 		success:function(d){
-			display(d);
-			//alert(d);
+			display2(d);
+			setInterval(function(){
+			display2(d);
+			}, 5000);
 		}
 	});
 };
 $(document).ready(function(){
-	getdata();
+	getdata2();
 });
 </script>
 
-<h1>R_CHART</h1>
+<h3>Temperature Info.</h3>
 
 	
-
-<div id="container"></div>
+<figure class="highcharts-figure">
+	<div id="container_temp"></div>
+</figure>
 
