@@ -1,18 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<style>
-#container {
-    height: 400px;
-    border: 2px solid blue;
-}
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/annotations.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script>
 function display2(d){
 			Highcharts.getJSON(
@@ -81,21 +68,21 @@ function getdata2(){
 		url:'rcharttemp.mc',
 		success:function(d){
 			display2(d);
-			setInterval(function(){
-			display2(d);
-			}, 5000);
 		}
 	});
 };
+
 $(document).ready(function(){
-	getdata2();
+		getdata2();
+	setInterval(function(){
+		getdata2();
+	},5000);
+	
 });
 </script>
 
-<h1>R_CHART</h1>
-
-	
-<figure class="highcharts-figure">
-	<div id="container_temp"></div>
-</figure>
+<div class="cbox">
+    <h3 class="cbox-body">Temperature Info.</h3>
+    <div id="container_temp"></div>
+  </div>
 

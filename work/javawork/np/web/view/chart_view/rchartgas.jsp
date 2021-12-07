@@ -1,16 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<style>
-
-
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/annotations.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script>
 function display(d){
 			Highcharts.getJSON(
@@ -79,22 +68,22 @@ function getdata(){
 		url:'rchartgas.mc',
 		success:function(d){
 			display(d);
-			setInterval(function(){
-			display(d);
-			}, 5000);
 		}
 	});
 };
+
 $(document).ready(function(){
-	getdata();
+		getdata(); 
+	setInterval(function(){
+		getdata();
+	},5000);
 });
 </script>
 
-<h1>R_CHART</h1>
-
 	
 
-<figure class="highcharts-figure">
+<div class="cbox">
+    <h3 class="cbox-body">Gas Info.</h3>
     <div id="container_gas"></div>
-</figure>
+  </div>
 

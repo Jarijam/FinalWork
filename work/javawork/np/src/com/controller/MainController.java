@@ -45,6 +45,7 @@ public class MainController {
 	}
 	
 	
+	
 	  @RequestMapping("/graphics.mc") 
 	   public ModelAndView coords() throws Exception { 
 	      ModelAndView mv =  new ModelAndView(); 
@@ -114,31 +115,39 @@ public class MainController {
 	    @RequestMapping("/rcharttemppage.mc")
 		public ModelAndView rchart_temp() {
 			ModelAndView mv = new ModelAndView();
-			//mv.addObject("center2", "rcharttemp"); 
-			mv.setViewName("chart_view/rcharttemp"); 
+			mv.addObject("rchart", "rcharttemp"); 
+			mv.setViewName("chart_view/recentdata"); 
 			return mv;
 			}
 	    
 	    @RequestMapping("/rchartgaspage.mc")
 		public ModelAndView rchart_gas() {
 			ModelAndView mv = new ModelAndView();
-			//mv.addObject("center", "rchartgas"); 
-			mv.setViewName("chart_view/rchartgas"); 
+			mv.addObject("rchart", "rchartgas"); 
+			mv.setViewName("chart_view/recentdata"); 
 			return mv;
 			}
 	    
 	    @RequestMapping("/rchartpage_tot.mc")
 		public ModelAndView rchart_tot() {
 			ModelAndView mv = new ModelAndView();
-			//mv.addObject("center", "rchart"); 
-			mv.setViewName("chart_view/rcharttot"); 
+			mv.addObject("rchart", "rcharttot"); 
+			mv.setViewName("chart_view/recentdata"); 
 			return mv;
 			}
+	    
+	    @RequestMapping("/recentdata.mc")
+	    public ModelAndView recentdata() {
+	    	ModelAndView mv = new ModelAndView();
+	    	mv.addObject("center","recentdata");
+	    	mv.setViewName("main");
+	    	return mv;
+	    }
+	    
 	}
 	
 	  
 	 
 	  
 	
-
 
