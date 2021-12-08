@@ -27,7 +27,6 @@
         <activity
             android:name=".WebActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".testActivity" />
         <activity android:name=".ConsoleActivity" />
         <activity android:name=".ControllerActivity" />
         <activity android:name=".GalleryActivity" />
