@@ -109,7 +109,7 @@
 					<a href="main.mc">Main</a>
 					<a href="recentdata.mc">Recent Data</a>
 					<a href="#">Accumulated Data</a>
-					<a href="testgraph.mc">testgraph</a>
+					<a href="graphics.mc">Canvas Test</a>
 					<a href="testgraph2.mc">testgrapgh2</a>
 					<a href="testgraph3.mc">testgrapgh3</a>
 					<a href="#">About Us</a>
