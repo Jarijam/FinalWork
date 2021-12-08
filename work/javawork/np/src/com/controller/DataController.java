@@ -8,8 +8,10 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.rosuda.REngine.REXPMismatchException;
@@ -22,93 +24,157 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.frame.Service;
 //import com.vo.Product;
+import com.vo.CoordinateVO;
 
 @Controller
 public class DataController {
-
 	
-//	@Resource(name="pbiz")
-//	Service<Integer,Product> biz;
 	
-	public DataController() {
-
+		private Logger data_log = 
+				Logger.getLogger("data");
+		
+		
+		@Resource(name="cdservice")
+		Service<String, CoordinateVO> cdservice;
+		
+		
+		public DataController() {
+	
+		}
+	
+	    @RequestMapping("/data.mc")
+		@ResponseBody
+		public void data(HttpServletRequest request) throws Exception {
+			String btn = request.getParameter("btn");
+			String gas = request.getParameter("gas");
+			String flame = request.getParameter("flame");
+			String dis = request.getParameter("dis");
+			String temp = request.getParameter("temp");
+			
+			
+	//		System.out.println(btn+","+gas+","+flame+","+dis);
+			
+			data_log.debug(btn+","+gas+","+flame+","+dis+","+temp);
+	
+				if(btn.equals(1+"")) {
+					cdservice.remove(btn);
+				}
+		}
+    
+    	@RequestMapping("/crddata.mc")
+  		@ResponseBody
+  		public void uu(HttpServletResponse response) throws IOException {
+  			response.setContentType("text/json;charset=UTF-8");
+  			PrintWriter out = response.getWriter();
+  			ArrayList<CoordinateVO> list = null;
+  			try {
+  				list = cdservice.get();
+  			} catch (Exception e) {
+  				e.printStackTrace();
+  			}
+  			JSONArray ja = new JSONArray();
+  			for(CoordinateVO u:list) {
+  				JSONObject jo = new JSONObject();
+  				jo.put("X", u.getX()+"");
+  				jo.put("Y", u.getY()+"");
+  				ja.add(jo);
+  			}
+  			out.print(ja.toJSONString());
+  			out.close();
+  		}
+    
+    
+    //test용 (sendhttp)
+    	@RequestMapping("/iot1.mc")
+		@ResponseBody
+		public void iotdata(HttpServletRequest request, CoordinateVO coord) throws Exception {
+			String temp = request.getParameter("temp");
+			String humi = request.getParameter("humi");
+			int f_temp = Integer.parseInt(temp);
+			int f_humi = Integer.parseInt(humi);
+			System.out.println(f_temp+" : "+f_humi);
+			CoordinateVO coord1 = new CoordinateVO(temp, humi);
+			
+			cdservice.register(coord1);
+			//data_log.debug(f_temp+" : "+f_humi);
+		}
+	  
+		
+		@RequestMapping("/gas.mc")
+		@ResponseBody
+		public void gas(HttpServletResponse response) throws IOException, RserveException, REXPMismatchException {
+			response.setContentType("text/json;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			RConnection rconn = new RConnection("192.168.0.29");
+			rconn.setStringEncoding("utf8");
+	
+			rconn.eval("source('C:/logs/final_test.R',encoding='UTF-8')");
+			// R의 계산 결과를 리스트로 리턴 받음(소스를 로딩하고 함수를 호출하는 과정, 어레이리스트아님)
+			RList list = rconn.eval("a6()").asList();
+	
+	
+			// 리스트의 첫 번째 요소를 double 배열로 리턴
+			double[] n1 = list.at(0).asDoubles();
+			double[] n2 = list.at(1).asDoubles();
+			
+			
+			JSONObject jo = new JSONObject();
+			JSONArray tdata = new JSONArray();
+			for(double num:n1) {
+				tdata.add(num);
+			}
+			jo.put("date",tdata);
+			
+			JSONArray tdata2 = new JSONArray();
+			for(double num:n2) {
+				tdata2.add(num);
+			}
+			jo.put("gas", tdata2);
+			
+			
+			
+			out.print(jo.toJSONString());
+			out.close();
+			rconn.close();
+		}
+		@RequestMapping("/temp.mc")
+		@ResponseBody
+		public void temp(HttpServletResponse response) throws IOException, RserveException, REXPMismatchException {
+			response.setContentType("text/json;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			RConnection rconn = new RConnection("192.168.0.29");
+			rconn.setStringEncoding("utf8");
+	
+			rconn.eval("source('C:/logs/final_test.R',encoding='UTF-8')");
+			// R의 계산 결과를 리스트로 리턴 받음(소스를 로딩하고 함수를 호출하는 과정, 어레이리스트아님)
+			RList list = rconn.eval("a7()").asList();
+	
+	
+			// 리스트의 첫 번째 요소를 double 배열로 리턴
+			double[] n1 = list.at(0).asDoubles();
+			double[] n2 = list.at(1).asDoubles();
+			
+			
+			JSONObject jo = new JSONObject();
+			JSONArray tdata = new JSONArray();
+			for(double num:n1) {
+				tdata.add(num);
+			}
+			jo.put("date",tdata);
+			
+			JSONArray tdata2 = new JSONArray();
+			for(double num:n2) {
+				tdata2.add(num);
+			}
+			jo.put("temp", tdata2);
+			
+			
+			
+			out.print(jo.toJSONString());
+			out.close();
+			rconn.close();
+		}
+		
+		
+		
 	}
-	
-	@RequestMapping("/gas.mc")
-	@ResponseBody
-	public void gas(HttpServletResponse response) throws IOException, RserveException, REXPMismatchException {
-		response.setContentType("text/json;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		RConnection rconn = new RConnection("192.168.0.29");
-		rconn.setStringEncoding("utf8");
-
-		rconn.eval("source('C:/logs/final_test.R',encoding='UTF-8')");
-		// R의 계산 결과를 리스트로 리턴 받음(소스를 로딩하고 함수를 호출하는 과정, 어레이리스트아님)
-		RList list = rconn.eval("a6()").asList();
-
-
-		// 리스트의 첫 번째 요소를 double 배열로 리턴
-		double[] n1 = list.at(0).asDoubles();
-		double[] n2 = list.at(1).asDoubles();
-		
-		
-		JSONObject jo = new JSONObject();
-		JSONArray tdata = new JSONArray();
-		for(double num:n1) {
-			tdata.add(num);
-		}
-		jo.put("date",tdata);
-		
-		JSONArray tdata2 = new JSONArray();
-		for(double num:n2) {
-			tdata2.add(num);
-		}
-		jo.put("gas", tdata2);
-		
-		
-		
-		out.print(jo.toJSONString());
-		out.close();
-		rconn.close();
-	}
-	@RequestMapping("/temp.mc")
-	@ResponseBody
-	public void temp(HttpServletResponse response) throws IOException, RserveException, REXPMismatchException {
-		response.setContentType("text/json;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		RConnection rconn = new RConnection("192.168.0.29");
-		rconn.setStringEncoding("utf8");
-
-		rconn.eval("source('C:/logs/final_test.R',encoding='UTF-8')");
-		// R의 계산 결과를 리스트로 리턴 받음(소스를 로딩하고 함수를 호출하는 과정, 어레이리스트아님)
-		RList list = rconn.eval("a7()").asList();
-
-
-		// 리스트의 첫 번째 요소를 double 배열로 리턴
-		double[] n1 = list.at(0).asDoubles();
-		double[] n2 = list.at(1).asDoubles();
-		
-		
-		JSONObject jo = new JSONObject();
-		JSONArray tdata = new JSONArray();
-		for(double num:n1) {
-			tdata.add(num);
-		}
-		jo.put("date",tdata);
-		
-		JSONArray tdata2 = new JSONArray();
-		for(double num:n2) {
-			tdata2.add(num);
-		}
-		jo.put("temp", tdata2);
-		
-		
-		
-		out.print(jo.toJSONString());
-		out.close();
-		rconn.close();
-	}
-	
-	
-	
-}
