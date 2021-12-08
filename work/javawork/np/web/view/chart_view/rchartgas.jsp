@@ -68,22 +68,22 @@ function getdata(){
 		url:'rchartgas.mc',
 		success:function(d){
 			display(d);
-			setInterval(function(){
-			display(d);
-			}, 5000);
 		}
 	});
 };
+
 $(document).ready(function(){
-	getdata();
+		getdata(); 
+	setInterval(function(){
+		getdata();
+	},5000);
 });
 </script>
 
-<h3>Gas Info.</h3>
-
 	
 
-<figure class="highcharts-figure">
+<div class="cbox">
+    <h3 class="cbox-body">Gas Info.</h3>
     <div id="container_gas"></div>
-</figure>
+  </div>
 

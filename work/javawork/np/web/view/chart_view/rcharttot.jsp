@@ -152,9 +152,6 @@ function getdata3(){
 		url:'rchart_tot.mc',
 		success:function(d){
 			display3(d);
-			setInterval(function(){
-			display3(d);
-			},5000);
 		}
 	});
 };
@@ -162,14 +159,17 @@ function getdata3(){
 
 
 $(document).ready(function(){
-			getdata3();
-	});
+		getdata3(); 
+	setInterval(function(){
+		getdata3();
+	},5000);
+});
 
 
 </script>
 </head>
 <body>
-<h3>Overall Info.</h3>
-
-
-<div id="container_tot"></div>
+<div class="cbox">
+    <h3 class="cbox-body">A Basic Panel</h3>
+    <div id="container_tot"></div>
+  </div>
