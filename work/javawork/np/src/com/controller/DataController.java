@@ -60,6 +60,22 @@ public class DataController {
 					cdservice.remove(btn);
 				}
 		}
+	    
+	    @RequestMapping("/androidpower.mc")
+		@ResponseBody
+		public void androidpower(HttpServletRequest request) throws Exception {
+			String power = request.getParameter("pow_txt");
+			System.out.println(power);
+				
+		}
+	    
+	    @RequestMapping("/androidmode.mc")
+		@ResponseBody
+		public void androidmode(HttpServletRequest request) throws Exception {
+			String mode = request.getParameter("con_txt");
+			System.out.println(mode);
+			
+		}
     
     	@RequestMapping("/crddata.mc")
   		@ResponseBody
@@ -167,6 +183,43 @@ public class DataController {
 				tdata2.add(num);
 			}
 			jo.put("temp", tdata2);
+			
+			
+			
+			out.print(jo.toJSONString());
+			out.close();
+			rconn.close();
+		}
+		@RequestMapping("/flame.mc")
+		@ResponseBody
+		public void flame(HttpServletResponse response) throws IOException, RserveException, REXPMismatchException {
+			response.setContentType("text/json;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			RConnection rconn = new RConnection("192.168.0.29");
+			rconn.setStringEncoding("utf8");
+	
+			rconn.eval("source('C:/logs/final_test.R',encoding='UTF-8')");
+			// R의 계산 결과를 리스트로 리턴 받음(소스를 로딩하고 함수를 호출하는 과정, 어레이리스트아님)
+			RList list = rconn.eval("a8()").asList();
+	
+	
+			// 리스트의 첫 번째 요소를 double 배열로 리턴
+			double[] n1 = list.at(0).asDoubles();
+			double[] n2 = list.at(1).asDoubles();
+			
+			
+			JSONObject jo = new JSONObject();
+			JSONArray tdata = new JSONArray();
+			for(double num:n1) {
+				tdata.add(num);
+			}
+			jo.put("date",tdata);
+			
+			JSONArray tdata2 = new JSONArray();
+			for(double num:n2) {
+				tdata2.add(num);
+			}
+			jo.put("flame", tdata2);
 			
 			
 			

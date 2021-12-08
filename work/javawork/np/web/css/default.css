@@ -25,15 +25,7 @@ body {
 	background: #f9f9f9;
 }
 
-a {
-	color: #888;
-	text-decoration: none;
-}
 
-a:hover,
-a:active {
-	color: #333;
-}
 
 /* Header Style */
 .container > header {
