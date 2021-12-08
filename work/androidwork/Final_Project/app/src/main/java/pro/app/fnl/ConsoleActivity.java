@@ -30,6 +30,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -56,6 +57,7 @@ import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.NameValuePair;
@@ -69,10 +71,9 @@ public class ConsoleActivity extends AppCompatActivity {
     String urlStr = "http://192.168.0.29:80/np/crddata.mc";
     private static final int CALL_PERMISSION_REQUEST_CODE = 1234;
     TextView call_txt, pow_txt, con_txt, temp_txt, coll_txt, fire_txt, gas_txt;
-    ImageButton call_btn, move_console, move_controller, move_web, cap_btn;
+    ImageButton call_btn, move_console, move_controller, move_web,move_gallery, cap_btn;
     ToggleButton pow_btn, con_btn;
     LinearLayout container;
-    ArrayList<Sensor> list;
     NotificationManagerCompat notificationManager;
     String channelId = "channel";
     String channelName = "Channel_name";
@@ -89,6 +90,7 @@ public class ConsoleActivity extends AppCompatActivity {
         move_console = findViewById(R.id.move_console);
         move_controller = findViewById(R.id.move_controller);
         move_web = findViewById(R.id.move_web);
+        move_gallery = findViewById(R.id.move_gallery);
         pow_txt = findViewById(R.id.pow_txt);
         call_txt = findViewById(R.id.call_txt);
         con_txt = findViewById(R.id.con_txt);
@@ -97,8 +99,9 @@ public class ConsoleActivity extends AppCompatActivity {
         gas_txt = findViewById(R.id.gas_txt);
         fire_txt = findViewById(R.id.fire_txt);
         container = findViewById(R.id.container);
-        list = new ArrayList<>();
-        getData();
+        //listView = findViewById(R.id.listview);
+        //list = new ArrayList<>();
+        // getData();
 
         cap_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,6 +146,14 @@ public class ConsoleActivity extends AppCompatActivity {
                         println("등록 id--------------------------------------- : " + newToken);
                     }
                 });
+
+        move_gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ConsoleActivity.this, GalleryActivity.class);
+                startActivity(intent);
+            }
+        });
 
         move_controller.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -373,88 +384,4 @@ public class ConsoleActivity extends AppCompatActivity {
         notificationManager.notify(0, mBuilder.build());
     }
 
-    private void getData() {
-        String url = "http://192.168.0.21/sp/data.mc";
-        SensorAsync sensorAsync = new SensorAsync();
-        sensorAsync.execute(url);
-    }
-    class SensorAsync extends AsyncTask<String, Void, String> {
-        ProgressDialog progressDialog;
-
-        @Override
-        protected void onPreExecute() {
-            progressDialog = new ProgressDialog(ConsoleActivity.this);
-            progressDialog.setTitle("Get Data");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-            String url = strings[0].toString();
-            String result = HttpConnect.getString(url);
-            return result;
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            progressDialog.dismiss();
-            JSONArray ja = null;
-            try {
-                ja = new JSONArray(s);
-                for(int i=0; i<ja.length(); i++) {
-                    JSONObject jo = ja.getJSONObject(i);
-                    String temp = jo.getString("temp");
-                    String coll = jo.getString("coll");
-                    String gas = jo.getString("gas");
-                    String fire = jo.getString("fire");
-                    Sensor sensor = new Sensor(temp, coll, gas, fire);
-                    list.add(sensor);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            SensorAdapter sensorAdapter = new SensorAdapter();
-
-        }
-    }
-
-    class  SensorAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return list.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return list.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View sensorView = null;
-            LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            sensorView = inflater.inflate(R.layout.activity_console,container, true);
-            temp_txt = sensorView.findViewById(R.id.temp_txt);
-            coll_txt = sensorView.findViewById(R.id.coll_txt);
-            gas_txt = sensorView.findViewById(R.id.gas_txt);
-            fire_txt = sensorView.findViewById(R.id.fire_txt);
-            temp_txt.setText(list.get(position).getTemp());
-            coll_txt.setText(list.get(position).getColl());
-            gas_txt.setText(list.get(position).getGas());
-            fire_txt.setText(list.get(position).getFire());
-            return sensorView;
-        }
-    }
 }
