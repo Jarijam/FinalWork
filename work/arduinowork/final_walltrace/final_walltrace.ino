@@ -29,7 +29,7 @@ int motorA_vector = 1;  // 모터의 회전방향이 반대일 시 0을 1로, 1�
 int motorB_vector = 1;  // 모터의 회전방향이 반대일 시 0을 1로, 1을 0으로 바꿔주면 모터의 회전방향이 바뀜.
 int motor_speed = 150;  // 모터 스피드 0 ~ 255
 
-char data;
+
 
 void setup()  // 초기화
 { 
@@ -57,22 +57,28 @@ void setup()  // 초기화
   LKservo.attach(servo_motor);  // 서보모터 핀 설정
   LKservo.write(1);  // 서보모터 초기값 90도 설정
 }
+
+char data;
 void loop()  // 무한루프
 {
 
  
-sensing();
+//sensing();
+
 if(Serial.available()>0) {
     data = Serial.read();
-  if(data='x') {
+  if(data=='x') {
 //    mode1();
-    Serial.println("x들어옴");
-  }else if(data='y') {
+//    Serial.println("x들어옴");
+    LKservo.write(90);
+  }else if(data=='y') {
 //    mode2();
-    Serial.println("y들어옴");
-  }else if(data='x') {
+//    Serial.println("y들어옴");
+    LKservo.write(180);
+  }else if(data=='z') {
 //    mode3();
-    Serial.println("z들어옴");
+//    Serial.println("z들어옴");
+    LKservo.write(1);
   }
 }
  
