@@ -19,6 +19,12 @@ Servo LKservo;  // 서보모터 객체 선언
 
 #define servo_motor 2  // 서보모터 Signal 핀, 아두이노 우노 보드 디지털 3번 핀에 연결
 
+#define TEMP A2
+#define GAS A3
+#define FIRE A4
+int fireState = 0;
+
+
 int motorA_vector = 1;  // 모터의 회전방향이 반대일 시 0을 1로, 1을 0으로 바꿔주면 모터의 회전방향이 바뀜.
 int motorB_vector = 1;  // 모터의 회전방향이 반대일 시 0을 1로, 1을 0으로 바꿔주면 모터의 회전방향이 바뀜.
 int motor_speed = 150;  // 모터 스피드 0 ~ 255
@@ -39,6 +45,10 @@ void setup()  // 초기화
   pinMode(trig2, OUTPUT);  // trig1 출력 설정
   pinMode(echo2, INPUT);  // echo2 입력설정
 
+  pinMode(TEMP, INPUT);
+  pinMode(GAS, INPUT);
+  pinMode(FIRE, INPUT);
+  
 //  pinMode(5, INPUT);
   
   LKservo.attach(servo_motor);  // 서보모터 핀 설정
@@ -46,40 +56,37 @@ void setup()  // 초기화
 }
 void loop()  // 무한루프
 {
-//    if (read_ultrasonic() < 18)  // 만약 측정한 거리값이 18보다 작으면 자동차 우회전
-//  {
-//    motorA_con( motor_speed );  // 모터A 정방향
-//    motorB_con( -(motor_speed) );  // 모터B 역방향
-//    delay(280);  // 0.28초간 지연
-//  }
-//  else  // 측정한 거리값이 16보다 작지 않으면 자동차 직진
-//  {
-//    motorA_con( motor_speed );  // 모터A 정방향
-//    motorB_con( motor_speed );  // 모터B 정방향
-//  }
-  
-  
+
+ 
+sensing();
+if(Serial.read
+ 
 //    LKservo.write(90);
   
-//  Serial.println(val);
-//  delay(1000);
-//  digitalWrite(EA, HIGH);
-//  digitalWrite(EB, HIGH);
-//  go();
-//  delay(1000);
-//  back();
-//  delay(1000);
-//  left();
-//  delay(1000);
-//  right();
-//  delay(1000);
-//  spin_left();
-//  delay(1500);
-//  spin_right();
-//  delay(1500);
-//  brake();
-//  delay(1000);
+ 
 }
+void sensing() {
+  String spc = " "; 
+ unsigned int temp_val;
+ String fstate;
+ String temp;
+ String gas;
+ 
+ temp_val = analogRead(TEMP);
+ temp = (temp_val*500/1024);
+
+ fireState = digitalRead(FIRE);
+ if(fireState == LOW) {
+    fstate = "0";
+ }else if(fireState == HIGH) {
+    fstate = "1";
+ }
+
+ gas = analogRead(GAS);
+ 
+ Serial.println(gas+spc+fstate+spc+temp);
+}
+
 
 int read_ultrasonic1(void)  // 초음파 센서1 값 읽어오는 함수
 {
@@ -193,11 +200,9 @@ void back() {
 }
 
 void mode1() {
-  int crash_m = analogRead(A5);
-  int crash_l = analogRead(A4);
-  int crash_r = analogRead(A3);
+  int crash= analogRead(A5);
 //  Serial.println(crash_r);
-  if (crash_l <= 10 | crash_r <= 10 | crash_m <=10) {
+  if (crash<=10) {
     spin_left();
     delay(1000);
   }else if (read_ultrasonic2() < 7) {
@@ -206,7 +211,6 @@ void mode1() {
     spin_left();
     delay(500);
   }
-  
   else {
       if (read_ultrasonic1() < 18)  // 만약 측정한 거리값이 18보다 작으면 자동차 우회전
     {
@@ -221,10 +225,8 @@ void mode1() {
 }
 void mode2() {
   //물체 탐지.
-  int crash_m = analogRead(A5);
-  int crash_l = analogRead(A4);
-  int crash_r = analogRead(A3);
-  
+  int crash = analogRead(A5);
+ 
   int distance = 0;
   int angle = 0;
   for (int i=0 ; i<180 ; i+=10) {
@@ -251,9 +253,8 @@ void mode2() {
     spin_left();
     delay(800);
   }
-  
 
-  if (read_ultrasonic2() <5 | crash_l <= 10 | crash_m <= 10 | crash_r <= 10 ) {
+  if (read_ultrasonic2() <5 | crash <= 10 ) {
     brake();
     delay(50);
     back();
@@ -300,6 +301,26 @@ if (BTSerial.available())
   }
 }
 
+void speedtest() {
+   Serial.println(val);
+  delay(1000);
+  digitalWrite(EA, HIGH);
+  digitalWrite(EB, HIGH);
+  go();
+  delay(1000);
+  back();
+  delay(1000);
+  left();
+  delay(1000);
+  right();
+  delay(1000);
+  spin_left();
+  delay(1500);
+  spin_right();
+  delay(1500);
+  brake();
+  delay(1000);
+}
 //  // DC모터 정회전
 //  digitalWrite(EA, HIGH);  // 모터구동 ON
 //  digitalWrite(M_IN1, motorA_vector);  // IN1에 HIGH(or LOW)
