@@ -84,7 +84,9 @@ public class MainController {
 			}
 	    
 	    @RequestMapping("/recentdata.mc")
-	    public ModelAndView recentdata() {
+	    public ModelAndView recentdata(HttpServletRequest request) {
+	    	String MODE = request.getParameter("MODE");
+		      System.out.println("MODE Status: "+MODE);
 	    	ModelAndView mv = new ModelAndView();
 	    	mv.addObject("center","recentdata");
 	    	mv.setViewName("main");
