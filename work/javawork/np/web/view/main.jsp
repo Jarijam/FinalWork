@@ -127,6 +127,7 @@
 						<h1>불IT났어<span>test중입니다.</span></h1>
 						<p>바로가기 주소입니다.<a href="https://dribbble.com/shots/1663008-Old-Designspiration-Menu-Concept">Dribble shot by Michael Martinho</a></p>
 					</header>
+					
 					<section>
 						<c:choose>
 							<c:when test="${center == null }">
@@ -137,7 +138,7 @@
 							</c:otherwise>
 						</c:choose>
 					</section>
-		
+					
 				</div>
 				
 			</div><!-- /content-wrap -->
