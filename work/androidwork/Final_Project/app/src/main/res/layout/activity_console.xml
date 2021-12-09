@@ -91,6 +91,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/temp_img"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="right"
@@ -122,6 +123,7 @@
 
 
             <ImageView
+                android:id="@+id/coll_img"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="right"
@@ -158,6 +160,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/gas_img"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="right"
@@ -188,6 +191,7 @@
                 android:textSize="22dp" />
 
             <ImageView
+                android:id="@+id/fire_img"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="right"

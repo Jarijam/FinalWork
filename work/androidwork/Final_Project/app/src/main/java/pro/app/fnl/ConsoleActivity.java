@@ -31,6 +31,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -87,6 +88,7 @@ public class ConsoleActivity extends AppCompatActivity {
     static String regId;
     TextView call_txt, pow_txt, con_txt, temp_txt, coll_txt, fire_txt, gas_txt;
     ImageButton call_btn, move_console, move_controller, move_web,move_gallery, cap_btn;
+    ImageView fire_img, gas_img, coll_img, temp_img;
     ToggleButton pow_btn, con_btn;
     LinearLayout container, data;
     NotificationManagerCompat notificationManager;
@@ -114,6 +116,10 @@ public class ConsoleActivity extends AppCompatActivity {
         coll_txt = findViewById(R.id.coll_txt);
         gas_txt = findViewById(R.id.gas_txt);
         fire_txt = findViewById(R.id.fire_txt);
+        temp_img = findViewById(R.id.temp_img);
+        gas_img = findViewById(R.id.gas_img);
+        fire_img = findViewById(R.id.fire_img);
+        coll_img = findViewById(R.id.coll_img);
         container = findViewById(R.id.container);
         data = findViewById(R.id.data);
         regId = "fUgb9-D3SlO3X3P9-1XgLV:APA91bEPOnZ_d62DGfewfOJug0_EjvCCLfLnfxAZRCxvDzErinXGKHa3QKgtZ5DsAV_GH72iLxS-DtjbJLH7_Zsgj3BhnKf9vMbB0aTpoapCUfSPqYRNvf7Ajk3shxamFtbDKxH79oA8";
@@ -316,12 +322,32 @@ public class ConsoleActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            temp_txt.setText(values[0].split(",")[1]+"℃");
-                            gas_txt.setText(values[0].split(",")[0]);
+
+                            if(Integer.parseInt(values[0].split(",")[1]) >= 20) {
+                                temp_txt.setText(values[0].split(",")[1]+"℃");
+                                temp_img.setImageResource(R.drawable.temp);
+                            }else if(Integer.parseInt(values[0].split(",")[1]) >= 25) {
+                                temp_txt.setText(values[0].split(",")[1]+"℃");
+                                temp_img.setImageResource(R.drawable.temp2);
+                            }else {
+                                temp_txt.setText(values[0].split(",")[1]+"℃");
+                                temp_img.setImageResource(R.drawable.temp3);
+                            }
+
+                            if(values[0].split(",")[0].equals("0")) {
+                                gas_txt.setText(values[0].split(",")[0]);
+                                gas_img.setImageResource(R.drawable.gassensor2);
+                            }else {
+                                gas_txt.setText(values[0].split(",")[0]);
+                                gas_img.setImageResource(R.drawable.gassensor);
+                            }
+
                             if(values[0].split(",")[2].equals("0")) {
-                               fire_txt.setText("SAFE");
+                                fire_txt.setText("SAFE");
+                                fire_img.setImageResource(R.drawable.firesensor2);
                             }else {
                                 fire_txt.setText("WARNING!!!!");
+                                fire_img.setImageResource(R.drawable.firesensor);
                             }
                         }
                     });
