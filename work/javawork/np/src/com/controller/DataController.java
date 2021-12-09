@@ -114,7 +114,6 @@ public class DataController {
 			cdservice.register(coord1);
 			//data_log.debug(f_temp+" : "+f_humi);
 		}
-	  
 		
 		@RequestMapping("/gas.mc")
 		@ResponseBody
