@@ -227,6 +227,35 @@ public class DataController {
 			rconn.close();
 		}
 		
+		@RequestMapping("/androidtemp.mc")
+		@ResponseBody
+		public void androidtemp(HttpServletResponse response) throws IOException, RserveException, REXPMismatchException {
+			response.setContentType("text/json;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			RConnection rconn = new RConnection("192.168.0.29");
+			rconn.setStringEncoding("utf8");
+	
+			rconn.eval("source('C:/logs/final_test.R',encoding='UTF-8')");
+
+			RList list = rconn.eval("b1()").asList();
+			
+			
+			int [] n1 = list.at(0).asIntegers();
+			int [] n2 = list.at(1).asIntegers();
+			int [] n3 = list.at(2).asIntegers();
+			
+			
+			int gas = n1[0];
+			int temp = n2[0];
+			int flame = n3[0];		
+			
+			
+			out.print(gas+","+temp+","+flame);
+			
+			out.close();
+			rconn.close();
+		}
+		
 		
 		
 	}
