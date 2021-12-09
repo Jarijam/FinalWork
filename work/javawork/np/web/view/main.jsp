@@ -26,6 +26,7 @@
 		<script src="https://code.highcharts.com/modules/exporting.js"></script>
 		<script src="https://code.highcharts.com/modules/export-data.js"></script>
 		<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+		
 		<!--[if IE]>
   		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -109,7 +110,7 @@
 					<a href="main.mc">Main</a>
 					<a href="recentdata.mc">Recent Data</a>
 					<a href="#">Accumulated Data</a>
-					<a href="testgraph.mc">testgraph</a>
+					<a href="graphics.mc">Canvas Test</a>
 					<a href="testgraph2.mc">testgrapgh2</a>
 					<a href="testgraph3.mc">testgrapgh3</a>
 					<a href="#">About Us</a>
@@ -126,6 +127,7 @@
 						<h1>불IT났어<span>test중입니다.</span></h1>
 						<p>바로가기 주소입니다.<a href="https://dribbble.com/shots/1663008-Old-Designspiration-Menu-Concept">Dribble shot by Michael Martinho</a></p>
 					</header>
+					
 					<section>
 						<c:choose>
 							<c:when test="${center == null }">
@@ -136,7 +138,7 @@
 							</c:otherwise>
 						</c:choose>
 					</section>
-		
+					
 				</div>
 				
 			</div><!-- /content-wrap -->
