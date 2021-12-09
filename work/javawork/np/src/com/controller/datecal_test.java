@@ -32,6 +32,7 @@ public class datecal_test {
 		MM = null;
 		SS = null;
 		System.out.println(ttl);
+		System.out.println("Latte is a horse");
 	}
 
 }
