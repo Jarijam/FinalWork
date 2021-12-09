@@ -54,6 +54,7 @@ public class ControllerActivity extends AppCompatActivity {
         con_left = findViewById(R.id.con_left);
         con_right = findViewById(R.id.con_right);
         con_break = findViewById(R.id.con_break);
+        con_acell = findViewById(R.id.con_acell);
         blue_btn = findViewById(R.id.blue_btn);
         blue_con = findViewById(R.id.blue_con);
         blue_name = findViewById(R.id.blue_name);
@@ -132,6 +133,9 @@ public class ControllerActivity extends AppCompatActivity {
 
     public void onClickButtonbreak(View view){
         if(connectedThread!=null){ connectedThread.write("S"); }
+    }
+    public void onClickButtonacell(View view){
+        if(connectedThread!=null){ connectedThread.write("C"); }
     }
 
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
