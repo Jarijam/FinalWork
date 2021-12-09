@@ -2,8 +2,8 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_checked="false"
-        android:drawable="@drawable/fan0" />
+        android:drawable="@drawable/warning2" />
     <item android:state_checked="true"
-        android:drawable="@drawable/fan1" />
+        android:drawable="@drawable/warning" />
 
 </selector>

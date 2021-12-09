@@ -13,6 +13,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -33,6 +36,7 @@ public class ControllerActivity extends AppCompatActivity {
     ImageButton move_console, move_controller, move_web, move_gallery, con_up, con_down, con_left, con_right, con_break, con_acell, blue_btn;
     TextView blue_con;
     ListView blue_name;
+    WebView cam;
     BluetoothAdapter btAdapter;
     Set<BluetoothDevice> pairedDevices;
     ArrayAdapter<String> btArrayAdapter;
@@ -49,6 +53,7 @@ public class ControllerActivity extends AppCompatActivity {
         move_controller = findViewById(R.id.move_controller);
         move_web = findViewById(R.id.move_web);
         move_gallery = findViewById(R.id.move_gallery);
+        cam = findViewById(R.id.cam);
         con_up = findViewById(R.id.up_btn);
         con_down = findViewById(R.id.con_down);
         con_left = findViewById(R.id.con_left);
@@ -58,6 +63,15 @@ public class ControllerActivity extends AppCompatActivity {
         blue_btn = findViewById(R.id.blue_btn);
         blue_con = findViewById(R.id.blue_con);
         blue_name = findViewById(R.id.blue_name);
+
+        WebSettings webSettings = cam.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setLoadWithOverviewMode(true);
+        cam.setWebViewClient(new WebViewClient());
+        webSettings.setUseWideViewPort(true);
+        webSettings.setBuiltInZoomControls(false);
+        webSettings.setSaveFormData(false);
+        cam.loadUrl("http://192.168.0.15/");
 
         String[] permission_list = {
                 android.Manifest.permission.ACCESS_FINE_LOCATION,
@@ -195,5 +209,13 @@ public class ControllerActivity extends AppCompatActivity {
             Log.e(TAG, "Could not create Insecure RFComm Connection",e);
         }
         return  device.createRfcommSocketToServiceRecord(BT_MODULE_UUID);
+    }
+
+    private class ViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(final WebView view, final String url) {
+            view.loadUrl(url);
+            return true;
+        }
     }
 }
