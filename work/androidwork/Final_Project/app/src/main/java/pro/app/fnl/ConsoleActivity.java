@@ -88,12 +88,12 @@ public class ConsoleActivity extends AppCompatActivity {
     TextView call_txt, pow_txt, con_txt, temp_txt, coll_txt, fire_txt, gas_txt;
     ImageButton call_btn, move_console, move_controller, move_web,move_gallery, cap_btn;
     ToggleButton pow_btn, con_btn;
-    LinearLayout container;
+    LinearLayout container, data;
     NotificationManagerCompat notificationManager;
     String channelId = "channel";
     String channelName = "Channel_name";
     int importance = NotificationManager.IMPORTANCE_LOW;
-    MyAsynch myAsynch;
+    private static MyAsynch myAsynch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +115,7 @@ public class ConsoleActivity extends AppCompatActivity {
         gas_txt = findViewById(R.id.gas_txt);
         fire_txt = findViewById(R.id.fire_txt);
         container = findViewById(R.id.container);
+        data = findViewById(R.id.data);
         regId = "fUgb9-D3SlO3X3P9-1XgLV:APA91bEPOnZ_d62DGfewfOJug0_EjvCCLfLnfxAZRCxvDzErinXGKHa3QKgtZ5DsAV_GH72iLxS-DtjbJLH7_Zsgj3BhnKf9vMbB0aTpoapCUfSPqYRNvf7Ajk3shxamFtbDKxH79oA8";
 
         cap_btn.setOnClickListener(new View.OnClickListener() {
@@ -193,6 +194,8 @@ public class ConsoleActivity extends AppCompatActivity {
         move_controller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                myAsynch.cancel(true);
+                Log.d("park","cancel");
                 Intent intent = new Intent(ConsoleActivity.this, ControllerActivity.class);
                 startActivity(intent);
             }
@@ -201,6 +204,8 @@ public class ConsoleActivity extends AppCompatActivity {
         move_web.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                myAsynch.cancel(true);
+                Log.d("park","cancel");
                 Intent intent = new Intent(ConsoleActivity.this, WebActivity.class);
                 startActivity(intent);
             }
@@ -273,23 +278,7 @@ public class ConsoleActivity extends AppCompatActivity {
         Log.d("signUp", "response StatusCode:"+response.getStatusLine().getStatusCode()); // response StatusCode: 200
     }
 
-
-    public void signUPHttp2(String SensorInfo2) throws IOException {
-        HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost("http://192.168.0.29:80/np/androidpower.mc");
-        ArrayList<NameValuePair> sensorInfo2 = new ArrayList<NameValuePair>();
-        try {
-            sensorInfo2.add(new BasicNameValuePair("pow_txt", URLDecoder.decode(SensorInfo2, "UTF-8")));
-            post.setEntity(new UrlEncodedFormEntity(sensorInfo2, "UTF-8"));
-        } catch (UnsupportedEncodingException ex) {
-            Log.d("signUp", ex.toString());
-        }
-        HttpResponse response = client.execute(post);
-
-        Log.d("signUp", "response StatusCode:"+response.getStatusLine().getStatusCode()); // response StatusCode: 200
-    }
-
-    public void move_console(View v){
+    public void data (View v){
         String url = "http://192.168.0.29/np/androidtemp.mc";
 
         myAsynch = new MyAsynch();
@@ -297,22 +286,7 @@ public class ConsoleActivity extends AppCompatActivity {
         Log.d("park","시작?");
         }
 
-    public void move_web (View v){
-        myAsynch.cancel(true);
-        Log.d("park","종료?");
-        }
-    public void move_controller (View v){
-        myAsynch.cancel(true);
-        Log.d("park","종료?");
-    }
-//    public void move_gallery (View v){
-//        myAsynch.cancel(true);
-//        Log.d("park","종료?");
-//    }
-
-
-
-    class MyAsynch extends AsyncTask<String, String, Void> {
+     class MyAsynch extends AsyncTask<String, String, Void> {
 
         @SuppressLint("WrongThread")
         @Override
@@ -325,7 +299,7 @@ public class ConsoleActivity extends AppCompatActivity {
                 String result = HttpConnect.getString(url);
                 onProgressUpdate(result);
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -349,9 +323,6 @@ public class ConsoleActivity extends AppCompatActivity {
                             }else {
                                 fire_txt.setText("WARNING!!!!");
                             }
-
-
-
                         }
                     });
                 }
@@ -363,50 +334,6 @@ public class ConsoleActivity extends AppCompatActivity {
 
         }
     }
-
-
-    /*public void HttpRequest(String urlStr){
-        Log.d("erp","httprequest들어갔니?");
-        StringBuilder response = new StringBuilder();
-        try {
-            URL url = new URL(urlStr);
-
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            Log.d("erp",con+"");
-            if (con != null) {
-                con.setRequestMethod("GET");
-                con.setDoInput(true);
-                Log.d("erp","con밑으로 들어갔니?");
-                int resCode = con.getResponseCode();
-                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-
-                Log.d("erp",in+"??");
-                String JsonData = "";
-
-                Log.d("erp",JsonData+"제이슨~");
-                while (true) {
-                    Log.d("erp","json읽기 들어왔니?");
-                    Log.d("erp",JsonData);
-                    JsonData = in.readLine();
-                    if(JsonData == null){
-                        break;
-                    }
-                    response.append(JsonData+"\n");
-                }
-                Log.d("erp",response.toString()+"");
-                in.close();
-                con.disconnect();
-
-            }
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-*/
 
     public void println(String data) {
         Log.d("FMS", data);
