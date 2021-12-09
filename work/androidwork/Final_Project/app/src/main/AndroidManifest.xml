@@ -39,6 +39,13 @@
         </activity>
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />
+
+        <activity android:name=".ReceivedActivity"
+            android:label="비상상황 발생"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"
+            android:windowSoftInputMode="stateAlwaysHidden">
+        </activity>
+
         <service
             android:name=".MyFirebaseMessagingService"
             android:enabled="true"
