@@ -9,6 +9,7 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -78,6 +79,9 @@ import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
 import cz.msebera.android.httpclient.message.BasicNameValuePair;
 
 public class ConsoleActivity extends AppCompatActivity {
+
+    String urlStr = "http://192.168.0.29:80/np/data.mc";
+
     private static final int CALL_PERMISSION_REQUEST_CODE = 1234;
     static RequestQueue requestQueue;
     static String regId;
@@ -89,6 +93,7 @@ public class ConsoleActivity extends AppCompatActivity {
     String channelId = "channel";
     String channelName = "Channel_name";
     int importance = NotificationManager.IMPORTANCE_LOW;
+    MyAsynch myAsynch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,6 +183,8 @@ public class ConsoleActivity extends AppCompatActivity {
         move_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                myAsynch.cancel(true);
+                Log.d("park","cancel");
                 Intent intent = new Intent(ConsoleActivity.this, GalleryActivity.class);
                 startActivity(intent);
             }
@@ -265,6 +272,141 @@ public class ConsoleActivity extends AppCompatActivity {
         HttpResponse response = client.execute(post);
         Log.d("signUp", "response StatusCode:"+response.getStatusLine().getStatusCode()); // response StatusCode: 200
     }
+
+
+    public void signUPHttp2(String SensorInfo2) throws IOException {
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost("http://192.168.0.29:80/np/androidpower.mc");
+        ArrayList<NameValuePair> sensorInfo2 = new ArrayList<NameValuePair>();
+        try {
+            sensorInfo2.add(new BasicNameValuePair("pow_txt", URLDecoder.decode(SensorInfo2, "UTF-8")));
+            post.setEntity(new UrlEncodedFormEntity(sensorInfo2, "UTF-8"));
+        } catch (UnsupportedEncodingException ex) {
+            Log.d("signUp", ex.toString());
+        }
+        HttpResponse response = client.execute(post);
+
+        Log.d("signUp", "response StatusCode:"+response.getStatusLine().getStatusCode()); // response StatusCode: 200
+    }
+
+    public void move_console(View v){
+        String url = "http://192.168.0.29/np/androidtemp.mc";
+
+        myAsynch = new MyAsynch();
+        myAsynch.execute(url);
+        Log.d("park","시작?");
+        }
+
+    public void move_web (View v){
+        myAsynch.cancel(true);
+        Log.d("park","종료?");
+        }
+    public void move_controller (View v){
+        myAsynch.cancel(true);
+        Log.d("park","종료?");
+    }
+//    public void move_gallery (View v){
+//        myAsynch.cancel(true);
+//        Log.d("park","종료?");
+//    }
+
+
+
+    class MyAsynch extends AsyncTask<String, String, Void> {
+
+        @SuppressLint("WrongThread")
+        @Override
+        protected Void doInBackground(String... strings) {
+            String url = strings[0].toString();
+            while (true) {
+                if (isCancelled() == true) {
+                    break;
+                }
+                String result = HttpConnect.getString(url);
+                onProgressUpdate(result);
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(final String... values) {
+           /* Log.d("----------------", values[0]);*/
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            temp_txt.setText(values[0].split(",")[1]+"℃");
+                            gas_txt.setText(values[0].split(",")[0]);
+                            if(values[0].split(",")[2].equals("0")) {
+                               fire_txt.setText("SAFE");
+                            }else {
+                                fire_txt.setText("WARNING!!!!");
+                            }
+
+
+
+                        }
+                    });
+                }
+            }).start();
+        }
+
+        @Override
+        protected void onCancelled() {
+
+        }
+    }
+
+
+    /*public void HttpRequest(String urlStr){
+        Log.d("erp","httprequest들어갔니?");
+        StringBuilder response = new StringBuilder();
+        try {
+            URL url = new URL(urlStr);
+
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            Log.d("erp",con+"");
+            if (con != null) {
+                con.setRequestMethod("GET");
+                con.setDoInput(true);
+                Log.d("erp","con밑으로 들어갔니?");
+                int resCode = con.getResponseCode();
+                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+                Log.d("erp",in+"??");
+                String JsonData = "";
+
+                Log.d("erp",JsonData+"제이슨~");
+                while (true) {
+                    Log.d("erp","json읽기 들어왔니?");
+                    Log.d("erp",JsonData);
+                    JsonData = in.readLine();
+                    if(JsonData == null){
+                        break;
+                    }
+                    response.append(JsonData+"\n");
+                }
+                Log.d("erp",response.toString()+"");
+                in.close();
+                con.disconnect();
+
+            }
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+*/
 
     public void println(String data) {
         Log.d("FMS", data);
