@@ -290,6 +290,7 @@ public class ConsoleActivity extends AppCompatActivity {
 
         Log.d("signUp", "response StatusCode:"+response.getStatusLine().getStatusCode()); // response StatusCode: 200
     }
+
     public void move_console(View v){
         new Thread(new Runnable() {
             @Override
