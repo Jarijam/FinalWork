@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+					<jsp:include page="data_view/modetest.jsp"/>
 					<jsp:include page="data_view/countdata.jsp"/>
 						<div class="ex-layout">
 							<div class="main">
