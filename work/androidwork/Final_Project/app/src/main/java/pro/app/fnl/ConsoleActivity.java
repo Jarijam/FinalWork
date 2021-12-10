@@ -14,6 +14,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -30,6 +31,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -86,14 +88,17 @@ public class ConsoleActivity extends AppCompatActivity {
     private static final int CALL_PERMISSION_REQUEST_CODE = 1234;
     static RequestQueue requestQueue;
     static String regId;
-    TextView call_txt, pow_txt, con_txt, temp_txt, coll_txt, fire_txt, gas_txt;
+    TextView call_txt, pow_txt, temp_txt, coll_txt, fire_txt, gas_txt;
     ImageButton call_btn, move_console, move_controller, move_web,move_gallery, cap_btn;
-    ImageView fire_img, gas_img, coll_img, temp_img;
-    ToggleButton pow_btn, con_btn;
-    LinearLayout container, data;
+    Button data_on, data_off;
+    ImageView fire_img, gas_img, coll_img, temp_img, data_img;
+    ToggleButton pow_btn;
+    LinearLayout container;
     NotificationManagerCompat notificationManager;
     String channelId = "channel";
     String channelName = "Channel_name";
+    BluetoothSocket btSocket = null;
+    ConnectedThread connectedThread;
     int importance = NotificationManager.IMPORTANCE_LOW;
     private static MyAsynch myAsynch;
 
@@ -101,9 +106,10 @@ public class ConsoleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_console);
+        data_on = findViewById(R.id.data_on);
+        data_off = findViewById(R.id.data_off);
         pow_btn = findViewById(R.id.pow_btn);
         call_btn = findViewById(R.id.call_btn);
-        con_btn = findViewById(R.id.con_btn);
         cap_btn = findViewById(R.id.cap_btn);
         move_console = findViewById(R.id.move_console);
         move_controller = findViewById(R.id.move_controller);
@@ -111,7 +117,6 @@ public class ConsoleActivity extends AppCompatActivity {
         move_gallery = findViewById(R.id.move_gallery);
         pow_txt = findViewById(R.id.pow_txt);
         call_txt = findViewById(R.id.call_txt);
-        con_txt = findViewById(R.id.con_txt);
         temp_txt = findViewById(R.id.temp_txt);
         coll_txt = findViewById(R.id.coll_txt);
         gas_txt = findViewById(R.id.gas_txt);
@@ -120,8 +125,8 @@ public class ConsoleActivity extends AppCompatActivity {
         gas_img = findViewById(R.id.gas_img);
         fire_img = findViewById(R.id.fire_img);
         coll_img = findViewById(R.id.coll_img);
+        data_img = findViewById(R.id.data_img);
         container = findViewById(R.id.container);
-        data = findViewById(R.id.data);
         regId = "fUgb9-D3SlO3X3P9-1XgLV:APA91bEPOnZ_d62DGfewfOJug0_EjvCCLfLnfxAZRCxvDzErinXGKHa3QKgtZ5DsAV_GH72iLxS-DtjbJLH7_Zsgj3BhnKf9vMbB0aTpoapCUfSPqYRNvf7Ajk3shxamFtbDKxH79oA8";
 
         cap_btn.setOnClickListener(new View.OnClickListener() {
@@ -190,8 +195,6 @@ public class ConsoleActivity extends AppCompatActivity {
         move_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAsynch.cancel(true);
-                Log.d("park","cancel");
                 Intent intent = new Intent(ConsoleActivity.this, GalleryActivity.class);
                 startActivity(intent);
             }
@@ -200,7 +203,6 @@ public class ConsoleActivity extends AppCompatActivity {
         move_controller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAsynch.cancel(true);
                 Log.d("park","cancel");
                 Intent intent = new Intent(ConsoleActivity.this, ControllerActivity.class);
                 startActivity(intent);
@@ -210,45 +212,9 @@ public class ConsoleActivity extends AppCompatActivity {
         move_web.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAsynch.cancel(true);
                 Log.d("park","cancel");
                 Intent intent = new Intent(ConsoleActivity.this, WebActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        con_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
-                if(Build.VERSION.SDK_INT >= 26) {
-                    vibrator.vibrate(VibrationEffect.createOneShot(300,5));
-                }else {
-                    vibrator.vibrate(300);
-                }
-                if (con_btn.isChecked()) {
-                    con_txt.setText("ON");
-                    Log.d("con", "1");
-                } else {
-                    con_txt.setText("OFF");
-                    Log.d("con", "0");
-                }
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        String msg = " ";
-                        if(con_btn.isChecked()){
-                            msg = "Wireless" ;
-                        }else {
-                            msg = "flowinglines" ;
-                        }
-                        try {
-                            signUPHttp(msg);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
             }
         });
 
@@ -270,31 +236,24 @@ public class ConsoleActivity extends AppCompatActivity {
         }
     }
 
-    public void signUPHttp(String SensorInfo) throws IOException {
-        HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost("http://192.168.0.29:80/np/androidmode.mc");
-        ArrayList<NameValuePair> sensorInfo = new ArrayList<NameValuePair>();
-        try {
-            sensorInfo.add(new BasicNameValuePair("con_txt", URLDecoder.decode(SensorInfo, "UTF-8")));
-            post.setEntity(new UrlEncodedFormEntity(sensorInfo, "UTF-8"));
-        } catch (UnsupportedEncodingException ex) {
-            Log.d("signUp", ex.toString());
-        }
-        HttpResponse response = client.execute(post);
-        Log.d("signUp", "response StatusCode:"+response.getStatusLine().getStatusCode()); // response StatusCode: 200
-    }
-
-    public void data (View v){
+    public void data_on (View v){
         String url = "http://192.168.0.29/np/androidtemp.mc";
 
         myAsynch = new MyAsynch();
         myAsynch.execute(url);
+        data_on.setEnabled(false);
+        data_off.setEnabled(true);
         Log.d("park","시작?");
         }
 
+    public void data_off(View v) {
+        myAsynch.cancel(true);
+        myAsynch.onCancelled();
+    }
+
      class MyAsynch extends AsyncTask<String, String, Void> {
 
-        @SuppressLint("WrongThread")
+         @SuppressLint("WrongThread")
         @Override
         protected Void doInBackground(String... strings) {
             String url = strings[0].toString();
@@ -315,7 +274,6 @@ public class ConsoleActivity extends AppCompatActivity {
 
         @Override
         protected void onProgressUpdate(final String... values) {
-           /* Log.d("----------------", values[0]);*/
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -357,7 +315,8 @@ public class ConsoleActivity extends AppCompatActivity {
 
         @Override
         protected void onCancelled() {
-
+            data_on.setEnabled(true);
+            data_off.setEnabled(false);
         }
     }
 
