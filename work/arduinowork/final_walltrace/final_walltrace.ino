@@ -20,10 +20,10 @@ Servo LKservo;  // 서보모터 객체 선언
 #define servo_motor 2  // 서보모터 Signal 핀, 아두이노 우노 보드 디지털 3번 핀에 연결
 
 #define TEMP A2
-#define GAS A3
-#define FIRE A4
+#define GAS A4
+#define FIRE A3
 int fireState = 0;
-
+int crash = 0;
 
 int motorA_vector = 1;  // 모터의 회전방향이 반대일 시 0을 1로, 1을 0으로 바꿔주면 모터의 회전방향이 바뀜.
 int motorB_vector = 1;  // 모터의 회전방향이 반대일 시 0을 1로, 1을 0으로 바꿔주면 모터의 회전방향이 바뀜.
@@ -59,6 +59,7 @@ void setup()  // 초기화
 }
 
 char data;
+
 void loop()  // 무한루프
 {
 
@@ -76,9 +77,9 @@ if(Serial.available()>0) {
 //    Serial.println("y들어옴");
     LKservo.write(180);
   }else if(data=='z') {
-//    mode3();
+    mode3();
 //    Serial.println("z들어옴");
-    LKservo.write(1);
+//    LKservo.write(1);
   }
 }
  
@@ -86,6 +87,7 @@ if(Serial.available()>0) {
   
  
 }
+
 void sensing() {
   String spc = " "; 
  unsigned int temp_val;
@@ -104,8 +106,11 @@ void sensing() {
  }
 
  gas = analogRead(GAS);
+
+ crash = analogRead(A5);
  
- Serial.println(gas+spc+fstate+spc+temp);
+ Serial.println(fstate+spc+temp+spc+gas+spc+crash);
+ delay(500);
 }
 
 
@@ -221,7 +226,7 @@ void back() {
 }
 
 void mode1() {
-  int crash= analogRead(A5);
+//  int crash= analogRead(A5);
 //  Serial.println(crash_r);
   if (crash<=10) {
     spin_left();
@@ -246,7 +251,7 @@ void mode1() {
 }
 void mode2() {
   //물체 탐지.
-  int crash = analogRead(A5);
+//  int crash = analogRead(A5);
  
   int distance = 0;
   int angle = 0;
