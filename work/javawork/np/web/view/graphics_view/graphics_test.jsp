@@ -46,4 +46,5 @@
 		<canvas id="canvas" width="500" height="500">
 			does it work??
 		</canvas>	
-		
+		<a href = "crddelte.mc">DB삭제</a>
+				

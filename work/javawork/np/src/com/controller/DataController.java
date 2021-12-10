@@ -98,6 +98,16 @@ public class DataController {
   			out.print(ja.toJSONString());
   			out.close();
   		}
+    	
+    	@RequestMapping("/crddelte.mc")
+    	public String delete(String coordinate) {
+    		try {
+    			cdservice.remove(coordinate);
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
+    		return "redirect:graphics.mc";
+    	}
     
     
     //test용 (sendhttp)
