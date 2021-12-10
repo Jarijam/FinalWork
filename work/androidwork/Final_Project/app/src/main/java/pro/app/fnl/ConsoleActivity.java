@@ -87,7 +87,7 @@ public class ConsoleActivity extends AppCompatActivity {
 
     private static final int CALL_PERMISSION_REQUEST_CODE = 1234;
     static RequestQueue requestQueue;
-    static String regId;
+    static String regId, regId2;
     TextView call_txt, pow_txt, temp_txt, coll_txt, fire_txt, gas_txt;
     ImageButton call_btn, move_console, move_controller, move_web,move_gallery, cap_btn;
     Button data_on, data_off;
@@ -128,6 +128,7 @@ public class ConsoleActivity extends AppCompatActivity {
         data_img = findViewById(R.id.data_img);
         container = findViewById(R.id.container);
         regId = "fUgb9-D3SlO3X3P9-1XgLV:APA91bEPOnZ_d62DGfewfOJug0_EjvCCLfLnfxAZRCxvDzErinXGKHa3QKgtZ5DsAV_GH72iLxS-DtjbJLH7_Zsgj3BhnKf9vMbB0aTpoapCUfSPqYRNvf7Ajk3shxamFtbDKxH79oA8";
+        regId2 = "c1UI3eBjTtupybel2GeJFT:APA91bEcRXROZl-lGzDXls5WHbru8fuPw92lVt5V4SQ_W7YO-MSYpwrpVw3KcWQAiVCV1WA1CY8M7mUe4hs62LYkmUDxaSlFJG8ds2xxUS3QR3x_3tZwreOTyUfBWvKsLfh2GKcvlvcg";
 
         cap_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,7 +183,7 @@ public class ConsoleActivity extends AppCompatActivity {
                 }else {
                     vibrator.vibrate(300);
                 }
-                String input = "화재 발생 긴급 대피 요망  화재신고및 부상자 : call 119";
+                String input = "화재 발생 긴급 대피   <화재신고 및 부상자 : 119 >";
                 Log.d("fcm", input);
                 send(input);
             }
@@ -281,15 +282,15 @@ public class ConsoleActivity extends AppCompatActivity {
                         @Override
                         public void run() {
 
-                            if(Integer.parseInt(values[0].split(",")[1]) >= 20) {
-                                temp_txt.setText(values[0].split(",")[1]+"℃");
-                                temp_img.setImageResource(R.drawable.temp);
-                            }else if(Integer.parseInt(values[0].split(",")[1]) >= 25) {
+                            if(Integer.parseInt(values[0].split(",")[1]) >= 23) {
                                 temp_txt.setText(values[0].split(",")[1]+"℃");
                                 temp_img.setImageResource(R.drawable.temp2);
-                            }else {
+                            }else if(Integer.parseInt(values[0].split(",")[1]) >= 30) {
                                 temp_txt.setText(values[0].split(",")[1]+"℃");
                                 temp_img.setImageResource(R.drawable.temp3);
+                            }else {
+                                temp_txt.setText(values[0].split(",")[1]+"℃");
+                                temp_img.setImageResource(R.drawable.temp);
                             }
 
                             if(values[0].split(",")[0].equals("0")) {
@@ -342,7 +343,9 @@ public class ConsoleActivity extends AppCompatActivity {
 
         String title = intent.getStringExtra("title");
         String body = intent.getStringExtra("body");
-        println("title :"+title+"body : "+body);
+        String contents = intent.getStringExtra("contents");
+
+        println("title :"+title+"body : "+body+"contents : "+contents);
         String channelId = "channel";
 
         notificationManager = NotificationManagerCompat.from(ConsoleActivity.this);
@@ -357,6 +360,7 @@ public class ConsoleActivity extends AppCompatActivity {
                 .setSmallIcon(R.drawable.fireman)
                 .setContentTitle(title)
                 .setContentText(body)
+                .setContentText(contents)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
                 .setVibrate(new long[]{1000, 1000});
@@ -374,6 +378,8 @@ public class ConsoleActivity extends AppCompatActivity {
 
          JSONArray idarray = new JSONArray();
          idarray.put(0, regId);
+         idarray.put(1, regId2);
+
          requestData.put("registration_ids", idarray);
      } catch (Exception e) {
          e.printStackTrace();

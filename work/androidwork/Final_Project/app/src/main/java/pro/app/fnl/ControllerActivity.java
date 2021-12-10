@@ -72,7 +72,7 @@ public class ControllerActivity extends AppCompatActivity {
         webSettings.setUseWideViewPort(true);
         webSettings.setBuiltInZoomControls(false);
         webSettings.setSaveFormData(false);
-        cam.loadUrl("http://192.168.0.15/");
+        cam.loadUrl("https://youtu.be/9ep19RD3E6I");
 
         String[] permission_list = {
                 android.Manifest.permission.ACCESS_FINE_LOCATION,
