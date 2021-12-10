@@ -122,50 +122,141 @@ public class ChartController {
 		rconn.close();
 	}
 		
+//	@RequestMapping("/rchart_tot.mc")
+//	@ResponseBody
+//	public void ruu_tot(HttpServletResponse response) throws IOException, RserveException, REXPMismatchException {
+//		response.setContentType("text/json;charset=UTF-8");
+//		PrintWriter out = response.getWriter();
+//		RConnection rconn = new RConnection("192.168.0.29");
+//		rconn.setStringEncoding("utf8");
+//
+//		rconn.eval("source('C:/logs/final_test.R',encoding='UTF-8')");
+//		// R의 계산 결과를 리스트로 리턴 받음(소스를 로딩하고 함수를 호출하는 과정, 어레이리스트아님)
+//		RList list = rconn.eval("a3()").asList();
+//
+//
+//		// 리스트의 첫 번째 요소를 double 배열로 리턴
+//		double[] n1 = list.at(0).asDoubles();
+//		double[] n2 = list.at(1).asDoubles();
+//		double[] n3 = list.at(2).asDoubles();
+//		
+//		
+//		JSONObject jo = new JSONObject();
+//		JSONArray tdata = new JSONArray();
+//		for(double num:n1) {
+//			tdata.add(num);
+//		}
+//		jo.put("time",tdata);
+//		
+//		JSONArray tdata2 = new JSONArray();
+//		for(double num:n2) {
+//			tdata2.add(num);
+//		}
+//		jo.put("temp", tdata2);
+//		
+//		JSONArray tdata3 = new JSONArray();
+//		for(double num:n3) {
+//			tdata3.add(num);
+//		}
+//		jo.put("gas", tdata3);
+//		
+//		
+//		out.print(jo.toJSONString());
+//		out.close();
+//		rconn.close();
+//	}
 	@RequestMapping("/rchart_tot.mc")
 	@ResponseBody
 	public void ruu_tot(HttpServletResponse response) throws IOException, RserveException, REXPMismatchException {
 		response.setContentType("text/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		RConnection rconn = new RConnection("192.168.0.29");
+		RConnection rconn = new RConnection("192.168.0.158");
 		rconn.setStringEncoding("utf8");
 
 		rconn.eval("source('C:/logs/final_test.R',encoding='UTF-8')");
 		// R의 계산 결과를 리스트로 리턴 받음(소스를 로딩하고 함수를 호출하는 과정, 어레이리스트아님)
-		RList list = rconn.eval("a3()").asList();
+		RList list = rconn.eval("a4()").asList();
 
 
 		// 리스트의 첫 번째 요소를 double 배열로 리턴
-		double[] n1 = list.at(0).asDoubles();
-		double[] n2 = list.at(1).asDoubles();
+//		double[] n1 = list.at(0).asDoubles();
+//		double[] n2 = list.at(1).asDoubles();
 		double[] n3 = list.at(2).asDoubles();
 		
 		
 		JSONObject jo = new JSONObject();
 		JSONArray tdata = new JSONArray();
-		for(double num:n1) {
-			tdata.add(num);
-		}
-		jo.put("time",tdata);
-		
-		JSONArray tdata2 = new JSONArray();
-		for(double num:n2) {
-			tdata2.add(num);
-		}
-		jo.put("temp", tdata2);
+//		for(double num:n1) {
+//			tdata.add(num);
+//		}
+//		jo.put("time",tdata);
+//		
+//		JSONArray tdata2 = new JSONArray();
+//		for(double num:n2) {
+//			tdata2.add(num);
+//		}
+//		jo.put("temp", tdata2);
 		
 		JSONArray tdata3 = new JSONArray();
 		for(double num:n3) {
 			tdata3.add(num);
 		}
-		jo.put("gas", tdata3);
+		jo.put("crash", tdata3);
 		
 		
 		out.print(jo.toJSONString());
 		out.close();
 		rconn.close();
 	}
+	@RequestMapping("/tempgage.mc")
+	@ResponseBody
+	public void tempgage(HttpServletResponse response) throws IOException, RserveException, REXPMismatchException {
+		response.setContentType("text/json;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		RConnection rconn = new RConnection("192.168.0.29");
+		rconn.setStringEncoding("utf8");
+
+		rconn.eval("source('C:/logs/final_test.R',encoding='UTF-8')");
+		RList list = rconn.eval("b2()").asList();
+
+		int [] n1 = list.at(0).asIntegers();
+		
+		JSONObject jo = new JSONObject();
+		JSONArray tdata = new JSONArray();
+		for(int num:n1) {
+			tdata.add(num);
+		}
+		jo.put("temp",tdata);
+		
+		out.print(jo.toJSONString());
+		out.close();
+		rconn.close();
+	}
 	
+	@RequestMapping("/gasgage.mc")
+	@ResponseBody
+	public void gasgage(HttpServletResponse response) throws IOException, RserveException, REXPMismatchException {
+		response.setContentType("text/json;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		RConnection rconn = new RConnection("192.168.0.29");
+		rconn.setStringEncoding("utf8");
+
+		rconn.eval("source('C:/logs/final_test.R',encoding='UTF-8')");
+		RList list = rconn.eval("b1()").asList();
+
+		int [] n1 = list.at(0).asIntegers();
+		
+		JSONObject jo = new JSONObject();
+		JSONArray tdata = new JSONArray();
+		for(int num:n1) {
+			tdata.add(num);
+		}
+		jo.put("gas",tdata);
+		
+		out.print(jo.toJSONString());
+		out.close();
+		rconn.close();
+	}
 	
 	
 }

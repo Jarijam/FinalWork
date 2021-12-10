@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     android:orientation="vertical">
 
     <TextView
@@ -12,7 +13,8 @@
         android:layout_gravity="right"
         android:text="10시 20분"
         android:textSize="16sp"
-        android:textColor="#000000"/>
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"/>
 
     <EditText
         android:id="@+id/editText"
@@ -20,11 +22,15 @@
         android:layout_height="225dp"
         android:layout_above="@+id/button"
         android:layout_below="@+id/textView"
+        android:background="@drawable/fireback"
         android:layout_margin="8dp"
         android:ems="10"
-        android:gravity="top|left"
+        android:gravity="center|center"
         android:hint="내용"
-        android:inputType="text" />
+        android:inputType="text"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/button"
@@ -32,5 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_gravity="center"
-        android:text="확인" />
+        android:backgroundTint="@color/white"
+        android:text="확인"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
 </LinearLayout>

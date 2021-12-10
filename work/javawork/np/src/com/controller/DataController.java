@@ -42,24 +42,37 @@ public class DataController {
 	
 		}
 	
+
 	    @RequestMapping("/data.mc")
 		@ResponseBody
 		public void data(HttpServletRequest request) throws Exception {
-			String btn = request.getParameter("btn");
+//			String btn = request.getParameter("btn");
 			String gas = request.getParameter("gas");
 			String flame = request.getParameter("flame");
-			String dis = request.getParameter("dis");
+//			String dis = request.getParameter("dis");
 			String temp = request.getParameter("temp");
+	    	String crash = request.getParameter("crash");
+	    	
+			int f_flame = Integer.parseInt(flame);
 			
 			
-	//		System.out.println(btn+","+gas+","+flame+","+dis);
+		//	System.out.println(btn+","+gas+","+flame+","+dis);
 			
-			data_log.debug(btn+","+gas+","+flame+","+dis+","+temp);
-	
-				if(btn.equals(1+"")) {
-					cdservice.remove(btn);
+			data_log.debug(flame+","+temp+","+gas+","+crash);
+			if(f_flame > 0) {
+				try {
+					FcmUtil.sendServer(flame);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
+			}
+			
+//			if(btn.equals(1+"")) {
+//			cdservice.remove(btn);
+//		}
 		}
+	    
+	    
 	    
 	    @RequestMapping("/androidpower.mc")
 		@ResponseBody
@@ -229,6 +242,8 @@ public class DataController {
 				tdata2.add(num);
 			}
 			jo.put("flame", tdata2);
+
+			
 			
 			
 			

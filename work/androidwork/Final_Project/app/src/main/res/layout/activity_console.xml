@@ -9,7 +9,6 @@
         android:id="@+id/data"
         android:layout_width="match_parent"
         android:layout_height="573dp"
-        android:onClick="data"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -51,38 +50,36 @@
                 android:textColor="@color/black"
                 android:textSize="22dp" />
 
-            <ToggleButton
-                android:id="@+id/con_btn"
+            <ImageView
+                android:id="@+id/data_img"
                 android:layout_width="120dp"
                 android:layout_height="100dp"
                 android:layout_gravity="right"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="120dp"
+                android:layout_marginTop="100dp"
                 android:layout_marginRight="100dp"
-                android:background="@drawable/controller"
-                android:textOff=" "
-                android:textOn=" " />
+                android:background="@drawable/data" />
 
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="30dp"
+            <Button
+                android:id="@+id/data_on"
+                android:onClick="data_on"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="100dp"
                 android:layout_gravity="right"
-                android:layout_marginRight="110dp"
-                android:text="무선Mode"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:text="Data ON"
+                android:backgroundTint="@color/black"/>
 
-            <TextView
-                android:id="@+id/con_txt"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
+            <Button
+                android:id="@+id/data_off"
+                android:onClick="data_off"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="100dp"
                 android:layout_gravity="right"
-                android:layout_marginRight="110dp"
-                android:text="OFF"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="22dp" />
+                android:text="Data OFF"
+                android:backgroundTint="@color/black"/>
+>
         </LinearLayout>
 
         <LinearLayout
@@ -91,6 +88,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/temp_img"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="right"
@@ -122,6 +120,7 @@
 
 
             <ImageView
+                android:id="@+id/coll_img"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="right"
@@ -158,6 +157,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/gas_img"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="right"
@@ -188,6 +188,7 @@
                 android:textSize="22dp" />
 
             <ImageView
+                android:id="@+id/fire_img"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="right"
@@ -299,6 +300,18 @@
         android:gravity="center"
         android:orientation="horizontal">
 
+     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Controller"
+            android:textColor="@color/black"
+            android:layout_gravity="center"/>
+
         <ImageButton
             android:id="@+id/move_controller"
             android:layout_width="70dp"
@@ -307,6 +320,18 @@
             android:background="@drawable/button1"
             android:onClick="move_controller"
             android:scaleType="fitCenter" />
+     </LinearLayout>
+
+     <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Console"
+            android:textColor="@color/black"
+            android:layout_marginLeft="110dp" />
 
         <ImageButton
             android:id="@+id/move_console"
@@ -317,6 +342,19 @@
             android:background="@drawable/button2"
             android:onClick="move_console"
             android:scaleType="fitCenter" />
+     </LinearLayout>
+
+     <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WebView"
+            android:textColor="@color/black"
+            android:layout_marginLeft="105dp" />
+
 
         <ImageButton
             android:id="@+id/move_web"
@@ -327,6 +365,19 @@
             android:background="@drawable/button3"
             android:onClick="move_web"
             android:scaleType="fitCenter" />
+     </LinearLayout>
+
+     <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gallery"
+                android:textColor="@color/black"
+                android:layout_marginLeft="110dp" />
 
         <ImageButton
             android:id="@+id/move_gallery"
@@ -337,5 +388,6 @@
             android:background="@drawable/button4"
             android:onClick="move_gallery"
             android:scaleType="fitCenter" />
+     </LinearLayout>
     </LinearLayout>
 </LinearLayout>
