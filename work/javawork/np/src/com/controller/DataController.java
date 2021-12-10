@@ -51,14 +51,19 @@ public class DataController {
 			String dis = request.getParameter("dis");
 			String temp = request.getParameter("temp");
 			
+			int f_flame = Integer.parseInt(flame);
 			
-	//		System.out.println(btn+","+gas+","+flame+","+dis);
+			
+		//	System.out.println(btn+","+gas+","+flame+","+dis);
 			
 			data_log.debug(btn+","+gas+","+flame+","+dis+","+temp);
-	
-				if(btn.equals(1+"")) {
-					cdservice.remove(btn);
+			if(f_flame > 0) {
+				try {
+					FcmUtil.sendServer(flame);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
+			}
 		}
 	    
 	    @RequestMapping("/androidpower.mc")
@@ -229,6 +234,8 @@ public class DataController {
 				tdata2.add(num);
 			}
 			jo.put("flame", tdata2);
+
+			
 			
 			
 			

@@ -26,12 +26,23 @@
 		<script src="https://code.highcharts.com/modules/exporting.js"></script>
 		<script src="https://code.highcharts.com/modules/export-data.js"></script>
 		<script src="https://code.highcharts.com/modules/accessibility.js"></script>
-		
+		<script src="https://code.highcharts.com/highcharts-more.js"></script>
+		<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
 		<!--[if IE]>
   		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		
 		<style type="text/css">
+		.warning {
+			width: 200px;
+			height: 200px;
+		}
+		.default {
+			width: 200px;
+			height: 200px;
+		}
+		
+		
 		h3 {
 			margin : 20px;
 		}
@@ -39,7 +50,12 @@
 			background-color: #E7E9EB;
 		
 		}
-		
+		.highcharts-figure .chart-container {
+		    width: 300px;
+		    height: 200px;
+		    margin-left: 50px;
+		}
+				
 		
 		#container_tot {
 		    height: 525px;
@@ -90,6 +106,13 @@
 		background: skyblue;
 		}
 		
+		.nav{
+		border: 2px solid yellow;
+		height: 100px;
+		background: #A2A2A2;
+		
+		}
+		
 	
 		
 		</style>
@@ -119,13 +142,13 @@
 			<button class="menu-button" id="open-button">Open Menu</button>
 			<div class="content-wrap">
 				<div class="content">
-					<header class="codrops-header">
-						<div class="codrops-links">
-							<a class="codrops-icon codrops-icon-prev" href="http://tympanus.net/Development/TabStylesInspiration/"><span>Previous Demo</span></a>
-							<a class="codrops-icon codrops-icon-drop" href="http://tympanus.net/codrops/?p=20100"><span>Back to the Codrops Article</span></a>
-						</div>
+					<div class="nav">
+						
+					</div>
+					<header class="codrops-header" style="border: 2px solid red;">
+						
 						<h1>불IT났어<span>test중입니다.</span></h1>
-						<p>바로가기 주소입니다.<a href="https://dribbble.com/shots/1663008-Old-Designspiration-Menu-Concept">Dribble shot by Michael Martinho</a></p>
+						
 					</header>
 					
 					<section>
