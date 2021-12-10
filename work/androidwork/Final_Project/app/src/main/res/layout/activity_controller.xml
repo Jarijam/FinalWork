@@ -9,15 +9,28 @@
         android:layout_width="match_parent"
         android:layout_height="445dp"
         android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/web_id"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="연결"/>
+
+            <EditText
+                android:id="@+id/web_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Url"/>
+        </LinearLayout>
+
         <WebView
             android:id="@+id/cam"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-<!--        <ImageView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:src="@drawable/driving"/>-->
     </LinearLayout>
 
     <LinearLayout
@@ -28,7 +41,7 @@
         <LinearLayout
             android:layout_width="319dp"
             android:layout_height="171dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:orientation="vertical">
 
@@ -90,27 +103,83 @@
                 android:gravity="right"
                 android:orientation="horizontal">
 
+                <LinearLayout
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/chn_mode"
+                        android:onClick="chn_mode"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/changemode"
+                        android:scaleType="fitCenter" />
+
+                    <TextView
+                        android:id="@+id/chn_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Control\n Mode"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"/>
+                </LinearLayout>
+
                 <ImageView
                     android:layout_width="200dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/rpm"/>
+
                 <ImageView
                     android:layout_width="200dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/speed30"
-                    android:layout_marginRight="90dp"/>
-<!--                <ImageView-->
-<!--                    android:layout_width="100dp"-->
-<!--                    android:layout_height="100dp"-->
-<!--                    android:layout_marginTop="50dp"-->
-<!--                    android:src="@drawable/battery50"/>-->
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/speed30" />
+
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/blue_btn"
+                        android:onClick="onClickButtonPaired"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginRight="80dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/bluetooth_con"
+                        android:scaleType="fitCenter" />
+                    <TextView
+                        android:id="@+id/blue_con"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="40dp"
+                        android:textColor="@color/black"
+                        android:text="connection"
+                        android:textSize="20sp"
+                        android:layout_gravity="center"/>
+                    <ListView
+                        android:id="@+id/blue_name"
+                        android:layout_width="100sp"
+                        android:layout_height="40sp"
+                        android:textColor="@color/black"
+                        android:text="HC-06"
+                        android:gravity="center"/>
+                </LinearLayout>
+
 
                 <ImageButton
                     android:id="@+id/con_acell"
                     android:onClick="onClickButtonacell"
                     android:layout_width="100dp"
                     android:layout_height="180dp"
-                    android:layout_marginLeft="50dp"
                     android:adjustViewBounds="true"
                     android:background="@drawable/pushacell"
                     android:scaleType="fitCenter" />
@@ -123,34 +192,7 @@
                     android:adjustViewBounds="true"
                     android:background="@drawable/pushbreak"
                     android:scaleType="fitCenter" />
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                        <ImageButton
-                            android:id="@+id/blue_btn"
-                            android:onClick="onClickButtonPaired"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:adjustViewBounds="true"
-                            android:background="@drawable/bluetooth_con"
-                            android:scaleType="fitCenter" />
-                        <TextView
-                            android:id="@+id/blue_con"
-                            android:layout_width="100dp"
-                            android:layout_height="40dp"
-                            android:textColor="@color/black"
-                            android:text="connection"
-                            android:textSize="20sp"
-                            android:layout_gravity="center"/>
-                        <ListView
-                            android:id="@+id/blue_name"
-                            android:layout_width="100sp"
-                            android:layout_height="40sp"
-                            android:textColor="@color/black"
-                            android:text="HC-06"
-                            android:gravity="center"/>
-                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -159,14 +201,37 @@
         android:layout_height="85dp"
         android:gravity="center"
         android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Controller"
+                android:textColor="@color/black"
+                android:layout_gravity="center"/>
+
             <ImageButton
                 android:id="@+id/move_controller"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@drawable/button1"
                 android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                />
+                android:adjustViewBounds="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Console"
+                android:textColor="@color/black"
+                android:layout_marginLeft="110dp" />
 
             <ImageButton
                 android:id="@+id/move_console"
@@ -176,6 +241,18 @@
                 android:background="@drawable/button2"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WebView"
+                android:textColor="@color/black"
+                android:layout_marginLeft="105dp" />
 
             <ImageButton
                 android:id="@+id/move_web"
@@ -185,6 +262,19 @@
                 android:background="@drawable/button3"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gallery"
+                android:textColor="@color/black"
+                android:layout_marginLeft="110dp" />
 
             <ImageButton
                 android:id="@+id/move_gallery"
@@ -194,5 +284,6 @@
                 android:adjustViewBounds="true"
                 android:background="@drawable/button4"
                 android:scaleType="fitCenter" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
