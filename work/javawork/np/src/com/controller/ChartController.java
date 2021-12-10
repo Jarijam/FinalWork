@@ -165,6 +165,55 @@ public class ChartController {
 		out.close();
 		rconn.close();
 	}
+	@RequestMapping("/tempgage.mc")
+	@ResponseBody
+	public void tempgage(HttpServletResponse response) throws IOException, RserveException, REXPMismatchException {
+		response.setContentType("text/json;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		RConnection rconn = new RConnection("192.168.0.29");
+		rconn.setStringEncoding("utf8");
+
+		rconn.eval("source('C:/logs/final_test.R',encoding='UTF-8')");
+		RList list = rconn.eval("b2()").asList();
+
+		int [] n1 = list.at(0).asIntegers();
+		
+		JSONObject jo = new JSONObject();
+		JSONArray tdata = new JSONArray();
+		for(int num:n1) {
+			tdata.add(num);
+		}
+		jo.put("temp",tdata);
+		
+		out.print(jo.toJSONString());
+		out.close();
+		rconn.close();
+	}
+	
+	@RequestMapping("/gasgage.mc")
+	@ResponseBody
+	public void gasgage(HttpServletResponse response) throws IOException, RserveException, REXPMismatchException {
+		response.setContentType("text/json;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		RConnection rconn = new RConnection("192.168.0.29");
+		rconn.setStringEncoding("utf8");
+
+		rconn.eval("source('C:/logs/final_test.R',encoding='UTF-8')");
+		RList list = rconn.eval("b1()").asList();
+
+		int [] n1 = list.at(0).asIntegers();
+		
+		JSONObject jo = new JSONObject();
+		JSONArray tdata = new JSONArray();
+		for(int num:n1) {
+			tdata.add(num);
+		}
+		jo.put("gas",tdata);
+		
+		out.print(jo.toJSONString());
+		out.close();
+		rconn.close();
+	}
 	
 	
 	
