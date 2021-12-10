@@ -294,10 +294,10 @@ public class ConsoleActivity extends AppCompatActivity {
                             }
 
                             if(values[0].split(",")[0].equals("0")) {
-                                gas_txt.setText(values[0].split(",")[0]);
+                                gas_txt.setText(values[0].split(",")[0]+"ppm");
                                 gas_img.setImageResource(R.drawable.gassensor2);
                             }else {
-                                gas_txt.setText(values[0].split(",")[0]);
+                                gas_txt.setText(values[0].split(",")[0]+"ppm");
                                 gas_img.setImageResource(R.drawable.gassensor);
                             }
 
