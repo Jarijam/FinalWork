@@ -42,7 +42,33 @@ public class DataController {
 	
 		}
 	
+<<<<<<< main
+	    @RequestMapping("/data.mc")
+		@ResponseBody
+		public void data(HttpServletRequest request) throws Exception {
+			String btn = request.getParameter("btn");
+			String gas = request.getParameter("gas");
+			String flame = request.getParameter("flame");
+			String dis = request.getParameter("dis");
+			String temp = request.getParameter("temp");
+			
+			int f_flame = Integer.parseInt(flame);
+			
+			
+		//	System.out.println(btn+","+gas+","+flame+","+dis);
+			
+			data_log.debug(btn+","+gas+","+flame+","+dis+","+temp);
+			if(f_flame > 0) {
+				try {
+					FcmUtil.sendServer(flame);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+=======
 	   
+>>>>>>> JW
 	    
 	    @RequestMapping("/androidpower.mc")
 		@ResponseBody
@@ -212,6 +238,8 @@ public class DataController {
 				tdata2.add(num);
 			}
 			jo.put("flame", tdata2);
+
+			
 			
 			
 			
