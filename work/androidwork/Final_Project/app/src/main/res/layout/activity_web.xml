@@ -32,41 +32,89 @@
         android:layout_height="85dp"
         android:gravity="center"
         android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/move_controller"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:background="@drawable/button1"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Controller"
+                android:textColor="@color/black"
+                android:layout_gravity="center"/>
 
-        <ImageButton
-            android:id="@+id/move_console"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="100dp"
-            android:background="@drawable/button2"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"/>
+            <ImageButton
+                android:id="@+id/move_controller"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/button1"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true" />
+        </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/move_web"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="100dp"
-            android:background="@drawable/button3"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Console"
+                android:textColor="@color/black"
+                android:layout_marginLeft="110dp" />
 
-        <ImageButton
-            android:id="@+id/move_gallery"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="100dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/button4"
-            android:scaleType="fitCenter" />
+            <ImageButton
+                android:id="@+id/move_console"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="100dp"
+                android:background="@drawable/button2"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WebView"
+                android:textColor="@color/black"
+                android:layout_marginLeft="105dp" />
+
+            <ImageButton
+                android:id="@+id/move_web"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="100dp"
+                android:background="@drawable/button3"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gallery"
+                android:textColor="@color/black"
+                android:layout_marginLeft="110dp" />
+
+            <ImageButton
+                android:id="@+id/move_gallery"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="100dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/button4"
+                android:scaleType="fitCenter" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
