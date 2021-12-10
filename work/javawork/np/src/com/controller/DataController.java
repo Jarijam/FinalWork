@@ -42,26 +42,7 @@ public class DataController {
 	
 		}
 	
-	    @RequestMapping("/data.mc")
-		@ResponseBody
-		public void data(HttpServletRequest request) throws Exception {
-//			String btn = request.getParameter("btn");
-	    	String flame = request.getParameter("flame");
-	    	String temp = request.getParameter("temp");
-	    	String gas = request.getParameter("gas");
-	    	String crash = request.getParameter("crash");
-			//String dis = request.getParameter("dis");
-			
-			
-			System.out.println(flame+","+temp+","+gas+","+crash);
-			
-//			data_log.debug(btn+","+gas+","+flame+","+dis+","+temp);
-			data_log.debug(flame+","+temp+","+gas+","+crash);
-	
-//				if(btn.equals(1+"")) {
-//					cdservice.remove(btn);
-//				}
-		}
+	   
 	    
 	    @RequestMapping("/androidpower.mc")
 		@ResponseBody
