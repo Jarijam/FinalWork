@@ -65,6 +65,7 @@ public class ControllerActivity extends AppCompatActivity {
         blue_name = findViewById(R.id.blue_name);
         chn_txt = findViewById(R.id.chn_txt);
 
+        //webView
         WebSettings webSettings = cam.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setLoadWithOverviewMode(true);
@@ -74,6 +75,7 @@ public class ControllerActivity extends AppCompatActivity {
         webSettings.setSaveFormData(false);
         cam.loadUrl("https://youtu.be/9ep19RD3E6I");
 
+        //bluetooth
         String[] permission_list = {
                 android.Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION
@@ -90,6 +92,7 @@ public class ControllerActivity extends AppCompatActivity {
         blue_name.setAdapter(btArrayAdapter);
         blue_name.setOnItemClickListener(new myOnItemClickListener());
 
+        //intent - gallery
         move_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +101,7 @@ public class ControllerActivity extends AppCompatActivity {
             }
         });
 
+        //intent - console
         move_console.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +110,7 @@ public class ControllerActivity extends AppCompatActivity {
             }
         });
 
+        //intent - web
         move_web.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,6 +120,7 @@ public class ControllerActivity extends AppCompatActivity {
         });
     }
 
+    //bluetooth - connected
     public void onClickButtonPaired(View view){
         btArrayAdapter.clear();
         if(deviceAddressArray!=null && !deviceAddressArray.isEmpty()){ deviceAddressArray.clear(); }
@@ -129,6 +135,7 @@ public class ControllerActivity extends AppCompatActivity {
         }
     }
 
+    //bluetooth - send data
     public void onClickButtonup(View view){
         if(connectedThread!=null){ connectedThread.write("F"); }
     }

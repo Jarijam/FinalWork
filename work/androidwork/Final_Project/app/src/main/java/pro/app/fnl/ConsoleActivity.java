@@ -130,6 +130,7 @@ public class ConsoleActivity extends AppCompatActivity {
         regId = "fUgb9-D3SlO3X3P9-1XgLV:APA91bEPOnZ_d62DGfewfOJug0_EjvCCLfLnfxAZRCxvDzErinXGKHa3QKgtZ5DsAV_GH72iLxS-DtjbJLH7_Zsgj3BhnKf9vMbB0aTpoapCUfSPqYRNvf7Ajk3shxamFtbDKxH79oA8";
         regId2 = "c1UI3eBjTtupybel2GeJFT:APA91bEcRXROZl-lGzDXls5WHbru8fuPw92lVt5V4SQ_W7YO-MSYpwrpVw3KcWQAiVCV1WA1CY8M7mUe4hs62LYkmUDxaSlFJG8ds2xxUS3QR3x_3tZwreOTyUfBWvKsLfh2GKcvlvcg";
 
+        // screenshot
         cap_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,6 +162,7 @@ public class ConsoleActivity extends AppCompatActivity {
             }
         });
 
+        //FCM
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override
@@ -174,6 +176,7 @@ public class ConsoleActivity extends AppCompatActivity {
                     }
                 });
 
+        //FCM - send
         pow_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,6 +196,7 @@ public class ConsoleActivity extends AppCompatActivity {
             requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
 
+        //intent-gallery
         move_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -201,6 +205,7 @@ public class ConsoleActivity extends AppCompatActivity {
             }
         });
 
+        //intent-controller
         move_controller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -210,6 +215,7 @@ public class ConsoleActivity extends AppCompatActivity {
             }
         });
 
+        //intent-web
         move_web.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -219,6 +225,7 @@ public class ConsoleActivity extends AppCompatActivity {
             }
         });
 
+        //call
         call_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -236,7 +243,7 @@ public class ConsoleActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(ConsoleActivity.this, new String[]{Manifest.permission.CALL_PHONE}, CALL_PERMISSION_REQUEST_CODE);
         }
     }
-
+    //data receive
     public void data_on (View v){
         String url = "http://192.168.0.29/np/androidtemp.mc";
 
@@ -294,10 +301,10 @@ public class ConsoleActivity extends AppCompatActivity {
                             }
 
                             if(values[0].split(",")[0].equals("0")) {
-                                gas_txt.setText(values[0].split(",")[0]);
+                                gas_txt.setText(values[0].split(",")[0]+"ppm");
                                 gas_img.setImageResource(R.drawable.gassensor2);
                             }else {
-                                gas_txt.setText(values[0].split(",")[0]);
+                                gas_txt.setText(values[0].split(",")[0]+"ppm");
                                 gas_img.setImageResource(R.drawable.gassensor);
                             }
 
@@ -321,6 +328,7 @@ public class ConsoleActivity extends AppCompatActivity {
         }
     }
 
+    //FCM - notification
     public void println(String data) {
         Log.d("FMS", data);
     }
@@ -367,6 +375,7 @@ public class ConsoleActivity extends AppCompatActivity {
         notificationManager.notify(0, mBuilder.build());
     }
 
+    //FCM - send
     public void send (String input) {
      JSONObject requestData = new JSONObject();
      try{
