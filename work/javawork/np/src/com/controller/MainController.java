@@ -12,6 +12,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.frame.Service;
 import com.vo.CoordinateVO;
+import com.vo.UserVO;
 
 @Controller
 public class MainController {
@@ -38,9 +40,18 @@ public class MainController {
 			
 		}
 		
+		@RequestMapping("/login.mc")
+		public ModelAndView login() {
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("center", "login");
+			mv.setViewName("login");
+			return mv;
+		}
 	
 	   @Resource(name="cdservice")
 	   Service<String, CoordinateVO> cdservice;
+	   @Resource(name="userservice")
+	   Service<String, UserVO> userservice;
 	
 	   @RequestMapping("/main.mc")
 	   public ModelAndView main() {
@@ -122,6 +133,34 @@ public class MainController {
 				}
 	    	return mv;
 	    }
+	    
+		@RequestMapping("/loginimpl.mc")
+		public ModelAndView loginimpl(
+				HttpServletRequest request) {
+			String id = request.getParameter("id");
+			String pwd = request.getParameter("pwd");
+			ModelAndView mv = new ModelAndView();
+			
+			UserVO dbuser = null;
+			try {
+				dbuser = userservice.get(id);
+				if(dbuser.getPwd().equals(pwd)) {
+					mv.addObject("center", "ok");
+					HttpSession session 
+					= request.getSession();
+					session.setAttribute("loginid", id);
+				}else {
+					mv.addObject("center", "fail");
+				}
+			} catch (Exception e) {
+				mv.addObject("center", "fail");
+				e.printStackTrace();
+			}
+			
+			
+			mv.setViewName("main");
+			return mv;
+		}
 	    
 	    
 	}
