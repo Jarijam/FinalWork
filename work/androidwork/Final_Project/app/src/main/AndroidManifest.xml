@@ -28,7 +28,8 @@
             android:name=".WebActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".ConsoleActivity" />
-        <activity android:name=".ControllerActivity" />
+        <activity android:name=".ControllerActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity android:name=".GalleryActivity" />
         <activity android:name=".PostActivity">
             <intent-filter>

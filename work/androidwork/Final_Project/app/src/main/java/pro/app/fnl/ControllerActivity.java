@@ -33,8 +33,8 @@ import java.util.UUID;
 public class ControllerActivity extends AppCompatActivity {
     String TAG = "BluetoothActivity";
     UUID BT_MODULE_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    ImageButton move_console, move_controller, move_web, move_gallery, con_up, con_down, con_left, con_right, con_break, con_acell, blue_btn;
-    TextView blue_con;
+    ImageButton move_console, move_controller, move_web, move_gallery, con_up, con_down, con_left, con_right, con_break, con_acell, blue_btn, chn_mode;
+    TextView blue_con, chn_txt;
     ListView blue_name;
     WebView cam;
     BluetoothAdapter btAdapter;
@@ -63,7 +63,9 @@ public class ControllerActivity extends AppCompatActivity {
         blue_btn = findViewById(R.id.blue_btn);
         blue_con = findViewById(R.id.blue_con);
         blue_name = findViewById(R.id.blue_name);
+        chn_txt = findViewById(R.id.chn_txt);
 
+        //webView
         WebSettings webSettings = cam.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setLoadWithOverviewMode(true);
@@ -71,8 +73,9 @@ public class ControllerActivity extends AppCompatActivity {
         webSettings.setUseWideViewPort(true);
         webSettings.setBuiltInZoomControls(false);
         webSettings.setSaveFormData(false);
-        cam.loadUrl("http://192.168.0.15/");
+        cam.loadUrl("https://youtu.be/9ep19RD3E6I");
 
+        //bluetooth
         String[] permission_list = {
                 android.Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION
@@ -87,9 +90,9 @@ public class ControllerActivity extends AppCompatActivity {
         btArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         deviceAddressArray = new ArrayList<>();
         blue_name.setAdapter(btArrayAdapter);
-
         blue_name.setOnItemClickListener(new myOnItemClickListener());
 
+        //intent - gallery
         move_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +101,7 @@ public class ControllerActivity extends AppCompatActivity {
             }
         });
 
+        //intent - console
         move_console.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +110,7 @@ public class ControllerActivity extends AppCompatActivity {
             }
         });
 
+        //intent - web
         move_web.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,6 +120,7 @@ public class ControllerActivity extends AppCompatActivity {
         });
     }
 
+    //bluetooth - connected
     public void onClickButtonPaired(View view){
         btArrayAdapter.clear();
         if(deviceAddressArray!=null && !deviceAddressArray.isEmpty()){ deviceAddressArray.clear(); }
@@ -129,6 +135,7 @@ public class ControllerActivity extends AppCompatActivity {
         }
     }
 
+    //bluetooth - send data
     public void onClickButtonup(View view){
         if(connectedThread!=null){ connectedThread.write("F"); }
     }
@@ -148,8 +155,13 @@ public class ControllerActivity extends AppCompatActivity {
     public void onClickButtonbreak(View view){
         if(connectedThread!=null){ connectedThread.write("S"); }
     }
+
     public void onClickButtonacell(View view){
         if(connectedThread!=null){ connectedThread.write("C"); }
+    }
+
+    public void chn_mode(View view){
+        if(connectedThread!=null){ connectedThread.write("Z"); }
     }
 
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
