@@ -28,6 +28,8 @@
 		<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 		<script src="https://code.highcharts.com/highcharts-more.js"></script>
 		<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+			<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+
 		<!--[if IE]>
   		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -121,7 +123,7 @@
 		<div class="box">
 			<div class="menu-wrap">
 				<nav class="menu-top">
-					<div class="profile"><img src="img/user1.png" alt="Matthew Greenberg"/><span>Matthew Greenberg</span></div>
+					<div class="profile"><img src="img/user1.png" alt="Matthew Greenberg"/><span style="color: white;">Matthew Greenberg</span></div>
 					<div class="icon-list">
 						<a href="#"><i class="fa fa-fw fa-star-o"></i></a>
 						<a href="#"><i class="fa fa-fw fa-bell-o"></i></a>
@@ -143,7 +145,7 @@
 			<div class="content-wrap">
 				<div class="content">
 					<div class="nav">
-						
+						<a href ="login.mc"><img src="/np/img/login2.png" style = "width: 70px; height: 70px; float:right;"/></a>
 					</div>
 					<header class="codrops-header" style="border: 2px solid red;">
 						
