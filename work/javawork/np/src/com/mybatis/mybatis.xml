@@ -9,6 +9,7 @@ PUBLIC "-//mybatis.org/DTD Config 3.0//EN"
 	    <typeAlias type="com.vo.CamVO" alias="cam"/>
 	    <typeAlias type="com.vo.SonicVO" alias="sonic"/>
 	    <typeAlias type="com.vo.DustVO" alias="dust"/>
+	    <typeAlias type="com.vo.UserVO" alias="user"/>
 	</typeAliases>
 	
 	<mappers>
@@ -17,6 +18,7 @@ PUBLIC "-//mybatis.org/DTD Config 3.0//EN"
 		<mapper resource="com/mybatis/cammapper.xml"/>
 		<mapper resource="com/mybatis/sonicmapper.xml"/>
 		<mapper resource="com/mybatis/dustmapper.xml"/>
+		<mapper resource="com/mybatis/usermapper.xml"/>
 	</mappers>
 </configuration>
 

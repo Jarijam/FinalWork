@@ -182,7 +182,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="right"
                 android:layout_marginRight="100dp"
-                android:text="Warning!!"
+                android:text="500ppm"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="22dp" />
