@@ -1,3 +1,36 @@
+#include "Wire.h"
+#include "I2Cdev.h"
+#include "MPU9250.h"
+MPU9250 accelgyro;
+I2Cdev I2C_M;
+uint8_t buffer_m[6];
+int16_t ax, ay, az;
+int16_t gx, gy, gz;
+int16_t mx, my, mz;
+float heading;
+float tiltheading;
+float Axyz[3];
+float Gxyz[3];
+float Mxyz[3];
+#define sample_num_mdate 5000
+volatile float mx_sample[3];
+volatile float my_sample[3];
+volatile float mz_sample[3];
+static float mx_centre = 0;
+static float my_centre = 0;
+static float mz_centre = 0;
+volatile int mx_max = 0;
+volatile int my_max = 0;
+volatile int mz_max = 0;
+volatile int mx_min = 0;
+volatile int my_min = 0;
+volatile int mz_min = 0;
+float temperature;
+float pressure;
+float atm;
+float altitude;
+
+
 #include <SoftwareSerial.h>     //블루투스 통신을 하기위하여 아두이노에서 기본 제공해주는 SoftwareSerial.h를 사용하겠다는 선언
 SoftwareSerial BTSerial(10, 11); // HC - 06 통신을 위한 TX, RX의 PIN번호를 입력 합니다.(TX = 10 , RX = 11)
 
@@ -20,7 +53,7 @@ Servo LKservo;  // 서보모터 객체 선언
 #define servo_motor 2  // 서보모터 Signal 핀, 아두이노 우노 보드 디지털 3번 핀에 연결
 
 #define TEMP A2
-#define GAS A4
+#define GAS A0
 #define FIRE A3
 int fireState = 0;
 int crash = 0;
@@ -33,6 +66,14 @@ int motor_speed = 150;  // 모터 스피드 0 ~ 255
 
 void setup()  // 초기화
 { 
+  Wire.begin();
+  Serial.println("Initializing I2C devices...");
+  accelgyro.initialize();
+  Serial.println("Testing device connections...");
+  Serial.println(accelgyro.testConnection() ? "MPU9250 connection successful" : "MPU9250 connection failed");
+  delay(1000);
+  Serial.println(" ");
+  
   BTSerial.begin(9600);
   Serial.begin(9600);
   
@@ -56,6 +97,9 @@ void setup()  // 초기화
   
   LKservo.attach(servo_motor);  // 서보모터 핀 설정
   LKservo.write(1);  // 서보모터 초기값 90도 설정
+
+  
+
 }
 
 char data;
@@ -63,25 +107,27 @@ char data;
 void loop()  // 무한루프
 {
 
- 
-//sensing();
 
-if(Serial.available()>0) {
-    data = Serial.read();
-  if(data=='x') {
-//    mode1();
-//    Serial.println("x들어옴");
-    LKservo.write(90);
-  }else if(data=='y') {
-//    mode2();
-//    Serial.println("y들어옴");
-    LKservo.write(180);
-  }else if(data=='z') {
-    mode3();
-//    Serial.println("z들어옴");
-//    LKservo.write(1);
-  }
-}
+
+delay(1000);
+sensing();
+
+//if(Serial.available()>0) {
+//    data = Serial.read();
+//  if(data=='x') {
+////    mode1();
+////    Serial.println("x들어옴");
+//    LKservo.write(90);
+//  }else if(data=='y') {
+////    mode2();
+////    Serial.println("y들어옴");
+//    LKservo.write(180);
+//  }else if(data=='z') {
+//    mode3();
+////    Serial.println("z들어옴");
+////    LKservo.write(1);
+//  }
+//}
  
 //    LKservo.write(90);
   
@@ -107,9 +153,20 @@ void sensing() {
 
  gas = analogRead(GAS);
 
- crash = analogRead(A5);
+ crash = analogRead(A1);
+
+  getAccel_Data();
+  getGyro_Data();
+  getCompassDate_calibrated(); // compass data has been calibrated here
+  getHeading(); //before we use this function we should run 'getCompassDate_calibrated()' frist, so that we can get calibrated data ,then we can get correct angle .
+  getTiltHeading();
+  
+//  Serial.print(Mxyz[0]);
+//  Serial.print(",");
+//  Serial.print(Mxyz[1]);
+//  Serial.println(",");
  
- Serial.println(fstate+spc+temp+spc+gas+spc+crash);
+ Serial.println(fstate+spc+temp+spc+gas+spc+crash+spc+Mxyz[0]+spc+Mxyz[1]);
  delay(500);
 }
 
@@ -226,7 +283,7 @@ void back() {
 }
 
 void mode1() {
-//  int crash= analogRead(A5);
+//  int crash= analogRead(A1);
 //  Serial.println(crash_r);
   if (crash<=10) {
     spin_left();
@@ -251,7 +308,7 @@ void mode1() {
 }
 void mode2() {
   //물체 탐지.
-//  int crash = analogRead(A5);
+//  int crash = analogRead(A1);
  
   int distance = 0;
   int angle = 0;
@@ -346,6 +403,113 @@ void speedtest() {
   delay(1500);
   brake();
   delay(1000);
+}
+
+void getHeading(void)
+{
+heading = 180 * atan2(Mxyz[1], Mxyz[0]) / PI;
+if (heading < 0) heading += 360;
+}
+void getTiltHeading(void)
+{
+float pitch = asin(-Axyz[0]);
+float roll = asin(Axyz[1] / cos(pitch));
+float xh = Mxyz[0] * cos(pitch) + Mxyz[2] * sin(pitch);
+float yh = Mxyz[0] * sin(roll) * sin(pitch) + Mxyz[1] * cos(roll) - Mxyz[2] * sin(roll) * cos(pitch);
+float zh = -Mxyz[0] * cos(roll) * sin(pitch) + Mxyz[1] * sin(roll) + Mxyz[2] * cos(roll) * cos(pitch);
+tiltheading = 180 * atan2(yh, xh) / PI;
+if (yh < 0) tiltheading += 360;
+}
+void Mxyz_init_calibrated ()
+{
+Serial.println(F("Before using 9DOF,we need to calibrate the compass frist,It will takes about 2 minutes."));
+Serial.print(" ");
+Serial.println(F("During calibratting ,you should rotate and turn the 9DOF all the time within 2 minutes."));
+Serial.print(" ");
+Serial.println(F("If you are ready ,please sent a command data 'ready' to start sample and calibrate."));
+while (!Serial.find("ready"));
+Serial.println(" ");
+Serial.println("ready");
+Serial.println("Sample starting......");
+Serial.println("waiting ......");
+get_calibration_Data ();
+Serial.println(" ");
+Serial.println("compass calibration parameter ");
+Serial.print(mx_centre);
+Serial.print(" ");
+Serial.print(my_centre);
+Serial.print(" ");
+Serial.println(mz_centre);
+Serial.println(" ");
+}
+void get_calibration_Data ()
+{
+for (int i = 0; i < sample_num_mdate; i++)
+{
+get_one_sample_date_mxyz();
+/*
+ Serial.print(mx_sample[2]);
+ Serial.print(" ");
+ Serial.print(my_sample[2]); //you can see the sample data here .
+ Serial.print(" ");
+ Serial.println(mz_sample[2]);
+ */
+if (mx_sample[2] >= mx_sample[1])mx_sample[1] = mx_sample[2];
+if (my_sample[2] >= my_sample[1])my_sample[1] = my_sample[2]; //find max value
+if (mz_sample[2] >= mz_sample[1])mz_sample[1] = mz_sample[2];
+if (mx_sample[2] <= mx_sample[0])mx_sample[0] = mx_sample[2];
+if (my_sample[2] <= my_sample[0])my_sample[0] = my_sample[2]; //find min value
+if (mz_sample[2] <= mz_sample[0])mz_sample[0] = mz_sample[2];
+}
+mx_max = mx_sample[1];
+my_max = my_sample[1];
+mz_max = mz_sample[1];
+mx_min = mx_sample[0];
+my_min = my_sample[0];
+mz_min = mz_sample[0];
+mx_centre = (mx_max + mx_min) / 2;
+my_centre = (my_max + my_min) / 2;
+mz_centre = (mz_max + mz_min) / 2;
+}
+void get_one_sample_date_mxyz()
+{
+getCompass_Data();
+mx_sample[2] = Mxyz[0];
+my_sample[2] = Mxyz[1];
+mz_sample[2] = Mxyz[2];
+}
+void getAccel_Data(void)
+{
+accelgyro.getMotion9(&ax, &ay, &az, &gx, &gy, &gz, &mx, &my, &mz);
+Axyz[0] = (double) ax / 16384;
+Axyz[1] = (double) ay / 16384;
+Axyz[2] = (double) az / 16384;
+}
+void getGyro_Data(void)
+{
+accelgyro.getMotion9(&ax, &ay, &az, &gx, &gy, &gz, &mx, &my, &mz);
+Gxyz[0] = (double) gx * 250 / 32768;
+Gxyz[1] = (double) gy * 250 / 32768;
+Gxyz[2] = (double) gz * 250 / 32768;
+}
+void getCompass_Data(void)
+{
+I2C_M.writeByte(MPU9150_RA_MAG_ADDRESS, 0x0A, 0x01); //enable the magnetometer
+delay(10);
+I2C_M.readBytes(MPU9150_RA_MAG_ADDRESS, MPU9150_RA_MAG_XOUT_L, 6, buffer_m);
+mx = ((int16_t)(buffer_m[1]) << 8) | buffer_m[0] ;
+my = ((int16_t)(buffer_m[3]) << 8) | buffer_m[2] ;
+mz = ((int16_t)(buffer_m[5]) << 8) | buffer_m[4] ;
+Mxyz[0] = (double) mx * 1200 / 4096;
+Mxyz[1] = (double) my * 1200 / 4096;
+Mxyz[2] = (double) mz * 1200 / 4096;
+}
+void getCompassDate_calibrated ()
+{
+getCompass_Data();
+Mxyz[0] = Mxyz[0] - mx_centre;
+Mxyz[1] = Mxyz[1] - my_centre;
+Mxyz[2] = Mxyz[2] - mz_centre;
 }
 //  // DC모터 정회전
 //  digitalWrite(EA, HIGH);  // 모터구동 ON
