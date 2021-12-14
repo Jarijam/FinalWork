@@ -1,7 +1,6 @@
 package pro.app.fnl;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
@@ -13,7 +12,6 @@ import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
@@ -27,15 +25,11 @@ import android.os.Environment;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -52,34 +46,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
-
-import cz.msebera.android.httpclient.HttpResponse;
-import cz.msebera.android.httpclient.NameValuePair;
-import cz.msebera.android.httpclient.client.HttpClient;
-import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
-import cz.msebera.android.httpclient.client.methods.HttpPost;
-import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
-import cz.msebera.android.httpclient.message.BasicNameValuePair;
 
 public class ConsoleActivity extends AppCompatActivity {
 
@@ -88,10 +63,10 @@ public class ConsoleActivity extends AppCompatActivity {
     private static final int CALL_PERMISSION_REQUEST_CODE = 1234;
     static RequestQueue requestQueue;
     static String regId, regId2;
-    TextView call_txt, pow_txt, temp_txt, coll_txt, fire_txt, gas_txt;
+    TextView call_txt, pow_txt, temp_txt, fire_txt, gas_txt;
     ImageButton call_btn, move_console, move_controller, move_web,move_gallery, cap_btn;
-    Button data_on, data_off;
-    ImageView fire_img, gas_img, coll_img, temp_img, data_img;
+    Button data_on, data_off, btn_map;
+    ImageView fire_img, gas_img, temp_img, data_img;
     ToggleButton pow_btn;
     LinearLayout container;
     NotificationManagerCompat notificationManager;
@@ -111,6 +86,7 @@ public class ConsoleActivity extends AppCompatActivity {
         pow_btn = findViewById(R.id.pow_btn);
         call_btn = findViewById(R.id.call_btn);
         cap_btn = findViewById(R.id.cap_btn);
+        btn_map = findViewById(R.id.btn_map);
         move_console = findViewById(R.id.move_console);
         move_controller = findViewById(R.id.move_controller);
         move_web = findViewById(R.id.move_web);
@@ -118,13 +94,11 @@ public class ConsoleActivity extends AppCompatActivity {
         pow_txt = findViewById(R.id.pow_txt);
         call_txt = findViewById(R.id.call_txt);
         temp_txt = findViewById(R.id.temp_txt);
-        coll_txt = findViewById(R.id.coll_txt);
         gas_txt = findViewById(R.id.gas_txt);
         fire_txt = findViewById(R.id.fire_txt);
         temp_img = findViewById(R.id.temp_img);
         gas_img = findViewById(R.id.gas_img);
         fire_img = findViewById(R.id.fire_img);
-        coll_img = findViewById(R.id.coll_img);
         data_img = findViewById(R.id.data_img);
         container = findViewById(R.id.container);
         regId = "fUgb9-D3SlO3X3P9-1XgLV:APA91bEPOnZ_d62DGfewfOJug0_EjvCCLfLnfxAZRCxvDzErinXGKHa3QKgtZ5DsAV_GH72iLxS-DtjbJLH7_Zsgj3BhnKf9vMbB0aTpoapCUfSPqYRNvf7Ajk3shxamFtbDKxH79oA8";
@@ -159,6 +133,14 @@ public class ConsoleActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), filename + "저장", Toast.LENGTH_LONG).show();
                 view.setDrawingCacheEnabled(false);
                 return file;
+            }
+        });
+
+        btn_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ConsoleActivity.this, MapActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -209,7 +191,6 @@ public class ConsoleActivity extends AppCompatActivity {
         move_controller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("park","cancel");
                 Intent intent = new Intent(ConsoleActivity.this, ControllerActivity.class);
                 startActivity(intent);
             }
@@ -219,7 +200,6 @@ public class ConsoleActivity extends AppCompatActivity {
         move_web.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("park","cancel");
                 Intent intent = new Intent(ConsoleActivity.this, WebActivity.class);
                 startActivity(intent);
             }

@@ -14,6 +14,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -24,28 +26,37 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Final_Project"
         android:usesCleartextTraffic="true">
+
         <activity
             android:name=".WebActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".ConsoleActivity" />
-        <activity android:name=".ControllerActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity
+            android:name=".ControllerActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".GalleryActivity" />
         <activity android:name=".PostActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />
 
-        <activity android:name=".ReceivedActivity"
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAp7ECVXQJ264u7GvW7BksMaFk1WJT2wyE"/>
+
+        <activity android:name=".MapActivity"
+                 android:label="Map"
+                 android:theme="@style/Theme.AppCompat.Light.Dialog"/>
+
+        <activity
+            android:name=".ReceivedActivity"
             android:label="비상상황 발생"
             android:theme="@style/Theme.AppCompat.Light.Dialog"
-            android:windowSoftInputMode="stateAlwaysHidden">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
 
         <service
             android:name=".MyFirebaseMessagingService"
@@ -56,6 +67,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
     </application>
 
 </manifest>
