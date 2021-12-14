@@ -38,11 +38,13 @@ img {
 
 .tbox {
 	background-color: white;
+	border-radius: 40px;
 	margin: 30px;
-	height: 190px;
+	height: 200px;
 }
 
 .tbox-head {
+	border-radius: 40px;
 	
 }
 
@@ -160,205 +162,7 @@ img {
 }
 </style>
 	<script>
-	function getData() {
-		$.ajax({
-			url:'gas.mc',
-			success:function(data){
-				
-				$(data).each(function(idx,item){
-					
-					$('#date').html(item.date);
-					$('#gas').html(item.gas);
-				});
-			}
-		});
-	};
-	$(document).ready(function(){
-			getData();
-		setInterval(function(){
-			getData();
-		},5000);
-	});
 	
-	function getData2() {
-		$.ajax({
-			url:'temp.mc',
-			success:function(data){
-				
-				$(data).each(function(idx,item){
-					
-					$('#date2').html(item.date);
-					$('#temp').html(item.temp);
-				});
-			}
-		});
-	};
-	$(document).ready(function(){
-			getData2();
-		setInterval(function(){
-			getData2();
-		},5000);
-	});
-	
-	var imgArray = new Array();
-	imgArray[0] = "warning.png";
-	imgArray[1] = "default.png";
-	
-	
-	function getData3() {
-		
-		var imgArray = new Array();
-		imgArray[0] = "warning.png";
-		imgArray[1] = "default.png";
-		
-		var defalutimg = document.getElementById('warning');
-		
-		$.ajax({
-			url:'flame.mc',
-			success:function(data){
-				
-				
-				$(data).each(function(idx,item){
-					
-					if( item.flame >= 65){
-						/* $('#flame').html(item.flame+"<br/><img class='warning' src='/np/img/warning.png'>"); */
-						$('#flame').html("<br/><img class='warning' src='/np/img/warning.png'>");
-					}else if ( item.flame < 65){
-						/* $('#flame').html(item.flame+"<br/><img class='default' src='/np/img/default.png'>"); */
-						$('#flame').html("<br/><img class='default' src='/np/img/default.png'>");
-					}
-					
-					
-				/* 	if ( item.flame > 30 ){ 
-						 $('#flame').document.write("<img src='/np/img/warning.png'>");
-						
-					}else if ( item.flame < 30){
-						 $('#flame').document.write("<img src='/np/img/default.png'>");
-					} */
-					
-					
-					
-				});
-			}
-		});
-	};
-	$(document).ready(function(){
-			getData3();
-		setInterval(function(){
-			getData3();
-		},5000);
-	});
-	// ================================== TEMP GAGE ====================================
-		function display4(d){
-			var gaugeOptions = {
-				    chart: {
-				        type: 'solidgauge'
-				    },
-
-				    title: null,
-
-				    pane: {
-				        center: ['50%', '85%'],
-				        size: '140%',
-				        startAngle: -90,
-				        endAngle: 90,
-				        background: {
-				            backgroundColor:
-				                Highcharts.defaultOptions.legend.backgroundColor || '#EEE',
-				            innerRadius: '60%',
-				            outerRadius: '100%',
-				            shape: 'arc'
-				        }
-				    },
-
-				    exporting: {
-				        enabled: false
-				    },
-
-				    tooltip: {
-				        enabled: false
-				    },
-
-				    // the value axis
-				    yAxis: {
-				        stops: [
-				            [0.1, '#55BF3B'], // green
-				            [0.5, '#DDDF0D'], // yellow
-				            [0.9, '#DF5353'] // red
-				        ],
-				        lineWidth: 0,
-				        tickWidth: 0,
-				        minorTickInterval: null,
-				        tickAmount: 2,
-				        title: {
-				            y: -70
-				        },
-				        labels: {
-				            y: 16
-				        }
-				    },
-
-				    plotOptions: {
-				        solidgauge: {
-				            dataLabels: {
-				                y: 5,
-				                borderWidth: 0,
-				                useHTML: true
-				            }
-				        }
-				    }
-				};
-
-				// The speed gauge
-				var chartSpeed = Highcharts.chart('container-speed', Highcharts.merge(gaugeOptions, {
-				    yAxis: {
-				        min: 0,
-				        max: 50,
-				        title: {
-				            text: 'Temperature'
-				        }
-				    },
-
-				    credits: {
-				        enabled: false
-				    },
-
-				    series: [{
-				        name: 'Speed',
-				        data: d.temp,
-				        dataLabels: {
-				            format:
-				                '<div style="text-align:center">' +
-				                '<span style="font-size:25px">{y}</span><br/>' +
-				                '<span style="font-size:12px;opacity:0.4">°C</span>' +
-				                '</div>'
-				        },
-				        tooltip: {
-				            valueSuffix: ' °C'
-				        }
-				    }]
-
-				}));
-
-	}
-			
-		
-		function getData4(){
-			$.ajax({
-				url:'tempgage.mc',
-				success:function(d){
-					display4(d);
-				}
-			});
-		};
-		
-		
-		$(document).ready(function(){
-			getData4();
-		setInterval(function(){
-			getData4();
-		},5000);
-	});
 		// ================================== GAS GAGE ====================================
 		function display5(d){
 			var gaugeOptions = {
@@ -470,70 +274,121 @@ img {
 			getData5();
 		},5000);
 	});
-	
+		function display(d){
+			Highcharts.getJSON(
+			  'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
+			  function(data) {
+
+				  var chart2 = new Highcharts.chart('container_gas', {
+			      chart: {
+			        zoomType: 'x'
+			      },
+			      title: {
+			        text: 'Gas over time'
+			      },
+			      subtitle: {
+			        text: document.ontouchstart === undefined ?
+			          'Click and drag to zoom in' : 'Pinch the chart to zoom in'
+			      },
+			      xAxis: {
+			        type: 'datetime'
+			      },
+			      yAxis: {
+			        title: {
+			          text: 'Gas'
+			        }
+			      },
+			      legend: {
+			        enabled: false
+			      },
+			      plotOptions: {
+			        area: {
+			          fillColor: {
+			            linearGradient: {
+			              x1: 0,
+			              y1: 0,
+			              x2: 0,
+			              y2: 1
+			            },
+			            stops: [
+			              [0, Highcharts.getOptions().colors[6]],
+			              [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+			            ]
+			          },
+			          marker: {
+			            radius: 2
+			          },
+			          lineWidth: 1,
+			          states: {
+			            hover: {
+			              lineWidth: 1
+			            }
+			          },
+			          threshold: null
+			        }
+			      },
+
+			      series: [{
+			        type: 'area',
+			        name: 'Gas',
+			        data: d
+			      }]
+			    });
+			  });
+		}
+		function getdata(){
+			$.ajax({
+				url:'rchartgas.mc',
+				success:function(d){
+					display(d);
+				}
+			});
+		};
 		
-// =================================== kakao map =====================================
+		$(document).ready(function(){
+				getdata(); 
+			setInterval(function(){
+				getdata();
+			},5000);
+		});
 	
 	
     </script>
     
 	 <div class="row">
-	    <div class="col-sm-6">
-					  <div class="tbox"  >
-						     <div class="tbox-body">
-							 	<div id="map" style="width:100%;height:200px;"></div>
-						    </div>
-					    	
-				   	  </div>
-            	 </div>
-				    <div class="col-sm-2">
-					    <div class="tbox"  >
-						    <h5 class="tbox-head" style="background-color: blue;"  >Flame Detection&nbsp;&nbsp;
-						    <!-- <img src="/np/img/graph.png" width="30px" height="30px" > --></h5>
-						     <!--  <img src="/np/img/warning.png" width="100px" height="100px"  id="warning"><br/>
-						      <img src="/np/img/default.png" width="100px" height="100px" id="default"> -->
-							    <div class="tbox-body">
-							   		<!-- <  <a class="kr-font">기준치 초과 횟수</a> -->
-									 <a id="flame"></a> 
-								</div>
-						</div>
-				    </div>
-			   <div class="col-sm-2" >
-				<!-- 	 <div class="tbox">
+			   <div class="col-sm-4" >
+					 <div class="tbox" >
 						<h5 class="tbox-head" style="background-color: #E39600;" >Gas Info&nbsp;&nbsp;
-						 <img src="/np/img/graph2.png" width="30px" height="30px" ></h5>
+						 <!-- <img src="/np/img/graph2.png" width="30px" height="30px" > --></h5>
 							<div class="tbox-body">
-							  <a class="kr-font">기준치 초과 횟수</a>
-							  <a id="gas"></a>
+							 <!--  <a class="kr-font">기준치 초과 횟수</a>
+							  <a id="gas"></a> -->
 						    <div class="highcharts-figure">
 							    <div id="container-gas" class="chart-container"></div>
 							</div>
 						 </div>
-					</div> -->
-				</div>
-				<!--     <div class="col-sm-2" >
-				     <div class="tbox" >
-						<h5 class="tbox-head" style="background-color: #03C65A;" >Temp Info &nbsp;&nbsp;
-						 <img src="/np/img/graph.png" width="30px" height="30px" > </h5>
-						   <div class="tbox-body">
-							  <a class="kr-font">기준치 초과 횟수</a>
-							  <a id="temp"></a>
-						   <div class="highcharts-figure">
-							    <div id="container-speed" class="chart-container"></div>
-							</div>
-					    </div>
 					</div>
-			    </div> -->
-			    
-				 
-            	 
-            </div> 
-           <script>
+				</div>
+           <div class="col-sm-8" style="margin-top: 10px;"><br/>
+   			 <div id="container_gas"></div>
+ 		 </div>
+ 		<!--  <div class="col-sm-4">
+					  <div class="tbox" >
+						     <div class="tbox-body">
+							 	<div id="map" style="width:100%;height:400px;"></div>
+						    </div>
+					    	
+				   	  </div>
+            	 </div> -->
+      </div> 
+        
+        
+        <script>
            var mapContainer = document.getElementById('map'), // 지도의 중심좌표
            mapOption = { 
         	    
                center: new kakao.maps.LatLng(37.50972007166255, 127.05555398447125), // 지도의 중심좌표
-               level: 2 // 지도의 확대 레벨
+               level: 10 // 지도의 확대 레벨
            }; 
 
        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -583,4 +438,4 @@ img {
        function closeOverlay() {
            overlay.setMap(null);     
        }
-           </script>
+           </script>  

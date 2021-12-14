@@ -28,49 +28,54 @@
 		<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 		<script src="https://code.highcharts.com/highcharts-more.js"></script>
 		<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
-			<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-
+		<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d1fec8d8766a8a6cd6d1d7a100d376e0"></script>
 		<!--[if IE]>
   		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		
 		<style type="text/css">
 		.warning {
-			width: 200px;
-			height: 200px;
+			width: 100px;
+			height: 100px;
 		}
 		.default {
-			width: 200px;
-			height: 200px;
+			width: 100px;
+			height: 100px;
 		}
 		
 		
-		h3 {
+		h5 {
 			margin : 20px;
+			font-family: 'Titillium Web', sans-serif;
+			font-size: 15px;
+			color: white;
 		}
 		.content {
 			background-color: #E7E9EB;
 		
 		}
 		.highcharts-figure .chart-container {
-		    width: 300px;
-		    height: 200px;
-		    margin-left: 50px;
+		    /* width: 220px; */
+		    height: 130px;
+		    margin: auto;
+		    
 		}
 				
 		
 		#container_tot {
-		    height: 525px;
+		    height: 425px;
 		    border: 2px solid blue;
 		    margin : auto 20px;
+		    font-family: 'Titillium Web', sans-serif; 
 		}
 		#container_gas {
-		    height: 230px;
+		    height: 190px;
 		    border: 2px solid red;
 		    margin : auto 20px;
 		}
 		#container_temp {
-		    height: 230px;
+		    height: 190px;
 		    border: 2px solid purple;
 		    margin : auto 20px;
 		}
@@ -149,7 +154,7 @@
 					</div>
 					<header class="codrops-header" style="border: 2px solid red;">
 						
-						<h1>불IT났어<span>test중입니다.</span></h1>
+						<h1 class="eng-font">Industrial Fire Detector<span>Real-time status</span></h1>
 						
 					</header>
 					

@@ -56,7 +56,7 @@ public class MainController {
 	   @RequestMapping("/main.mc")
 	   public ModelAndView main() {
 			ModelAndView mv = new ModelAndView();
-			mv.setViewName("main");
+			mv.setViewName("login");
 			return mv;
 			}
 		
@@ -145,7 +145,7 @@ public class MainController {
 			try {
 				dbuser = userservice.get(id);
 				if(dbuser.getPwd().equals(pwd)) {
-					mv.addObject("center", "ok");
+					mv.addObject("center", "recentdata");
 					HttpSession session 
 					= request.getSession();
 					session.setAttribute("loginid", id);

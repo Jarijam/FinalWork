@@ -43,7 +43,7 @@
 			});		
 			}); 		
 	</script>
-		<canvas id="canvas" width="500" height="500">
+		<canvas id="canvas" width="700px" height="700px">
 			does it work??
 		</canvas>	
 		<a href = "crddelte.mc">DB삭제</a>
