@@ -38,7 +38,7 @@ function display(d){
 			              y2: 1
 			            },
 			            stops: [
-			              [0, Highcharts.getOptions().colors[0]],
+			              [0, Highcharts.getOptions().colors[6]],
 			              [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
 			            ]
 			          },

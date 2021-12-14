@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script>
+<!-- <script>
 function display3(d){
 	var chart3 = new Highcharts.chart('container_tot', {
 	    chart: {
@@ -22,13 +22,13 @@ function display3(d){
 	        labels: {
 	            format: '{value}°C',
 	            style: {
-	                color: Highcharts.getOptions().colors[2]
+	                color: Highcharts.getOptions().colors[1]
 	            }
 	        },
 	        title: {
 	            text: 'Temperature',
 	            style: {
-	                color: Highcharts.getOptions().colors[2]
+	                color: Highcharts.getOptions().colors[1]
 	            }
 	        },
 	        opposite: true
@@ -42,7 +42,7 @@ function display3(d){
 	            }
 	        },
 	        labels: {
-	            format: '{value} mm?',
+	            format: '{value} ppm',
 	            style: {
 	                color: Highcharts.getOptions().colors[0]
 	            }
@@ -87,7 +87,8 @@ function display3(d){
 	            valueSuffix: ' mm'
 	        }
 
-	    }, {
+	    }, 
+	/*     {
 	        name: 'Sea-Level Pressure',
 	        type: 'spline',
 	        yAxis: 2,
@@ -100,7 +101,9 @@ function display3(d){
 	            valueSuffix: ' mb'
 	        }
 
-	    }, {
+	    },  */
+	    
+	    {
 	        name: 'Temperature',
 	        type: 'spline',
 	        data: d.temp,
@@ -166,10 +169,13 @@ $(document).ready(function(){
 });
 
 
-</script>
+</script> -->
 </head>
 <body>
 <div class="cbox">
-    <h3 class="cbox-body">A Basic Panel</h3>
-    <div id="container_tot"></div>
+    <h3 class="cbox-body">CCTV</h3>
+    <div id = "cam" style="text-align: center;" >
+    <iframe src='http://192.168.0.16:81/stream' frameborder='0' width='90%' height='420px' scrolling='no' style='margin: auto;  border: solid red 2px; align-content: center;'></iframe>
+    
+    </div>
   </div>
