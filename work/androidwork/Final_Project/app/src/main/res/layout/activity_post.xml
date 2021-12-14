@@ -7,16 +7,6 @@
     android:background="@drawable/fire3"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="497dp"
-        android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:text="Fire\nFIGHTER"
-        android:textColor="#433F3F"
-        android:textSize="100sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="122dp"
-        tools:layout_editor_absoluteY="1dp" />
 
 
 </LinearLayout>
