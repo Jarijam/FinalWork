@@ -85,7 +85,7 @@ public class DataController {
 			 */
 			System.out.println(X+","+Y);
 			CoordinateVO coord1 = new CoordinateVO(X, Y);
-			cdservice.register(coord1);
+			cdservice.modify(coord1);
 			
 				
 			
@@ -303,15 +303,15 @@ public class DataController {
 			rconn.close();
 		}
 		
-		@RequestMapping("/data2.mc")
-		@ResponseBody
-		public void data2(HttpServletRequest request) throws Exception {
-//			Double X = Double.parseDouble(request.getParameter("X"));
-			String X = request.getParameter("X");
-			String Y = request.getParameter("Y");
-	    	
-			System.out.println(X+","+Y);
-			coord_log.debug(X+","+Y);
-		}
+//		@RequestMapping("/data2.mc")
+//		@ResponseBody
+//		public void data2(HttpServletRequest request) throws Exception {
+////			Double X = Double.parseDouble(request.getParameter("X"));
+//			String X = request.getParameter("X");
+//			String Y = request.getParameter("Y");
+//	    	
+//			System.out.println(X+","+Y);
+//			coord_log.debug(X+","+Y);
+//		}
 		
 	}
