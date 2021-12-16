@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-body {
+#canvas_body {
 	margin: 0;
 	padding: 30px;
 	font-size: 14px;
@@ -10,6 +10,7 @@ body {
 }
 
 #canvas {
+	
 	background-color: #eee;
 	border: 5px solid #333;
 }

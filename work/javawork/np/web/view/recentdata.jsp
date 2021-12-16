@@ -6,7 +6,7 @@
 					  	<div class="ex-layout">
 							<div class="main">
 								<div class="left-menu">
-									<jsp:include page="chart_view/rcharttot.jsp"/>	
+									<jsp:include page="chart_view/camview.jsp"/>	
 								</div>
 								<div class="contents">
 									<div class="article">
@@ -19,7 +19,9 @@
 									</div>
 							   </div>
 							</div>
-						</div> 	 
+						</div>
+						<jsp:include page="chart_view/rcharttot.jsp"/>
+							 
 						
 				   
 				

@@ -80,7 +80,7 @@
 		    margin : auto 20px;
 		}
 
-		.ex-layout{ height: 100%;}
+		.ex-layout{ height: 550px;}
 		.menu{
 			width: 100%;
 			height: 30px;
