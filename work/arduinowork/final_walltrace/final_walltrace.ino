@@ -12,6 +12,10 @@ float tiltheading;
 float Axyz[3];
 float Gxyz[3];
 float Mxyz[3];
+float Yaw_angle;
+unsigned long t_now, t_prev;
+unsigned long int D_min = 10000;
+unsigned long int D, Angle;
 #define sample_num_mdate 5000
 volatile float mx_sample[3];
 volatile float my_sample[3];
@@ -32,7 +36,7 @@ float altitude;
 
 
 #include <SoftwareSerial.h>     //블루투스 통신을 하기위하여 아두이노에서 기본 제공해주는 SoftwareSerial.h를 사용하겠다는 선언
-SoftwareSerial BTSerial(10, 11); // HC - 06 통신을 위한 TX, RX의 PIN번호를 입력 합니다.(TX = 10 , RX = 11)
+SoftwareSerial BTSerial(10, 1); // HC - 06 통신을 위한 TX, RX의 PIN번호를 입력 합니다.(TX = 10 , RX = 11)
 
 #include "Servo.h"  // 서보모터를 사용하기 위한 헤더파일 호출
 Servo LKservo;  // 서보모터 객체 선언
@@ -98,7 +102,7 @@ void setup()  // 초기화
   LKservo.attach(servo_motor);  // 서보모터 핀 설정
   LKservo.write(1);  // 서보모터 초기값 90도 설정
 
-  
+  Axyz[0]=Axyz[1]=0;
 
 }
 
@@ -106,11 +110,14 @@ char data;
 
 void loop()  // 무한루프
 {
+//crash = analogRead(A1);
+//Serial.println(crash);
 
+Serial.println(read_ultrasonic2());
+//Serial.println(getYaw_angle());
+//mode2();
 
-
-delay(1000);
-sensing();
+//sensing();
 
 //if(Serial.available()>0) {
 //    data = Serial.read();
@@ -160,14 +167,25 @@ void sensing() {
   getCompassDate_calibrated(); // compass data has been calibrated here
   getHeading(); //before we use this function we should run 'getCompassDate_calibrated()' frist, so that we can get calibrated data ,then we can get correct angle .
   getTiltHeading();
-  
+//Serial.println("Acceleration(g) of X,Y,Z:");
+//Serial.println(Axyz[0]+spc+Axyz[1]);
+String cmm = ",";
+//Serial.println(cmm+(Axyz[0]-0.015)*10+cmm+(Axyz[1]+0.1)*10);
+Serial.println(cmm+(Axyz[0])*100+cmm+(Axyz[1])*100);
+//Serial.print(",");
+//Serial.print(Axyz[1]);
+//Serial.print(",");
+//Serial.println(Axyz[2]);
 //  Serial.print(Mxyz[0]);
 //  Serial.print(",");
 //  Serial.print(Mxyz[1]);
 //  Serial.println(",");
- 
- Serial.println(fstate+spc+temp+spc+gas+spc+crash+spc+Mxyz[0]+spc+Mxyz[1]);
- delay(500);
+ //String C = "C";
+// Serial.println(C+spc+Mxyz[0]+spc+Mxyz[1]);
+// Mxyz[0] = 0;
+// Mxyz[1] = 0;
+// Serial.println("S"+spc+fstate+spc+temp+spc+gas+spc+crash);
+ delay(1000);
 }
 
 
@@ -195,56 +213,35 @@ int read_ultrasonic2(void)  // 초음파 센서2 값 읽어오는 함수
   return distance;  // 거리 값 리턴
 }
 
-void motorA_con(int M1)  // 모터A 컨트롤 함수
-{
-  if (M1 > 0)  // M1이 양수일 때, 모터A 정회전
-  {
-    digitalWrite(M_IN1, motorA_vector);  // IN1번에 HIGH(motorA_vector가 0이면 LOW)
-    digitalWrite(M_IN2, !motorA_vector);  // IN2번에 LOW(motorA_vector가 0이면 HIGH)
-  }
-  else if (M1 < 0)  // M1이 음수일 대, 모터A 역회전
-  {
-    digitalWrite(M_IN1, !motorA_vector);  // IN1번에 LOW(motorA_vector가 0이면 HIGH)
-    digitalWrite(M_IN2, motorA_vector);  // IN2번에 HIGH(motorA_vector가 0이면 LOW)
-  }
-  else  // 모터A 정지
-  {
-    digitalWrite(M_IN1, LOW);  // IN1번에 LOW
-    digitalWrite(M_IN2, LOW);  // IN2번에 LOW
-  }
-  analogWrite(EA, abs(M1));  // M1의 절대값으로 모터A 속도 제어
-}
+void find_wall(){
+    for (int i=40;i<150;i+=10) {LKservo.write(i); delay(200); 
+                             D=read_ultrasonic1(); delay(3); if (D<D_min&&D!=0) {D_min=D; Angle=i;} delay(10);}
+    if (Angle>=70&&Angle<90) {right(); delay(Angle*2+100); }
+    else if(Angle<=110&&Angle>90) {left(); delay(460-Angle*2); }
+    else if (Angle>110) {spin_left(Angle-88);}
+    else if (Angle<70) {spin_right(92-Angle);}
+    else {brake(); delay(100); }
+    LKservo.write(90); brake(); delay(1000); Yaw_angle=0;}
 
-void motorB_con(int M2)  // 모터B 컨트롤 함수
-{
-  if (M2 > 0)  // M2가 양수일 때, 모터B 정회전
-  {
-    digitalWrite(M_IN3, motorB_vector);  // IN3번에 HIGH(motorB_vector가 0이면 LOW)
-    digitalWrite(M_IN4, !motorB_vector);  // IN4번에 LOW(motorB_vector가 0이면 HIGH)
-  }
-  else if (M2 < 0)  // M2가 음수일 때, 모터B 역회전
-  {
-    digitalWrite(M_IN3, !motorB_vector);  // IN3번에 LOW(motorB_vector가 0이면 HIGH)
-    digitalWrite(M_IN4, motorB_vector);  // IN4번에 HIGH(motorB_vector가 0이면 LOW)
-  }
-  else  // 모터B 정지
-  {
-    digitalWrite(M_IN3, LOW);  // IN3번에 LOW
-    digitalWrite(M_IN4, LOW);  // IN4번에 LOW
-  }
-  analogWrite(EB, abs(M2));  // M2의 절대값으로 모터B 속도 제어
-}
+
 //오른직진 1 오른후진2 왼직진3 왼후진4
 void go() {
   digitalWrite(M_IN1, 1); digitalWrite(M_IN2, 0); delay(3);
   digitalWrite(M_IN3, 1); digitalWrite(M_IN4, 0); delay(3);
   analogWrite(EA,170);analogWrite(EB,180); delay(30);
+  Serial.println("go");
 }
-
+void go_slow() {
+  digitalWrite(M_IN1, 1); digitalWrite(M_IN2, 0); delay(3);
+  digitalWrite(M_IN3, 1); digitalWrite(M_IN4, 0); delay(3);
+  analogWrite(EA,120);analogWrite(EB,130); delay(30);
+  Serial.println("go_slow");
+}
 //void go_straight(){}
 void brake() {
   digitalWrite(M_IN1, 0); digitalWrite(M_IN2, 0); delay(3);
   digitalWrite(M_IN3, 0); digitalWrite(M_IN4, 0); delay(3);
+  analogWrite(EA,0);analogWrite(EB,0); delay(30);
 }
 void left() {
   digitalWrite(M_IN1, 1); digitalWrite(M_IN2, 0); delay(3);
@@ -254,7 +251,7 @@ void left() {
 void right(){
   digitalWrite(M_IN1, 1); digitalWrite(M_IN2, 0); delay(3);
   digitalWrite(M_IN3, 1); digitalWrite(M_IN4, 0); delay(3);
-  analogWrite(EA,50);analogWrite(EB,200); delay(30);;
+  analogWrite(EA,50);analogWrite(EB,200); delay(30);
 }
 void left_back() {
   digitalWrite(M_IN1, 0); digitalWrite(M_IN2, 1); delay(3);
@@ -264,7 +261,7 @@ void left_back() {
 void right_back(){
   digitalWrite(M_IN1, 0); digitalWrite(M_IN2, 1); delay(3);
   digitalWrite(M_IN3, 0); digitalWrite(M_IN4, 1); delay(3);
-  analogWrite(EA,50);analogWrite(EB,200); delay(30);;
+  analogWrite(EA,50);analogWrite(EB,200); delay(30);
 }
 void spin_left() {
   digitalWrite(M_IN1, 1); digitalWrite(M_IN2, 0); delay(3);
@@ -276,6 +273,22 @@ void spin_right() {
   digitalWrite(M_IN3, 1); digitalWrite(M_IN4, 0); delay(3);
   analogWrite(EA,200);analogWrite(EB,200); delay(30);;
 }
+void spin_left(unsigned int Spin_angle) {//우직,좌후
+  digitalWrite(M_IN1, 1); digitalWrite(M_IN2, 0); delay(3); 
+  digitalWrite(M_IN3, 0); digitalWrite(M_IN4, 1); delay(3);
+  analogWrite(EA,200);analogWrite(EB,200); 
+   for(Yaw_angle=0, t_prev=millis(); (Spin_angle - 23)>abs(Yaw_angle); ) getYaw_angle();
+  analogWrite(EA,0);analogWrite(EB,0); 
+  delay(30);
+}
+void spin_right(unsigned int Spin_angle) {
+  digitalWrite(M_IN1, 0); digitalWrite(M_IN2, 1); delay(3);
+  digitalWrite(M_IN3, 1); digitalWrite(M_IN4, 0); delay(3);
+  analogWrite(EA,200);analogWrite(EB,200); 
+  for(Yaw_angle=0, t_prev=millis(); (Spin_angle - 23)>abs(Yaw_angle); ) getYaw_angle();
+  analogWrite(EA,0);analogWrite(EB,0);
+  delay(30);
+}
 void back() {
   digitalWrite(M_IN1, 0); digitalWrite(M_IN2, 1); delay(3);
   digitalWrite(M_IN3, 0); digitalWrite(M_IN4, 1); delay(3);
@@ -285,10 +298,8 @@ void back() {
 void mode1() {
 //  int crash= analogRead(A1);
 //  Serial.println(crash_r);
-  if (crash<=10) {
-    spin_left();
-    delay(1000);
-  }else if (read_ultrasonic2() < 7) {
+  
+  if (read_ultrasonic2() < 7 | crash <= 10) {
     back();
     delay(500);
     spin_left();
@@ -306,55 +317,85 @@ void mode1() {
     }
   }
 }
+//void mode2() {
+//  //물체 탐지.
+////  int crash = analogRead(A1);
+// 
+//  int distance = 0;
+//  int angle = 0;
+//  for (int i=0 ; i<180 ; i+=10) {
+//    LKservo.write(i);
+//    //distance 최대값 설정 및 그때 각도 설정
+//    if (read_ultrasonic1()>distance) {
+//      if(read_ultrasonic1()>500) {
+//        distance = 500;
+//      }else {
+//       distance = read_ultrasonic1(); 
+//      }
+//      angle = i;
+//    }
+//    delay(100);
+//  }
+//
+//  if (angle>=80 & angle<=100) {
+//    go();
+//    delay(800);
+//  } else if (angle<80){
+//    spin_right();
+//    delay(800);
+//  } else if (angle >100) {
+//    spin_left();
+//    delay(800);
+//  }
+//
+//  if (read_ultrasonic2() <5 | crash <= 10 ) {
+//    brake();
+//    delay(50);
+//    back();
+//    delay(300);
+//   } else if ( angle<80) {
+//    spin_right();
+//    delay(300);
+//   } else if ( angle>100) {
+//    spin_left();
+//    delay(300);
+//   } else {
+//    go();
+//    delay(500);
+//   }
+//
+//   LKservo.write(1);
+//}
 void mode2() {
-  //물체 탐지.
-//  int crash = analogRead(A1);
- 
-  int distance = 0;
-  int angle = 0;
-  for (int i=0 ; i<180 ; i+=10) {
-    LKservo.write(i);
-    //distance 최대값 설정 및 그때 각도 설정
-    if (read_ultrasonic1()>distance) {
-      if(read_ultrasonic1()>500) {
-        distance = 500;
-      }else {
-       distance = read_ultrasonic1(); 
-      }
-      angle = i;
-    }
-    delay(100);
-  }
-
-  if (angle>=80 & angle<=100) {
-    go();
-    delay(800);
-  } else if (angle<80){
-    spin_right();
-    delay(800);
-  } else if (angle >100) {
-    spin_left();
-    delay(800);
-  }
-
-  if (read_ultrasonic2() <5 | crash <= 10 ) {
-    brake();
-    delay(50);
+   if(read_ultrasonic2() <7 | crash <=10){
     back();
-    delay(300);
-   } else if ( angle<80) {
-    spin_right();
-    delay(300);
-   } else if ( angle>100) {
-    spin_left();
-    delay(300);
-   } else {
-    go();
-    delay(500);
+    delay(200);
+    brake();
+    delay(200);
+    for (int i=40;i<150;i+=10) {
+      LKservo.write(i); delay(200); 
+       D=read_ultrasonic1(); 
+       delay(3); 
+       
+       if (D<D_min&&D!=0) {
+        D_min=D; Angle=i;
+        } 
+        delay(10);
+        }
+       Serial.println(Angle);
+      if (Angle>=70&&Angle<90) {right(); delay(Angle*2+100); }
+      else if(Angle<=110&&Angle>90) {left(); delay(460-Angle*2); }
+      else if (Angle>110) {spin_left(Angle-88);}
+      else if (Angle<70) {spin_right(92-Angle);}
+//    else {brake(); delay(100); }
+   }else {
+    go_slow();
    }
-
-   LKservo.write(1);
+   
+   
+        
 }
+
 void mode3() {
 if (BTSerial.available()) 
   {
@@ -510,6 +551,52 @@ getCompass_Data();
 Mxyz[0] = Mxyz[0] - mx_centre;
 Mxyz[1] = Mxyz[1] - my_centre;
 Mxyz[2] = Mxyz[2] - mz_centre;
+}
+double getYaw_angle(void) {
+  getGyro_Data();
+  t_now = millis();
+  if(t_prev) Yaw_angle = Yaw_angle + Gxyz[2] * (t_now-t_prev) / 1000.;
+  t_prev = t_now;
+  return Yaw_angle;
+}
+void motorA_con(int M1)  // 모터A 컨트롤 함수
+{
+  if (M1 > 0)  // M1이 양수일 때, 모터A 정회전
+  {
+    digitalWrite(M_IN1, motorA_vector);  // IN1번에 HIGH(motorA_vector가 0이면 LOW)
+    digitalWrite(M_IN2, !motorA_vector);  // IN2번에 LOW(motorA_vector가 0이면 HIGH)
+  }
+  else if (M1 < 0)  // M1이 음수일 대, 모터A 역회전
+  {
+    digitalWrite(M_IN1, !motorA_vector);  // IN1번에 LOW(motorA_vector가 0이면 HIGH)
+    digitalWrite(M_IN2, motorA_vector);  // IN2번에 HIGH(motorA_vector가 0이면 LOW)
+  }
+  else  // 모터A 정지
+  {
+    digitalWrite(M_IN1, LOW);  // IN1번에 LOW
+    digitalWrite(M_IN2, LOW);  // IN2번에 LOW
+  }
+  analogWrite(EA, abs(M1));  // M1의 절대값으로 모터A 속도 제어
+}
+
+void motorB_con(int M2)  // 모터B 컨트롤 함수
+{
+  if (M2 > 0)  // M2가 양수일 때, 모터B 정회전
+  {
+    digitalWrite(M_IN3, motorB_vector);  // IN3번에 HIGH(motorB_vector가 0이면 LOW)
+    digitalWrite(M_IN4, !motorB_vector);  // IN4번에 LOW(motorB_vector가 0이면 HIGH)
+  }
+  else if (M2 < 0)  // M2가 음수일 때, 모터B 역회전
+  {
+    digitalWrite(M_IN3, !motorB_vector);  // IN3번에 LOW(motorB_vector가 0이면 HIGH)
+    digitalWrite(M_IN4, motorB_vector);  // IN4번에 HIGH(motorB_vector가 0이면 LOW)
+  }
+  else  // 모터B 정지
+  {
+    digitalWrite(M_IN3, LOW);  // IN3번에 LOW
+    digitalWrite(M_IN4, LOW);  // IN4번에 LOW
+  }
+  analogWrite(EB, abs(M2));  // M2의 절대값으로 모터B 속도 제어
 }
 //  // DC모터 정회전
 //  digitalWrite(EA, HIGH);  // 모터구동 ON

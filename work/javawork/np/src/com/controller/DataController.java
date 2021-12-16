@@ -33,6 +33,9 @@ public class DataController {
 		private Logger data_log = 
 				Logger.getLogger("data");
 		
+		private Logger coord_log = 
+				Logger.getLogger("coord");
+		
 		
 		@Resource(name="cdservice")
 		Service<String, CoordinateVO> cdservice;
@@ -281,6 +284,15 @@ public class DataController {
 			rconn.close();
 		}
 		
-		
+		@RequestMapping("/data2.mc")
+		@ResponseBody
+		public void data2(HttpServletRequest request) throws Exception {
+//			Double X = Double.parseDouble(request.getParameter("X"));
+			String X = request.getParameter("X");
+			String Y = request.getParameter("Y");
+	    	
+			System.out.println(X+","+Y);
+			coord_log.debug(X+","+Y);
+		}
 		
 	}
