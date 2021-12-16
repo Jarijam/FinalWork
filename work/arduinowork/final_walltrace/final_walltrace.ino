@@ -36,7 +36,7 @@ float altitude;
 
 
 #include <SoftwareSerial.h>     //블루투스 통신을 하기위하여 아두이노에서 기본 제공해주는 SoftwareSerial.h를 사용하겠다는 선언
-SoftwareSerial BTSerial(10, 1); // HC - 06 통신을 위한 TX, RX의 PIN번호를 입력 합니다.(TX = 10 , RX = 11)
+SoftwareSerial BTSerial(10, 1); // HC - 06 통신을 위한 TX, RX의 PIN번호를 입력 합니다.(TX = 10 , RX = 1)
 
 #include "Servo.h"  // 서보모터를 사용하기 위한 헤더파일 호출
 Servo LKservo;  // 서보모터 객체 선언
