@@ -74,6 +74,25 @@ public class DataController {
 //			cdservice.remove(btn);
 //		}
 		}
+	    @RequestMapping("/data2.mc")
+		@ResponseBody
+		public void data2(HttpServletRequest request) throws Exception {
+			
+			String X = request.getParameter("X");
+			String Y = request.getParameter("Y");
+			/*
+			 * int X1 = Integer.parseInt(X); int Y1 = Integer.parseInt(Y);
+			 */
+			System.out.println(X+","+Y);
+			CoordinateVO coord1 = new CoordinateVO(X, Y);
+			cdservice.register(coord1);
+			
+				
+			
+//			if(btn.equals(1+"")) {
+//			cdservice.remove(btn);
+//		}
+		}
 	    
 	    
 	    
