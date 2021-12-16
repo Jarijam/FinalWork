@@ -26,38 +26,61 @@
 		<script src="https://code.highcharts.com/modules/exporting.js"></script>
 		<script src="https://code.highcharts.com/modules/export-data.js"></script>
 		<script src="https://code.highcharts.com/modules/accessibility.js"></script>
-		
+		<script src="https://code.highcharts.com/highcharts-more.js"></script>
+		<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+		<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d1fec8d8766a8a6cd6d1d7a100d376e0"></script>
 		<!--[if IE]>
   		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		
 		<style type="text/css">
-		h3 {
+		.warning {
+			width: 100px;
+			height: 100px;
+		}
+		.default {
+			width: 100px;
+			height: 100px;
+		}
+		
+		
+		h5 {
 			margin : 20px;
+			font-family: 'Titillium Web', sans-serif;
+			font-size: 15px;
+			color: white;
 		}
 		.content {
 			background-color: #E7E9EB;
 		
 		}
-		
+		.highcharts-figure .chart-container {
+		    /* width: 220px; */
+		    height: 130px;
+		    margin: auto;
+		    
+		}
+				
 		
 		#container_tot {
-		    height: 525px;
+		    height: 425px;
 		    border: 2px solid blue;
 		    margin : auto 20px;
+		    font-family: 'Titillium Web', sans-serif; 
 		}
 		#container_gas {
-		    height: 230px;
+		    height: 190px;
 		    border: 2px solid red;
 		    margin : auto 20px;
 		}
 		#container_temp {
-		    height: 230px;
+		    height: 190px;
 		    border: 2px solid purple;
 		    margin : auto 20px;
 		}
 
-		.ex-layout{ height: 100%;}
+		.ex-layout{ height: 550px;}
 		.menu{
 			width: 100%;
 			height: 30px;
@@ -90,6 +113,13 @@
 		background: skyblue;
 		}
 		
+		.nav{
+		border: 2px solid yellow;
+		height: 100px;
+		background: #A2A2A2;
+		
+		}
+		
 	
 		
 		</style>
@@ -98,7 +128,7 @@
 		<div class="box">
 			<div class="menu-wrap">
 				<nav class="menu-top">
-					<div class="profile"><img src="img/user1.png" alt="Matthew Greenberg"/><span>Matthew Greenberg</span></div>
+					<div class="profile"><img src="img/user1.png" alt="Matthew Greenberg"/><span style="color: white;">Matthew Greenberg</span></div>
 					<div class="icon-list">
 						<a href="#"><i class="fa fa-fw fa-star-o"></i></a>
 						<a href="#"><i class="fa fa-fw fa-bell-o"></i></a>
@@ -119,13 +149,13 @@
 			<button class="menu-button" id="open-button">Open Menu</button>
 			<div class="content-wrap">
 				<div class="content">
-					<header class="codrops-header">
-						<div class="codrops-links">
-							<a class="codrops-icon codrops-icon-prev" href="http://tympanus.net/Development/TabStylesInspiration/"><span>Previous Demo</span></a>
-							<a class="codrops-icon codrops-icon-drop" href="http://tympanus.net/codrops/?p=20100"><span>Back to the Codrops Article</span></a>
-						</div>
-						<h1>불IT났어<span>test중입니다.</span></h1>
-						<p>바로가기 주소입니다.<a href="https://dribbble.com/shots/1663008-Old-Designspiration-Menu-Concept">Dribble shot by Michael Martinho</a></p>
+					<div class="nav">
+						<a href ="login.mc"><img src="/np/img/login2.png" style = "width: 70px; height: 70px; float:right;"/></a>
+					</div>
+					<header class="codrops-header" style="border: 2px solid red;">
+						
+						<h1 class="eng-font">Industrial Fire Detector<span>Real-time status</span></h1>
+						
 					</header>
 					
 					<section>

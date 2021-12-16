@@ -33,6 +33,9 @@ public class DataController {
 		private Logger data_log = 
 				Logger.getLogger("data");
 		
+		private Logger coord_log = 
+				Logger.getLogger("coord");
+		
 		
 		@Resource(name="cdservice")
 		Service<String, CoordinateVO> cdservice;
@@ -42,24 +45,56 @@ public class DataController {
 	
 		}
 	
+
 	    @RequestMapping("/data.mc")
 		@ResponseBody
 		public void data(HttpServletRequest request) throws Exception {
-			String btn = request.getParameter("btn");
+//			String btn = request.getParameter("btn");
 			String gas = request.getParameter("gas");
 			String flame = request.getParameter("flame");
-			String dis = request.getParameter("dis");
+//			String dis = request.getParameter("dis");
 			String temp = request.getParameter("temp");
+	    	String crash = request.getParameter("crash");
+	    	
+			int f_flame = Integer.parseInt(flame);
 			
 			
-	//		System.out.println(btn+","+gas+","+flame+","+dis);
+		//	System.out.println(btn+","+gas+","+flame+","+dis);
 			
-			data_log.debug(btn+","+gas+","+flame+","+dis+","+temp);
-	
-				if(btn.equals(1+"")) {
-					cdservice.remove(btn);
+			data_log.debug(flame+","+temp+","+gas+","+crash);
+			if(f_flame > 0) {
+				try {
+					FcmUtil.sendServer(flame);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
+			}
+			
+//			if(btn.equals(1+"")) {
+//			cdservice.remove(btn);
+//		}
 		}
+	    @RequestMapping("/data2.mc")
+		@ResponseBody
+		public void data2(HttpServletRequest request) throws Exception {
+			
+			String X = request.getParameter("X");
+			String Y = request.getParameter("Y");
+			/*
+			 * int X1 = Integer.parseInt(X); int Y1 = Integer.parseInt(Y);
+			 */
+			System.out.println(X+","+Y);
+			CoordinateVO coord1 = new CoordinateVO(X, Y);
+			cdservice.modify(coord1);
+			
+				
+			
+//			if(btn.equals(1+"")) {
+//			cdservice.remove(btn);
+//		}
+		}
+	    
+	    
 	    
 	    @RequestMapping("/androidpower.mc")
 		@ResponseBody
@@ -98,6 +133,16 @@ public class DataController {
   			out.print(ja.toJSONString());
   			out.close();
   		}
+    	
+    	@RequestMapping("/crddelte.mc")
+    	public String delete(String coordinate) {
+    		try {
+    			cdservice.remove(coordinate);
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
+    		return "redirect:graphics.mc";
+    	}
     
     
     //test용 (sendhttp)
@@ -219,6 +264,8 @@ public class DataController {
 				tdata2.add(num);
 			}
 			jo.put("flame", tdata2);
+
+			
 			
 			
 			
@@ -227,6 +274,44 @@ public class DataController {
 			rconn.close();
 		}
 		
+		@RequestMapping("/androidtemp.mc")
+		@ResponseBody
+		public void androidtemp(HttpServletResponse response) throws IOException, RserveException, REXPMismatchException {
+			response.setContentType("text/json;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			RConnection rconn = new RConnection("192.168.0.29");
+			rconn.setStringEncoding("utf8");
+	
+			rconn.eval("source('C:/logs/final_test.R',encoding='UTF-8')");
+
+			RList list = rconn.eval("b1()").asList();
+			
+			
+			int [] n1 = list.at(0).asIntegers();
+			int [] n2 = list.at(1).asIntegers();
+			int [] n3 = list.at(2).asIntegers();
+			
+			
+			int gas = n1[0];
+			int temp = n2[0];
+			int flame = n3[0];		
+			
+			
+			out.print(gas+","+temp+","+flame);
+			
+			out.close();
+			rconn.close();
+		}
 		
+//		@RequestMapping("/data2.mc")
+//		@ResponseBody
+//		public void data2(HttpServletRequest request) throws Exception {
+////			Double X = Double.parseDouble(request.getParameter("X"));
+//			String X = request.getParameter("X");
+//			String Y = request.getParameter("Y");
+//	    	
+//			System.out.println(X+","+Y);
+//			coord_log.debug(X+","+Y);
+//		}
 		
 	}

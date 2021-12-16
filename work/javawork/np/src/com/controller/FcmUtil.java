@@ -16,10 +16,10 @@ import com.frame.Service;
 
 @Controller
 public class FcmUtil {
-	public final static String API_KEY = "AAAAj786B0A:APA91bEswaGH2EkUHyoeZimlPM6T70o39tf-uIEO93Q2KKB43UlbE3LVaugXvU9Fdb2gj3siFR218BSvdyFIPQN73_pmm_oynYPGbUFRZpbN-kFrrnVXGAdFesdvhk5-IfMz-r9aK_mw"; //서버키 값
+	public final static String API_KEY = "AAAA1VVZLSw:APA91bFeZYPNf8ZCUYBVRcpM_XzeiDDR8k1hWujBXSPhalQcC_BknrVB3aHg_ijA5ryBSlk4-mwvjvBIu68nmkmc2-9LpuvADYX_2fxNPZZ8w5wCxtlGggj87B-Sg3z_94n0ayPj7Whx"; //서버키 값
 	public final static String URL = "https://fcm.googleapis.com/fcm/send";
 
-	public static void sendServer(String LED) throws Exception{
+	public static void sendServer(String flame) throws Exception{
 		URL url = new URL(URL);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setDoOutput(true);
@@ -30,12 +30,13 @@ public class FcmUtil {
 		conn.setDoOutput(true);
 
 		JSONObject notification = new JSONObject();
-		notification.put("title", "LED 상태 변동");
-		notification.put("body", "LED ON");
+		notification.put("title", "화재 발생!!!");
+		notification.put("body", "긴급상황 알림!!! \n 화재발생!!!!");
+		notification.put("contents", "18층 사무실 화재 발생 건물 밖으로 피신");
 		
 		JSONObject body = new JSONObject();
 		body.put("notification", notification);
-		body.put("to", "cw3Pu9h7Q3eTygl_PtxbQ3:APA91bH-X4SYrm3eXICSqTSuuhciDYAkhVJB4byBOqhUWLwnouEdpE20SzmJmUuBVne4VAHLWz3KRb9DwVm9tW106yiloYUJt_TZQ35EziSC1iWbtOdBIL2XE2aE9ozDNI_M5XOW6b74"); // 토큰값
+		body.put("to", "fUgb9-D3SlO3X3P9-1XgLV:APA91bEPOnZ_d62DGfewfOJug0_EjvCCLfLnfxAZRCxvDzErinXGKHa3QKgtZ5DsAV_GH72iLxS-DtjbJLH7_Zsgj3BhnKf9vMbB0aTpoapCUfSPqYRNvf7Ajk3shxamFtbDKxH79oA8"); // 토큰값
 
 		OutputStream os = conn.getOutputStream();
 
