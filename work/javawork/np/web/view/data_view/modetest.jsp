@@ -29,17 +29,18 @@ form{
 	float: left;
 }
 .test{
-	align-content: center;
-	margin-left: 740px;
+	
+	margin: auto;
+	margin-left: 800px;
 
 }
 </style>
 
 			<div class = "test">
-				<form  name="mode1" onclick="click()" method='GET'>
+				<!-- <form  name="mode1" onclick="click()" method='GET'>
 				      <input type = 'hidden' name='MODE' value='mode1'>
 				      <input class = "btn1" type='submit' value='Automatic Patrol' />
-				</form>
+				</form> -->
 				
 				<form  name="mode2" onclick="click()" method='GET'>
 				      <input type = 'hidden' name='MODE' value='mode2'>
