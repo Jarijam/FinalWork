@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,6 +40,25 @@ public class MainController {
 		public MainController() {
 			client = new MyMqtt_Pub_client();
 			
+		}
+		
+		@RequestMapping("/uadd.mc")
+		public ModelAndView add(ModelAndView mv) {
+			mv.setViewName("register");
+			return mv;
+		}
+		@Autowired
+		@Qualifier("userservice")
+		Service<String, UserVO> service;
+		
+		@RequestMapping("/uaddimpl.mc")
+		public String addimpl(UserVO user) {
+			try {
+				service.register(user);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return "redirect:main.mc";
 		}
 		
 		@RequestMapping("/login.mc")
@@ -174,10 +195,7 @@ public class MainController {
 			mv.addObject("center","test_view/testview2");
 	    	mv.setViewName("main");
 			return mv;
-			}
-		
-	    
-	    
+			}    
 	}
 	
 	  
