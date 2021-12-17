@@ -46,6 +46,8 @@ public class MapActivity extends AppCompatActivity {
             public void onMapReady(GoogleMap googleMap) {
                 Log.d("Map", "지도 준비됨.");
                 map = googleMap;
+                LatLng latLng = new LatLng(37.50958477466319, 127.05552514757225);
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
                 if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext()
                         , android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     return;
@@ -78,13 +80,13 @@ public class MapActivity extends AppCompatActivity {
                 .onGranted(new Action<List<String>>() {
                     @Override
                     public void onAction(List<String> permissions) {
-                        showToast("허용된 권한 갯수 : " + permissions.size());
+                        showToast("허용");
                     }
                 })
                 .onDenied(new Action<List<String>>() {
                     @Override
                     public void onAction(List<String> permissions) {
-                        showToast("거부된 권한 갯수 : " + permissions.size());
+                        showToast("거부");
                     }
                 })
                 .start();
