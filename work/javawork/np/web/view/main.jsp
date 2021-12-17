@@ -35,6 +35,13 @@
 		<![endif]-->
 		
 		<style type="text/css">
+		@import
+			url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap')
+			;
+		
+		@import
+			url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&family=Titillium+Web&display=swap')
+			;
 		.warning {
 			width: 100px;
 			height: 100px;
@@ -43,7 +50,9 @@
 			width: 100px;
 			height: 100px;
 		}
-		
+		h2 {
+			font-family: 'Titillium Web', sans-serif;
+		}
 		
 		
 		h5 {

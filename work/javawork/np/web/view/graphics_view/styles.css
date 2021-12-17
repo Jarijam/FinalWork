@@ -10,7 +10,7 @@
 }  */ 
 
 #canvas {
-	margin-left : 100px;
 	background-color: #eee;
 	border: 5px solid #333;
+	margin-left: 200px;
 }
