@@ -258,5 +258,57 @@ public class ChartController {
 		rconn.close();
 	}
 	
+	@RequestMapping("/areadata.mc")
+	@ResponseBody
+	public void areadata(HttpServletResponse response) throws IOException, RserveException, REXPMismatchException {
+		response.setContentType("text/json;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		RConnection rconn = new RConnection("192.168.0.29");
+		rconn.setStringEncoding("utf8");
+
+		rconn.eval("source('C:/logs/final_test.R',encoding='UTF-8')");
+		// R의 계산 결과를 리스트로 리턴 받음(소스를 로딩하고 함수를 호출하는 과정, 어레이리스트아님)
+		RList list = rconn.eval("b3()").asList();
+		RList list2 = rconn.eval("b4()").asList();
+
+
+		// 리스트의 첫 번째 요소를 double 배열로 리턴
+		double[] n1 = list.at(0).asDoubles();
+		double[] n2 = list.at(1).asDoubles();
+		double[] n3 = list.at(2).asDoubles();
+		
+		double[] nn1 = list2.at(0).asDoubles();
+		double[] nn2 = list2.at(1).asDoubles();
+		double[] nn3 = list2.at(2).asDoubles();
+
+		if(n1 == nn1) {
+			
+		}
+		
+		JSONObject jo = new JSONObject();
+		JSONArray tdata = new JSONArray();
+		for(double num:n1) {
+			tdata.add(num);
+		}
+		jo.put("time",tdata);
+		
+		JSONArray tdata2 = new JSONArray();
+		for(double num:n2) {
+			tdata2.add(num);
+		}
+		jo.put("temp", tdata2);
+		
+		JSONArray tdata3 = new JSONArray();
+		for(double num:n3) {
+			tdata3.add(num);
+		}
+		jo.put("gas", tdata3);
+		
+		
+		out.print(jo.toJSONString());
+		out.close();
+		rconn.close();
+	}
+	
 	
 }
