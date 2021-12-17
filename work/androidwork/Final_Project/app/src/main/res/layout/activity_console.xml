@@ -79,7 +79,6 @@
                 android:layout_gravity="right"
                 android:text="Data OFF"
                 android:backgroundTint="@color/black"/>
->
         </LinearLayout>
 
         <LinearLayout
