@@ -45,6 +45,7 @@
 		}
 		
 		
+		
 		h5 {
 			margin : 20px;
 			font-family: 'Titillium Web', sans-serif;
@@ -124,7 +125,7 @@
 		
 		</style>
 	</head>
-	<body>
+	<body onload="time()">
 		<div class="box">
 			<div class="menu-wrap">
 				<nav class="menu-top">
