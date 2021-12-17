@@ -128,7 +128,7 @@
 		<div class="box">
 			<div class="menu-wrap">
 				<nav class="menu-top">
-					<div class="profile"><img src="img/user1.png" alt="Matthew Greenberg"/><span style="color: white;">Matthew Greenberg</span></div>
+					<div class="profile"><img src="img/cap01.jpg" alt="Matthew Greenberg"/><span style="color: white;">2조프로젝트</span></div>
 					<div class="icon-list">
 						<a href="#"><i class="fa fa-fw fa-star-o"></i></a>
 						<a href="#"><i class="fa fa-fw fa-bell-o"></i></a>
@@ -143,7 +143,7 @@
 					<a href="graphics.mc">Canvas Test</a>
 					<a href="testgraph2.mc">testgrapgh2</a>
 					<a href="testgraph3.mc">testgrapgh3</a>
-					<a href="#">About Us</a>
+					<a href="test01.mc">테스트중입니다</a>
 				</nav>
 			</div>
 			<button class="menu-button" id="open-button">Open Menu</button>

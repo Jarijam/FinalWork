@@ -161,6 +161,21 @@ public class MainController {
 			mv.setViewName("main");
 			return mv;
 		}
+		@RequestMapping("/test01.mc")
+		public ModelAndView test01() {
+			ModelAndView mv = new ModelAndView();  
+			mv.addObject("center","test_view/testview");
+	    	mv.setViewName("main");
+			return mv;
+			}
+		@RequestMapping("/test02.mc")
+		public ModelAndView test02() {
+			ModelAndView mv = new ModelAndView();  		
+			mv.addObject("center","test_view/testview2");
+	    	mv.setViewName("main");
+			return mv;
+			}
+		
 	    
 	    
 	}
