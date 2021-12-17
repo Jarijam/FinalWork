@@ -57,8 +57,9 @@
 							<div class="login100-form-bgbtn"></div>
 							<button class="login100-form-btn" value="LOGIN">
 								Login
-							</button>
+							</button>							
 						</div>
+						<a href="uadd.mc">register</a>					
 					</div>
 				</form>
 			</div>
