@@ -43,12 +43,15 @@
 			url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&family=Titillium+Web&display=swap')
 			;
 		.warning {
-			width: 100px;
-			height: 100px;
+		/* 	width: 100px; */
+			/* height: 100px; */
+			size: 10%;
+			display: inline-block;
 		}
 		.default {
-			width: 100px;
-			height: 100px;
+			/* width: 100px; */
+			/* height: 100px; */
+			display: inline-block;
 		}
 		h2 {
 			font-family: 'Titillium Web', sans-serif;
@@ -130,6 +133,11 @@
 		
 		}
 		
+		.imgtest{
+		width: 30px;
+		height: 30px;
+		}
+		
 	
 		
 		</style>
@@ -138,7 +146,7 @@
 		<div class="box">
 			<div class="menu-wrap">
 				<nav class="menu-top">
-					<div class="profile"><img src="img/cap01.jpg" alt="Matthew Greenberg"/><span style="color: white;">2조프로젝트</span></div>
+					<div class="profile"><img class="imgtest" src="img/cap01.jpg" alt="Matthew Greenberg"/><span style="color: white;">2조프로젝트</span></div>
 					<div class="icon-list">
 						<a href="#"><i class="fa fa-fw fa-star-o"></i></a>
 						<a href="#"><i class="fa fa-fw fa-bell-o"></i></a>

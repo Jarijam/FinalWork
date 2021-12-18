@@ -133,7 +133,7 @@ public class MainController {
 				BufferedReader in = null;
 				PrintWriter out = null;
 				try {
-					server = new Socket("192.168.0.158", 12346);
+					server = new Socket("192.168.0.29", 12346);
 					System.out.println("서버에 접속 성공");
 					//네트워크를 통해서 입출력을 하기 위한 IO스트림객체를 생성
 					in = new BufferedReader(new InputStreamReader(server.getInputStream()));
