@@ -23,7 +23,7 @@
 
 
 img {
-	size: 30px;
+	/* size: 30px; */
 }
 
 .cbox {
@@ -34,6 +34,7 @@ img {
 
 .cbox-body {
 	text-decoration: underline;
+	text-align: center;
 }
 
 .tbox {
@@ -43,12 +44,14 @@ img {
 }
 
 .tbox-head {
-	
+	text-align: center;
+	margin-top: 30px;
 }
 
 .tbox-body {
 	margin: auto;
 	height: 300px;
+	text-align: center;
 }
 
 .wrap {
@@ -225,7 +228,7 @@ img {
 						$('#flame').html("<br/><img class='warning' src='/np/img/warning.png'>");
 					}else if ( item.flame < 65){
 						/* $('#flame').html(item.flame+"<br/><img class='default' src='/np/img/default.png'>"); */
-						$('#flame').html("<br/><img class='default' src='/np/img/default.png'>");
+						$('#flame').html("<br/><img class='default' src='/np/img/security.png'>");
 					}
 					
 					
