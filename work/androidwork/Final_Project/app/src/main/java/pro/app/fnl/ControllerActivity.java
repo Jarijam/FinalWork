@@ -73,7 +73,7 @@ public class ControllerActivity extends AppCompatActivity {
         webSettings.setUseWideViewPort(true);
         webSettings.setBuiltInZoomControls(false);
         webSettings.setSaveFormData(false);
-        cam.loadUrl("http://192.168.0.18/");
+        cam.loadUrl("http://192.168.0.15/mjpeg/1");
 
         //bluetooth
         String[] permission_list = {
