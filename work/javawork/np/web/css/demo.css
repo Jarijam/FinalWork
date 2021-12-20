@@ -23,25 +23,16 @@ body {
 	font-family: 'Raleway', Arial, sans-serif;
 }
 
-a {
-	color: #4e4a46;
-	text-decoration: none;
-	outline: none;
-}
 
-a:hover, a:focus {
-	color: #c94e50;
-	outline: none;
-}
 
 button:focus {
 	outline: none;
 }
 
-section {
+/* section {
 	padding: 1em;
 	text-align: center;
-}
+} */
 
 /* Header */
 .codrops-header {

@@ -1,7 +1,9 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login</title>
+	<title>Update</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -31,36 +33,26 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" action="loginimpl.mc" method="post">
+				<form class="login100-form validate-form" action="uupdateimpl.mc" method="post">
 					<span class="login100-form-title p-b-26">
-						Welcome
+						회원수정 & 탈퇴1
 					</span>
 					<span class="login100-form-title p-b-48">
-						<img src="/np/img/logo.png">
+						<img src="/np/img/cap01.jpg">
 					</span>
-
-					<div class="wrap-input100 validate-input" data-validate = "check your ID">
-						<input class="input100" type="text" name="id">
-						<span class="focus-input100" data-placeholder="Id"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<span class="btn-show-pass">
-							<i class="zmdi zmdi-eye"></i>
-						</span>
-						<input class="input100" type="password" name="pwd">
-						<span class="focus-input100" data-placeholder="Password"></span>
-					</div>
-
-					<div class="container-login100-form-btn">
-						<div class="wrap-login100-form-btn">
-							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn" value="LOGIN">
-								Login
-							</button>							
+						<div class="wrap-input100 validate-input" data-validate = "check your ID">
+							<span class="focus-input100"></span>
+							ID : <input type="text" name="id" value="${user.id }"  readonly="readonly">						
 						</div>
-						<a href="uadd.mc">register</a>					
-					</div>
+						<div class="wrap-input100 validate-input" data-validate="Enter password">
+							<span class="btn-show-pass">
+								<i class="zmdi zmdi-eye"></i>
+							</span>
+							PWD : <input type="text" name="pwd" value="${user.pwd }">
+							<span class="focus-input100"></span>		
+						</div>	
+						<input type="submit" value="update"><br>
+						<button>sd</button>							
 				</form>
 			</div>
 		</div>

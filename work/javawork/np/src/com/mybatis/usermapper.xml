@@ -5,11 +5,11 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.mapper.UserMapper">
 	
 	<insert id="insert" parameterType="user">
-		INSERT INTO MEMBERS VALUES (#{id},#{pwd},#{img})	
+		INSERT INTO MEMBERS VALUES (#{id},#{pwd},'a')	
 	</insert>
 	
 	<update id="update" parameterType="user">
-		UPDATE MEMBERS SET PWD=#{pwd},NAME=#{img} WHERE ID=#{id}
+		UPDATE MEMBERS SET pwd=#{pwd} WHERE ID=#{id}
 	</update>
 	
 	<delete id="delete" parameterType="String">
