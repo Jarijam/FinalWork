@@ -148,7 +148,7 @@
 				<nav class="menu-top">
 					<div class="profile"><img class="imgtest" src="img/cap01.jpg" alt="Matthew Greenberg"/><span style="color: white;">2조프로젝트</span></div>
 					<div class="icon-list">
-						<a href="#"><i class="fa fa-fw fa-star-o"></i></a>
+						<a href="update.mc">회원정보 수정<i class="fa fa-fw fa-star-o"></i></a>
 						<a href="#"><i class="fa fa-fw fa-bell-o"></i></a>
 						<a href="#"><i class="fa fa-fw fa-envelope-o"></i></a>
 						<a href="#"><i class="fa fa-fw fa-comment-o"></i></a>
