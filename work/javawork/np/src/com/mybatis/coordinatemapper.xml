@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</insert>
 	
 	<update id="update" parameterType="coordinate">
-		UPDATE COORDINATE SET X = (#{X}), Y = (#{Y}) WHERE COORD_NO = 1
+		UPDATE COORDINATE SET X = (#{X}), Y = (#{Y}) WHERE COORD_NO = 2
 	</update>
 	
 	<select id="select" parameterType="String" 

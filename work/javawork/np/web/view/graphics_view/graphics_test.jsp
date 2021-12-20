@@ -67,14 +67,24 @@
 		               } */  
 		            	/* codi(data[1].X,data[1].Y); */
 		            	codi(data);
-		               
 		            }
 		         });
-		      };	      
+		      };
+	      function getSensor() {
+	 	        $.ajax({
+		            url:'recentsensor.mc',
+		            success:function(sensor){
+		            	alert(sensor.temp);
+		            	$('#test').html(sensor.temp);
+		            }
+		         });
+		      };
+		  var sensor = getSensor();
 		  var data = getData();
 		  $(document).ready(function(){
 				setInterval(function(){
 					getData();
+					getSensor();
 				}, 5000);
 			});		
 			}); 		
@@ -87,6 +97,6 @@
 			</canvas>
 		</div>
 		<a href = "crddelte.mc">DB삭제1</a>
-	
+		<div id="test"></div>
 
 </body>	
