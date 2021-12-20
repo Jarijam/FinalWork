@@ -37,6 +37,11 @@ public class MainController {
 		
 		MyMqtt_Pub_client client;
 		
+		 @Resource(name="cdservice")
+		   Service<String, CoordinateVO> cdservice;
+		   @Resource(name="userservice")
+		   Service<String, UserVO> userservice;
+		
 		public MainController() {
 			client = new MyMqtt_Pub_client();
 			
@@ -47,18 +52,53 @@ public class MainController {
 			mv.setViewName("register");
 			return mv;
 		}
-		@Autowired
-		@Qualifier("userservice")
-		Service<String, UserVO> service;
+		
 		
 		@RequestMapping("/uaddimpl.mc")
 		public String addimpl(UserVO user) {
 			try {
-				service.register(user);
+				userservice.register(user);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			return "redirect:main.mc";
+		}
+		
+		@RequestMapping("/update.mc")
+		public ModelAndView update(ModelAndView mv,String id) {
+			UserVO dbuser = null;
+			try {
+				System.out.println("update모델엔뷰 try왔니?");
+				
+				dbuser = userservice.get(id);
+				
+				mv.addObject("uuser", dbuser);
+				mv.addObject("center","update");
+				mv.setViewName("main");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return mv;
+		}
+		@RequestMapping("/uupdateimpl.mc")
+		public String updateimpl(UserVO user) {
+			try {
+				userservice.modify(user);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+//			String id = user.getId();
+			return "redirect:main.mc";
+		}
+		
+		@RequestMapping("/udel.mc")
+		public String delete(String id) {
+			try {
+				userservice.remove(id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return "redirect:ulist.mc";
 		}
 		
 		@RequestMapping("/login.mc")
@@ -69,10 +109,7 @@ public class MainController {
 			return mv;
 		}
 	
-	   @Resource(name="cdservice")
-	   Service<String, CoordinateVO> cdservice;
-	   @Resource(name="userservice")
-	   Service<String, UserVO> userservice;
+	  
 	
 	   @RequestMapping("/main.mc")
 	   public ModelAndView main() {

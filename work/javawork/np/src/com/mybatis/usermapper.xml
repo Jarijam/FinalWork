@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</insert>
 	
 	<update id="update" parameterType="user">
-		UPDATE MEMBERS SET PWD=#{pwd},NAME=#{img} WHERE ID=#{id}
+		UPDATE MEMBERS SET pwd=#{pwd} WHERE ID=#{id}
 	</update>
 	
 	<delete id="delete" parameterType="String">
