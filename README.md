@@ -1,7 +1,7 @@
 
 ## Android  -  Native App
 
-<img src="img\Logo.png" style="zoom: 80%;" />
+                                                          <img src="img\Logo.png" style="zoom: 80%;" />
 
 ### 목차
 
