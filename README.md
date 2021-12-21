@@ -1,7 +1,7 @@
 
 ## Android  -  Native App
 
-<img src="C:\Users\a\Desktop\파이널프로젝트\Logo.png" style="zoom: 80%;" />
+<img src="img\Logo.png" style="zoom: 80%;" />
 
 ### 목차
 
@@ -42,17 +42,16 @@
 ## 3. 구성 및 기능
 
 
-
-		### 3.1 구성
+### 3.1 구성
 
 #### Console
 
-![``](C:\Users\a\Desktop\파이널프로젝트\11.PNG)
+![``](img/console1.PNG)
 
 - FCM으로 비상 상황 전파 및 상단바 알림으로 상황 알림
 - 긴급 통화 기능
 
-![](C:\Users\a\Desktop\파이널프로젝트\2.PNG)
+![``](img/console2.PNG)
 
 - HTTP 통신으로 받아온 센서 데이터값을 실시간으로 표시
 - Google Map을 사용하여 현 관리자 위치 표시
@@ -62,7 +61,7 @@
 
 #### Controller
 
-![](C:\Users\a\Desktop\파이널프로젝트\22.PNG)
+![``](img/controller.PNG)
 
 - IOT장비와 블루투스 연결을 통한 제어
 - 필요시 무선으로 장비를 조정하여 관리 
@@ -74,7 +73,7 @@
 
 #### web view
 
-![](C:\Users\a\Desktop\파이널프로젝트\3333.PNG)
+![``](img/webview.PNG)
 
 
 
