@@ -205,18 +205,10 @@ img {
 		},5000);
 	});
 	
-	var imgArray = new Array();
-	imgArray[0] = "warning.png";
-	imgArray[1] = "default.png";
+	
 	
 	
 	function getData3() {
-		
-		var imgArray = new Array();
-		imgArray[0] = "warning.png";
-		imgArray[1] = "default.png";
-		
-		var defalutimg = document.getElementById('warning');
 		
 		$.ajax({
 			url:'flame.mc',
@@ -226,10 +218,8 @@ img {
 				$(data).each(function(idx,item){
 					console.log(item.flame);
 					if( item.flame == 1){
-						/* $('#flame').html(item.flame+"<br/><img class='warning' src='/np/img/warning.png'>"); */
 						$('#flame').html("<br/><img class='warning' src='/np/img/warning3.png'>");
 					}else if ( item.flame == 0){
-						/* $('#flame').html(item.flame+"<br/><img class='default' src='/np/img/default.png'>"); */
 						$('#flame').html("<br/><img class='default' src='/np/img/security2.png'>");
 					}
 					
@@ -482,9 +472,7 @@ img {
 					    <div class="tbox"  >
 						    <h5 class="tbox-head" style="background-color: blue;"  >Flame Detection&nbsp;&nbsp;
 						    </h5>
-						
 							    <div class="tbox-body">
-							 
 									 <a id="flame"></a> 
 								</div>
 						</div>
