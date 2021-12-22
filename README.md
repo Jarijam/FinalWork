@@ -574,13 +574,14 @@ JsonObjectRequest request = new JsonObjectRequest(
 
 #### 데이터 받아오기
 
-<img src="img\http1.PNG" style="zoom: 85%;" /><img src="C:\Users\a\Desktop\http2.PNG" alt="http2" style="zoom: 89%;" />
+<img src="img\http1.PNG" style="zoom: 85%;" />
+<img src="img\http2.PNG" alt="http2" style="zoom: 89%;" />
 
 - IOT장비에서 측정중인 센서값을 받아오기 위해 클래스 생성
 
 
 
-![](img\http3.PNG)
+![``](img\http3.PNG)
 
 - JSON형식으로 수집한 데이터를 각각의 뷰로 지정해주고 값에 따라 이미지를 변화 할 수 있게 설정 
 
@@ -590,13 +591,13 @@ JsonObjectRequest request = new JsonObjectRequest(
 
 #### Google Map
 
-![](img\mapapi.PNG)
+![``](img\mapapi.PNG)
 
 - Google Maps platform에서 API키 발급 및 SDK등록
 
 
 
-![](img\mapmanifest.PNG)
+![``](img\mapmanifest.PNG)
 
 - Manifest에 발급받은 API키를 등록
 
@@ -644,13 +645,13 @@ AndPermission.with(this)
 
 
 
-![](img\location.PNG)
+![``](img\location.PNG)
 
 - 현재위치를 찾고 지도에 현위치를 표시
 
 
 
-<img src="img\map.png" style="zoom: 33%;" />
+<img src="img\map.png" style="zoom: 30%;" />
 
 
 
@@ -688,9 +689,9 @@ public void onClickButtonPaired(View view){
 
 
 
-![](img\connectbluetooth.PNG)
+![``](img\connectbluetooth.PNG)
 
-![](img\bluetooth_soket.PNG)
+![``](img\bluetooth_soket.PNG)
 
 - 선택된 기기의 이름과 address를 가져오도록 설정
 
@@ -700,13 +701,13 @@ public void onClickButtonPaired(View view){
 
   
 
-![](img\bluetooth_connect.PNG)
+![``](img\bluetooth_connect.PNG)
 
 - Bluetooth연결을 위한 connectedThread 클래스 생성
 
 
 
-![](img\sendbluetooth.PNG)
+![``](img\sendbluetooth.PNG)
 
 - 블루투스로 문자열을 IOT기기에 전송하여 기기를 제어
 
