@@ -29,19 +29,18 @@ form{
 	float: left;
 }
 .test{
+	text-align: center;
 	
-	margin: auto;
-	margin-left: 800px;
 
+}
+.test2 {
+	display: inline-block;
 }
 </style>
 
 			<div class = "test">
-				<!-- <form  name="mode1" onclick="click()" method='GET'>
-				      <input type = 'hidden' name='MODE' value='mode1'>
-				      <input class = "btn1" type='submit' value='Automatic Patrol' />
-				</form> -->
 				
+				<div class= "test2">
 				<form  name="mode2" onclick="click()" method='GET'>
 				      <input type = 'hidden' name='MODE' value='X'>
 				      <input class = "btn2" type='submit' value='Obstacle Detection' />
@@ -51,6 +50,7 @@ form{
 				      <input type = 'hidden' name='MODE' value='Y'>
 				      <input class = "btn3" type='submit' value='Manual Operation' />
 				</form>
+				</div>
 			</div><br/><br/>
 				
 			

@@ -10,12 +10,7 @@
 			     const canvas = document.getElementById('canvas');
 			 	 const ctx = canvas.getContext('2d');
 			 	 
-			 	 const url = "/np/img/car.png";
-			 	 const img = new Image();
-			 	 
-			 	 img.addEventListener('load',function(){
-			 		 ctx.drawImage(this, data[0].X, data[0].Y, 300, 200);
-			 	 });
+			 
 			 	 
 			 	
 				
@@ -27,20 +22,20 @@
 			 	  		ctx.closePath();
 			 	  		//새로운 구역 값 들어올 시 영역 표시
 				 	    ctx.beginPath();
-						ctx.fillStyle = '#CDDCE0';
+						ctx.fillStyle = '#FB0606';
 						ctx.rect(data[0].X,data[0].Y,300,200);
 						if(data[0].X == 0 & data[0].Y == 0) {
-							$('#location').html('정원이형집')
+							$('#location').html('1구역')
 						} else if(data[0].X == 300 & data[0].Y == 0) {
-							$('#location').html('해규집')
+							$('#location').html('2구역')
 						} else if(data[0].X == 0 & data[0].Y == 200) {
-							$('#location').html('승훈이집')
+							$('#location').html('3구역')
 						} else if(data[0].X == 300 & data[0].Y == 200) {
-							$('#location').html('준범이집')
+							$('#location').html('4구역')
 						} else if(data[0].X == 0 & data[0].Y == 400) {
-							$('#location').html('강남역')
+							$('#location').html('5구역')
 						} else if(data[0].X == 300 & data[0].Y == 400) {
-							$('#location').html('멀티캠퍼스')
+							$('#location').html('6구역')
 						} 
 						ctx.fill();						
 						ctx.closePath();
@@ -66,11 +61,7 @@
 	 	         $.ajax({
 		            url:'crddata.mc',
 		            success:function(data){
-		           /* for (var i=0; i < data.length; i++) {
-		            	   codi(data[i].X,data[i].Y);
-		            	   console.log(data[i]);
-		               } */  
-		            	/* codi(data[1].X,data[1].Y); */
+		         
 		            	codi(data);
 		               
 		            }
@@ -83,6 +74,11 @@
 	                   
 	                     $('#areatemp').html(sensor.temp+"°C");
 	                     $('#areagas').html(sensor.gas+"ppm");
+	                     if( sensor.flame == 1){
+	                    	 $('#areaflame').html("WARNING!!!!!")
+	                     }else if(sensor.flame == 0){
+	                    	 $('#areaflame').html("SAFE")
+	                     }
 	                  }
 	               });
 	            };
@@ -92,7 +88,7 @@
 					 setInterval(function(){
 					 getData();
 					 getSensor();
-					}, 500);
+					}, 1000);
 				});		
 			}); 
 		
@@ -210,7 +206,7 @@
 		
 	</style>
 	<div >
-		<h1 class = "areahead">Test</h1>
+		<h1 class = "areahead">Current Status</h1>
 	</div>		
 	<div >
 		<div>
@@ -231,7 +227,7 @@
 					    <li class="list-group-item"><p class="t2">Sensor</p></li>
 					    <li class="list-group-item"><img src="/np/img/purplesquare.png">&nbsp;Temperature :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="areatemp"></span></li>
 					    <li class="list-group-item"><img src="/np/img/limesquare.png">&nbsp;Gas : &nbsp;<span id="areagas"></span></li>
-					    <li class="list-group-item"><img src="/np/img/pinksquare.png">&nbsp;Flame : &nbsp;<span id="areaflame">Warning!!!!</span></li>					    
+					    <li class="list-group-item"><img src="/np/img/pinksquare.png">&nbsp;Flame : &nbsp;<span id="areaflame"></span></li>					    
  				  	</ul>
  				  	</div>
 					<div id = "canvas_body" class="test002">
