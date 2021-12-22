@@ -20,6 +20,8 @@
         android:allowBackup="true"
         android:icon="@mipmap/final_luncher"
         android:label="Fire IT Patrol"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/final_luncher_round"
         android:supportsRtl="true"
