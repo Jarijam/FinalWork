@@ -92,6 +92,27 @@
 ![``](img/oracle.PNG)
 
 ![``](img/oracle2.PNG)
+
+
+이클립스의 데이터베이스 세팅(XML)
+
+![``](img/oracle3.PNG)
+
+데이터를 입력하거나 조회 요청이 왔을 때, 입력된 데이터나 조회하는 조건을 VO에 담아서 DAO에 요청하면 DAO는 저장소(DB)로부터 데이터를 입력하거나 조회한 후 그 결과를 돌려주게 하기 위한 작업
+
+![``](img/oracle4.PNG)
+![``](img/oracle5.PNG)
+![``](img/oracle6.PNG)
+
+controller
+
+![``](img/oracle7.PNG)
+
+mapper
+
+![``](img/oracle8.PNG)
+
+![``](img/oracle9.PNG)
 -----
 
 ## R
