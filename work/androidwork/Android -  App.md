@@ -212,5 +212,71 @@ JsonObjectRequest request = new JsonObjectRequest(
 
 #### Google Map
 
+![](C:\Users\a\Desktop\mapapi.PNG)
+
+- Google Maps platform에서 API키 발급 및 SDK등록
+
+
+
+![](C:\Users\a\Documents\GitHub\FinalWork\img\mapmanifest.PNG)
+
+- Manifest에 발급받은 API키를 등록
+
+
+
+```java
+ public void onMapReady(GoogleMap googleMap) {
+                Log.d("Map", "지도 준비됨.");
+                map = googleMap;
+                LatLng latLng = new LatLng(37.50958477466319, 127.05552514757225);
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(),android.Manifest.permission.ACCESS_FINE_LOCATION)                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext()
+                , android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+                }
+                map.setMyLocationEnabled(true);
+```
+
+- 지도가 처음 실행되고 보여지는 위치를 좌표로 지정
+
+
+
+```java
+AndPermission.with(this)
+                .runtime()
+                .permission(
+                        Permission.ACCESS_FINE_LOCATION,
+                        Permission.ACCESS_COARSE_LOCATION)
+                .onGranted(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> permissions) {
+                        showToast("허용");
+                    }
+                })
+                .onDenied(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> permissions) {
+                        showToast("거부");
+                    }
+                })
+                .start();
+```
+
+- 위치권한은 위험 권한이므로 코드상에서 권한을 승인 하여준다
+
+
+
+![](C:\Users\a\Documents\GitHub\FinalWork\img\location.PNG)
+
+- 현재위치를 찾고 지도에 현위치를 표시
+
+
+
+<img src="C:\Users\a\Documents\GitHub\FinalWork\img\map.png" style="zoom: 33%;" />
+
+
+
+#### Bluetooth
+
 
 
