@@ -14,7 +14,7 @@
 
 ## Arduino
 
-## Android  -  Native App
+## Android 
 
 <img src="img\app_logo.png" style="zoom: 80%;" />
 
