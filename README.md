@@ -63,7 +63,9 @@
 
 -----
 
-## Web![``](img/member_delete.PNG)
+## Web
+
+![``](img/member_delete.PNG)
 
 <h4>회원 수정 - 회원 수정 기능(본인의 아이디가 고정으로 입력되어 있도록 설정)</h4>
 
