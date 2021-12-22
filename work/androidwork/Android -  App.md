@@ -34,8 +34,6 @@
 
 ## 3. 구성 및 기능
 
-
-
 ### 3.1 구성
 
 #### Console
@@ -277,6 +275,80 @@ AndPermission.with(this)
 
 
 #### Bluetooth
+
+```java
+ btAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (!btAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }
+        btArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        deviceAddressArray = new ArrayList<>();
+        blue_name.setAdapter(btArrayAdapter);
+        blue_name.setOnItemClickListener(new myOnItemClickListener());
+```
+
+```java
+public void onClickButtonPaired(View view){
+        btArrayAdapter.clear();
+        if(deviceAddressArray!=null && !deviceAddressArray.isEmpty()){ deviceAddressArray.clear(); }
+        pairedDevices = btAdapter.getBondedDevices();
+        if (pairedDevices.size() > 0) {
+            for (BluetoothDevice device : pairedDevices) {
+                String deviceName = device.getName();
+                String deviceHardwareAddress = device.getAddress(); // MAC address
+                btArrayAdapter.add(deviceName);
+                deviceAddressArray.add(deviceHardwareAddress);
+            }
+        }
+    }
+```
+
+- 디바이스에 기존에 페어링 되어있는 블루투스 기기 목록을 불러와서 리스뷰에 출력
+
+
+
+![](C:\Users\a\Documents\GitHub\FinalWork\img\connectbluetooth.PNG)
+
+![](C:\Users\a\Documents\GitHub\FinalWork\img\bluetooth_soket.PNG)
+
+- 선택된 기기의 이름과 address를 가져오도록 설정
+
+- 선택된 기기와의 소켓을 만들고 연결을 시도
+
+- 연결이 정상적으로 완료되면 thread를 통하여 통신을 시작
+
+  
+
+![](C:\Users\a\Documents\GitHub\FinalWork\img\bluetooth_connect.PNG)
+
+- Bluetooth연결을 위한 connectedThread 클래스 생성
+
+
+
+![](C:\Users\a\Documents\GitHub\FinalWork\img\sendbluetooth.PNG)
+
+- 블루투스로 문자열을 IOT기기에 전송하여 기기를 제어
+
+
+
+#### Web View
+
+```java
+WebSettings webSettings = web.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN); // 컨텐츠 사이즈 맞추기
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용
+        web.setWebViewClient(new WebViewClient());
+        webSettings.setUseWideViewPort(true);
+        webSettings.setBuiltInZoomControls(false);
+        webSettings.setSaveFormData(false);
+        web.loadUrl("http://192.168.0.29:80/np/recentdata.mc");
+```
+
+- Web view를 실행 시키기 위한 설정
 
 
 
