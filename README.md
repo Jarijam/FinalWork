@@ -94,7 +94,121 @@
 ### 3.2 기능 상세
 
 #### FCM
-  - 
+
+``` java
+<service
+    android:name=".MyFirebaseMessagingService"
+    android:enabled="true"
+    android:exported="true"
+    android:stopWithTask="false">
+   <intent-filter>
+     <action android:name="com.google.firebase.MESSAGING_EVENT" />
+   </intent-filter>
+</service>	
+```
+
+- FCM 사용을 위한 Manifest 초기 등록
+
+
+
+``` java
+notificationManager = NotificationManagerCompat.from(ConsoleActivity.this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel mChannel = new NotificationChannel(channelId, channelName, importance);
+            notificationManager.createNotificationChannel(mChannel);
+        }
+        Intent intent2 = new Intent(ConsoleActivity.this, ConsoleActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(ConsoleActivity.this, 101, intent2, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(ConsoleActivity.this, "channel")
+                .setSmallIcon(R.drawable.fireman)
+                .setContentTitle(title)
+                .setContentText(body)
+                .setContentText(contents)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .setVibrate(new long[]{1000, 1000});
+        notificationManager.notify(0, mBuilder.build());
+```
+
+- 상단바로 알림을 받기 위하여 notification을 작성
+
+
+
+``` java
+<activity
+  android:name=".ReceivedActivity"
+  android:label="비상상황 발생"
+  android:theme="@style/Theme.AppCompat.Light.Dialog"
+  android:windowSoftInputMode="stateAlwaysHidden" />
+```
+
+- 비상상황 알림을 다이얼로그로 전파 하기 위한 설정
+
+
+
+```java
+ regId = "fUgb9-D3SlO3X3P9-1XgLV:APA91bEPOnZ_d62DGfewfOJug0_EjvCCLfLnfxAZRCxvDzErinXGKHa3QKgtZ5DsAV_GH72iLxS-DtjbJLH7_Zsgj3BhnKf9vMbB0aTpoapCUfSPqYRNvf7Ajk3shxamFtbDKxH79oA8";
+ regId2 = "c1UI3eBjTtupybel2GeJFT:APA91bEcRXROZl-lGzDXls5WHbru8fuPw92lVt5V4SQ_W7YO-MSYpwrpVw3KcWQAiVCV1WA1CY8M7mUe4hs62LYkmUDxaSlFJG8ds2xxUS3QR3x_3tZwreOTyUfBWvKsLfh2GKcvlvcg";
+
+public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", "key = AAAA1VVZLSw:APA91bFeZYPNf8ZCUYBVRcpM_XzeiDDR8k1hWujBXSPhalQcC_BknrVB3aHg_ijA5ryBSlk4-mwvjvBIu68nmkmc2-9LpuvADYX_2fxNPZZ8w5wCxtlGggj87B-Sg3z_94n0ayPj7Whx");
+                return headers;
+            }
+
+```
+-  FCM서버키 및 관리자 기기 고유 토큰 등록
+
+
+
+
+```java
+JSONObject requestData = new JSONObject();
+     try{
+         requestData.put("priority", "high");
+
+         JSONObject dataobj = new JSONObject();
+         dataobj.put("contents",input);
+         requestData.put("data",dataobj);
+
+         JSONArray idarray = new JSONArray();
+         idarray.put(0, regId);
+         idarray.put(1, regId2);
+
+         requestData.put("registration_ids", idarray);
+     } catch (Exception e) {
+         e.printStackTrace();
+     }
+```
+
+```java
+JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                "https://fcm.googleapis.com/fcm/send",
+                requestData,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        listener.onRequestCompleted();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        listener.onRequestWithError(error);
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                return  params;
+            }
+```
+
+- 긴급상황을 FCM을 이용하여 다른 관리자 기기로 전파 할 수 있도록 전송기능 설정
+
+
 
 
 
