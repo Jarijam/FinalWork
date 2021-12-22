@@ -572,6 +572,162 @@ JsonObjectRequest request = new JsonObjectRequest(
 - 긴급상황을 FCM을 이용하여 다른 관리자 기기로 전파 할 수 있도록 전송기능 설정
 
 
+#### 데이터 받아오기
 
+<img src="img\http1.PNG" style="zoom: 85%;" /><img src="C:\Users\a\Desktop\http2.PNG" alt="http2" style="zoom: 89%;" />
+
+- IOT장비에서 측정중인 센서값을 받아오기 위해 클래스 생성
+
+
+
+![](img\http3.PNG)
+
+- JSON형식으로 수집한 데이터를 각각의 뷰로 지정해주고 값에 따라 이미지를 변화 할 수 있게 설정 
+
+
+
+
+
+#### Google Map
+
+![](img\mapapi.PNG)
+
+- Google Maps platform에서 API키 발급 및 SDK등록
+
+
+
+![](img\mapmanifest.PNG)
+
+- Manifest에 발급받은 API키를 등록
+
+
+
+```java
+ public void onMapReady(GoogleMap googleMap) {
+                Log.d("Map", "지도 준비됨.");
+                map = googleMap;
+                LatLng latLng = new LatLng(37.50958477466319, 127.05552514757225);
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(),android.Manifest.permission.ACCESS_FINE_LOCATION)                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext()
+                , android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+                }
+                map.setMyLocationEnabled(true);
+```
+
+- 지도가 처음 실행되고 보여지는 위치를 좌표로 지정
+
+
+
+```java
+AndPermission.with(this)
+                .runtime()
+                .permission(
+                        Permission.ACCESS_FINE_LOCATION,
+                        Permission.ACCESS_COARSE_LOCATION)
+                .onGranted(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> permissions) {
+                        showToast("허용");
+                    }
+                })
+                .onDenied(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> permissions) {
+                        showToast("거부");
+                    }
+                })
+                .start();
+```
+
+- 위치권한은 위험 권한이므로 코드상에서 권한을 승인 하여준다
+
+
+
+![](img\location.PNG)
+
+- 현재위치를 찾고 지도에 현위치를 표시
+
+
+
+<img src="img\map.png" style="zoom: 33%;" />
+
+
+
+#### Bluetooth
+
+```java
+ btAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (!btAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }
+        btArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        deviceAddressArray = new ArrayList<>();
+        blue_name.setAdapter(btArrayAdapter);
+        blue_name.setOnItemClickListener(new myOnItemClickListener());
+```
+
+```java
+public void onClickButtonPaired(View view){
+        btArrayAdapter.clear();
+        if(deviceAddressArray!=null && !deviceAddressArray.isEmpty()){ deviceAddressArray.clear(); }
+        pairedDevices = btAdapter.getBondedDevices();
+        if (pairedDevices.size() > 0) {
+            for (BluetoothDevice device : pairedDevices) {
+                String deviceName = device.getName();
+                String deviceHardwareAddress = device.getAddress(); // MAC address
+                btArrayAdapter.add(deviceName);
+                deviceAddressArray.add(deviceHardwareAddress);
+            }
+        }
+    }
+```
+
+- 디바이스에 기존에 페어링 되어있는 블루투스 기기 목록을 불러와서 리스뷰에 출력
+
+
+
+![](img\connectbluetooth.PNG)
+
+![](img\bluetooth_soket.PNG)
+
+- 선택된 기기의 이름과 address를 가져오도록 설정
+
+- 선택된 기기와의 소켓을 만들고 연결을 시도
+
+- 연결이 정상적으로 완료되면 thread를 통하여 통신을 시작
+
+  
+
+![](img\bluetooth_connect.PNG)
+
+- Bluetooth연결을 위한 connectedThread 클래스 생성
+
+
+
+![](img\sendbluetooth.PNG)
+
+- 블루투스로 문자열을 IOT기기에 전송하여 기기를 제어
+
+
+
+#### Web View
+
+```java
+WebSettings webSettings = web.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN); // 컨텐츠 사이즈 맞추기
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용
+        web.setWebViewClient(new WebViewClient());
+        webSettings.setUseWideViewPort(true);
+        webSettings.setBuiltInZoomControls(false);
+        webSettings.setSaveFormData(false);
+        web.loadUrl("http://192.168.0.29:80/np/recentdata.mc");
+```
+
+- Web view를 실행 시키기 위한 설정
 
 
