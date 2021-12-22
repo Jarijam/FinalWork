@@ -14,6 +14,10 @@
 
 ## Web
 
+## DB
+
+## R
+
 ## Arduino
 
 ## Android 
