@@ -590,13 +590,13 @@ JsonObjectRequest request = new JsonObjectRequest(
 
 #### Google Map
 
-![``](img\mapapi.PNG)
+<img src="img\mapapi.PNG"/>
 
 - Google Maps platform에서 API키 발급 및 SDK등록
 
 
 
-![``](img\mapmanifest.PNG)
+<img src="img\mapmanifest.PNG"/>
 
 - Manifest에 발급받은 API키를 등록
 
@@ -644,7 +644,7 @@ AndPermission.with(this)
 
 
 
-![``](img\location.PNG)
+<img src="img\location.PNG"/>
 
 - 현재위치를 찾고 지도에 현위치를 표시
 
@@ -688,9 +688,9 @@ public void onClickButtonPaired(View view){
 
 
 
-![``](img\connectbluetooth.PNG)
+<img src="img\connectbluetooth.PNG"/>
 
-![``](img\bluetooth_soket.PNG)
+<img src="img\bluetooth_soket.PNG"/>
 
 - 선택된 기기의 이름과 address를 가져오도록 설정
 
@@ -700,13 +700,13 @@ public void onClickButtonPaired(View view){
 
   
 
-![``](img\bluetooth_connect.PNG)
+<img src="img\bluetooth_connect.PNG"/>
 
 - Bluetooth연결을 위한 connectedThread 클래스 생성
 
 
 
-![``](img\sendbluetooth.PNG)
+<img src="img\sendbluetooth.PNG"/>
 
 - 블루투스로 문자열을 IOT기기에 전송하여 기기를 제어
 
