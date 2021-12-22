@@ -87,7 +87,11 @@
 
 ## DB
 
+오라클 데이터베이스 세팅 및 구축
 
+![``](img/oracle.PNG)
+
+![``](img/oracle2.PNG)
 -----
 
 ## R
