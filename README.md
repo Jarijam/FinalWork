@@ -5,6 +5,8 @@
 
 - 개요
 - Web
+- DB
+- R
 - Arduino
 - Android
 
