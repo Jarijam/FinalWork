@@ -4,8 +4,6 @@
     			<!-- MODE 변경 -->
 				<jsp:include page="data_view/modetest.jsp"/>
 				<jsp:include page="data_view/countdata.jsp"/>
-			    <!-- CCTV -->
-			    <jsp:include page="chart_view/camview.jsp"/> 	
 				<!-- 가스 값-->
 				<jsp:include page="data_view/gasgage.jsp"/>
 				<!-- 온도 값 -->

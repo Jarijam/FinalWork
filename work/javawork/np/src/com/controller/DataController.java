@@ -55,11 +55,10 @@ public class DataController {
 	    	String crash = request.getParameter("crash");
 	    	
 			int f_flame = Integer.parseInt(flame);
-			
-			
-		
+			System.out.println("불꽃감지센서 : "+flame+" 온도 : "+temp+" 가스 : "+gas+" 충돌감지 : "+crash);
 			
 			data_log.debug(flame+","+temp+","+gas+","+crash);
+			
 			if(f_flame > 0) {
 				try {
 					FcmUtil.sendServer(flame);
