@@ -574,13 +574,13 @@ JsonObjectRequest request = new JsonObjectRequest(
 
 #### 데이터 받아오기
 
-<img src="img\http1.PNG" style="zoom: 85%;" /><img src="img\http2.PNG" alt="http2" style="zoom: 89%;" />
+<img src="img\http1.PNG" style="zoom: 85%;" /> <img src="img\http2.PNG" alt="http2" style="zoom: 85%;" />
 
 - IOT장비에서 측정중인 센서값을 받아오기 위해 클래스 생성
 
 
 
-![``](img\http3.PNG)
+<img src="img\http3.png"/>
 
 - JSON형식으로 수집한 데이터를 각각의 뷰로 지정해주고 값에 따라 이미지를 변화 할 수 있게 설정 
 
