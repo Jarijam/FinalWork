@@ -580,7 +580,7 @@ JsonObjectRequest request = new JsonObjectRequest(
 
 
 
-<img src="img\http3.png"/>
+<img src="img\http3.PNG"/>
 
 - JSON형식으로 수집한 데이터를 각각의 뷰로 지정해주고 값에 따라 이미지를 변화 할 수 있게 설정 
 
