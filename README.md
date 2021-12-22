@@ -1,9 +1,19 @@
+# Fire IT Patrol Project
+<img src="img\Logo.png" style="zoom: 80%;" />
+
+##목차
+
+- 개요
+- Web
+- Arduino
+- Android
+
 
 ## Android  -  Native App
 
 <img src="img\Logo.png" style="zoom: 80%;" />
 
-### 목차
+### APP 목차
 
 - 개요
 - 환경 및 기술 스택
