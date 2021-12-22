@@ -1,7 +1,5 @@
 # Android  -  App
 
-<img src="C:\Users\a\Desktop\파이널프로젝트\Logo.png" style="zoom: 80%;" />
-
 ### 목차
 
 - 개요
@@ -38,7 +36,7 @@
 
 
 
-		### 3.1 구성
+### 3.1 구성
 
 #### Console
 
@@ -71,8 +69,6 @@
 
 ![](C:\Users\a\Desktop\파이널프로젝트\webview.PNG)
 
-
-
 - web에서 관리하는 차트들을 app에서도 동시에 관리 
 
 
@@ -83,7 +79,138 @@
 
 #### FCM
 
-- 
+``` java
+<service
+    android:name=".MyFirebaseMessagingService"
+    android:enabled="true"
+    android:exported="true"
+    android:stopWithTask="false">
+   <intent-filter>
+     <action android:name="com.google.firebase.MESSAGING_EVENT" />
+   </intent-filter>
+</service>	
+```
+
+- FCM 사용을 위한 Manifest 초기 등록
+
+
+
+``` java
+notificationManager = NotificationManagerCompat.from(ConsoleActivity.this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel mChannel = new NotificationChannel(channelId, channelName, importance);
+            notificationManager.createNotificationChannel(mChannel);
+        }
+        Intent intent2 = new Intent(ConsoleActivity.this, ConsoleActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(ConsoleActivity.this, 101, intent2, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(ConsoleActivity.this, "channel")
+                .setSmallIcon(R.drawable.fireman)
+                .setContentTitle(title)
+                .setContentText(body)
+                .setContentText(contents)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .setVibrate(new long[]{1000, 1000});
+        notificationManager.notify(0, mBuilder.build());
+```
+
+- 상단바로 알림을 받기 위하여 notification을 작성
+
+
+
+``` java
+<activity
+  android:name=".ReceivedActivity"
+  android:label="비상상황 발생"
+  android:theme="@style/Theme.AppCompat.Light.Dialog"
+  android:windowSoftInputMode="stateAlwaysHidden" />
+```
+
+- 비상상황 알림을 다이얼로그로 전파 하기 위한 설정
+
+
+
+```java
+ regId = "fUgb9-D3SlO3X3P9-1XgLV:APA91bEPOnZ_d62DGfewfOJug0_EjvCCLfLnfxAZRCxvDzErinXGKHa3QKgtZ5DsAV_GH72iLxS-DtjbJLH7_Zsgj3BhnKf9vMbB0aTpoapCUfSPqYRNvf7Ajk3shxamFtbDKxH79oA8";
+ regId2 = "c1UI3eBjTtupybel2GeJFT:APA91bEcRXROZl-lGzDXls5WHbru8fuPw92lVt5V4SQ_W7YO-MSYpwrpVw3KcWQAiVCV1WA1CY8M7mUe4hs62LYkmUDxaSlFJG8ds2xxUS3QR3x_3tZwreOTyUfBWvKsLfh2GKcvlvcg";
+
+public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", "key = AAAA1VVZLSw:APA91bFeZYPNf8ZCUYBVRcpM_XzeiDDR8k1hWujBXSPhalQcC_BknrVB3aHg_ijA5ryBSlk4-mwvjvBIu68nmkmc2-9LpuvADYX_2fxNPZZ8w5wCxtlGggj87B-Sg3z_94n0ayPj7Whx");
+                return headers;
+            }
+
+```
+-  FCM서버키 및 관리자 기기 고유 토큰 등록
+
+
+
+
+```java
+JSONObject requestData = new JSONObject();
+     try{
+         requestData.put("priority", "high");
+
+         JSONObject dataobj = new JSONObject();
+         dataobj.put("contents",input);
+         requestData.put("data",dataobj);
+
+         JSONArray idarray = new JSONArray();
+         idarray.put(0, regId);
+         idarray.put(1, regId2);
+
+         requestData.put("registration_ids", idarray);
+     } catch (Exception e) {
+         e.printStackTrace();
+     }
+```
+
+```java
+JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                "https://fcm.googleapis.com/fcm/send",
+                requestData,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        listener.onRequestCompleted();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        listener.onRequestWithError(error);
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                return  params;
+            }
+```
+
+- 긴급상황을 FCM을 이용하여 다른 관리자 기기로 전파 할 수 있도록 전송기능 설정
+
+
+
+#### 데이터 받아오기
+
+<img src="C:\Users\a\Desktop\http1.PNG" style="zoom: 85%;" /><img src="C:\Users\a\Desktop\http2.PNG" alt="http2" style="zoom: 89%;" />
+
+- IOT장비에서 측정중인 센서값을 받아오기 위해 클래스 생성
+
+
+
+![](C:\Users\a\Desktop\http3.PNG)
+
+- JSON형식으로 수집한 데이터를 각각의 뷰로 지정해주고 값에 따라 이미지를 변화 할 수 있게 설정 
+
+
+
+
+
+#### Google Map
 
 
 
