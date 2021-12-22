@@ -53,7 +53,7 @@
 
 ### 프로젝트 멤버
 
-![``](img/member.PNG)
+![``](img/member.png)
 
 
 
