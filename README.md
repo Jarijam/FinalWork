@@ -574,8 +574,7 @@ JsonObjectRequest request = new JsonObjectRequest(
 
 #### 데이터 받아오기
 
-<img src="img\http1.PNG" style="zoom: 85%;" />
-<img src="img\http2.PNG" alt="http2" style="zoom: 89%;" />
+<img src="img\http1.PNG" style="zoom: 85%;" /><img src="img\http2.PNG" alt="http2" style="zoom: 89%;" />
 
 - IOT장비에서 측정중인 센서값을 받아오기 위해 클래스 생성
 
