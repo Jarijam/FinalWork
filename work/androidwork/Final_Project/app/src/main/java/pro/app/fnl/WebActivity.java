@@ -34,6 +34,10 @@ public class WebActivity extends AppCompatActivity {
 
         WebSettings webSettings = web.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN); // 컨텐츠 사이즈 맞추기
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용
         web.setWebViewClient(new WebViewClient());
         webSettings.setUseWideViewPort(true);
         webSettings.setBuiltInZoomControls(false);

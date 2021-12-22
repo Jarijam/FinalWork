@@ -14,13 +14,14 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/final_luncher"
-        android:label="불IT났어"
+        android:label="Fire IT Patrol"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/final_luncher_round"
         android:supportsRtl="true"
@@ -53,20 +54,12 @@
             android:name=".MapActivity"
             android:label="Map"
             android:theme="@style/Theme.AppCompat.Light.Dialog" />
+
         <activity
             android:name=".ReceivedActivity"
             android:label="비상상황 발생"
             android:theme="@style/Theme.AppCompat.Light.Dialog"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
-<!--        <receiver android:name=".WidgetProvider">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />-->
-<!--            </intent-filter>-->
-<!--            <meta-data-->
-<!--                android:name="android.appwidget.provider"-->
-<!--                android:resource="@xml/widget_info"/>-->
-<!--        </receiver>-->
 
         <service
             android:name=".MyFirebaseMessagingService"

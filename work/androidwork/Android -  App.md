@@ -1,119 +1,10 @@
-# Fire IT Patrol Project
-<img src="img\Logo.png" style="zoom: 80%;" />
+# Android  -  App
 
-
-
-## 목차
-
-- 개요
-- Web
-- DB
-- R
-- Arduino
-- Android
-
-
-
-## 개요
-<img src="img\title.png"/>
-- 고층아파트, 대형병원, 마트 등 어느 곳에서든 우리는 화재의 위험 속에서 살아가고 있다. 
-  현대화 사회에서 화재의 위험 요인이 많아지면서 화재가 발생하였을 때 가장 중요한 점은 초기인지(신고), 초기 진압, 인명 대피 등이 있다. 
-  이에 따라 이번 프로젝트를 통해 IOT를 접목하고 화재를 초기에 감지 하여 피해를 사전에 방지 하고자 한다.
-  
-  
-  
-### 프로젝트 목적
--  부재중인 시설 또는 사람의 시선이 닿지 않는곳에서 발생할 수 있는 화재를 사전에 감지하고자 한다.
--  사전 감지를 통하여 화재 골든타임을 놓치지 않으며 피해를 감소 시키고자 한다.
-
-
-
-### 프로젝트 구성
-#### Web
-- 자이로 센서 값을 TCP/IP 통신으로 Main Server에 전송후  순찰 장비의 위치 및 이동경로를 Canvas 로 표현
-- 불꽃 감지 센서,가스 센서, 온도 센서, 충돌 센서 값을 TCP/IP 통신으로 MainServer에 전송후 MyBatis로 DB저장 또는 Log 데이터 축적
-- 저장된 데이터를 R을 활용, 차트 api를 활용해 시각화
-
-
-
-#### Mobile
-- Flame Sensor, Gas Sensor, Temperature Sensor 의 값이 일정 수준 도달 했을때 FCM을 활용해 관리자 App으로 푸시알림 발송
-- Bluetooth 통신으로 순찰 장비 무선 조종
-
-
-
-#### IOT
-- 화재감지 센서를 활용한 화재 감지
-- 가스 감지 센서를 활용한 가스 수치 확인
-- 온도 감지 센서를 활용한 온도 측정
-- 초음파센서를 활용해 장애물 회피 또는 구조물 tracing
-- 와이파이 및 블루투스 모듈을 활용해 메인서버와 통신
-
-
-
-### 환경 및 기술 스택
-![``](img/tool.PNG)
-
-
-
-### 시스템 구성도
-![``](img/system.PNG)
-
-
-
------
-
-## Web
-
-![``](img/member_login.PNG)
-
-<h4>로그인 페이지 - DB에 저장된 데이터를 통하여 로그인이 가능</h4>
-
-![``](img/member_signup.PNG)
-
-<h4>회원 가입 - DB에 데이터를 저장하며 회원가입 가능</h4>
-
-![``](img/member_delete.PNG)
-
-<h4>회원 수정 - 회원 수정 기능(본인의 아이디가 고정으로 입력되어 있도록 설정)</h4>
-
-<h4>회원 탈퇴 - 회원 탈퇴 기능(로그인 되어 있는 아이디를 삭제하도록 설정) </h4>
-
-
-
-
-
------
-
-## DB
-
-오라클 데이터베이스 세팅 및 구축
-
-![``](img/oracle.PNG)
-
-![``](img/oracle2.PNG)
------
-
-## R
-
-
-------
-
-## Arduino
-
-
-------
-
-## Android 
-
-<img src="img\app_logo.png" style="zoom: 80%;" />
-
-### APP 목차
+### 목차
 
 - 개요
 - 환경 및 기술 스택
 - 구성 및 기능
-
 
 
 
@@ -141,20 +32,20 @@
 
 
 
-
 ## 3. 구성 및 기능
+
 
 
 ### 3.1 구성
 
 #### Console
 
-![``](img/console1.PNG)
+![``](C:\Users\a\Desktop\파이널프로젝트\console1.PNG)
 
 - FCM으로 비상 상황 전파 및 상단바 알림으로 상황 알림
 - 긴급 통화 기능
 
-![``](img/console2.PNG)
+![](C:\Users\a\Desktop\파이널프로젝트\console2.PNG)
 
 - HTTP 통신으로 받아온 센서 데이터값을 실시간으로 표시
 - Google Map을 사용하여 현 관리자 위치 표시
@@ -164,7 +55,7 @@
 
 #### Controller
 
-![``](img/controller.PNG)
+![](C:\Users\a\Desktop\파이널프로젝트\controller.PNG)
 
 - IOT장비와 블루투스 연결을 통한 제어
 - 필요시 무선으로 장비를 조정하여 관리 
@@ -176,9 +67,7 @@
 
 #### web view
 
-![``](img/webview.PNG)
-
-
+![](C:\Users\a\Desktop\파이널프로젝트\webview.PNG)
 
 - web에서 관리하는 차트들을 app에서도 동시에 관리 
 
@@ -304,6 +193,24 @@ JsonObjectRequest request = new JsonObjectRequest(
 - 긴급상황을 FCM을 이용하여 다른 관리자 기기로 전파 할 수 있도록 전송기능 설정
 
 
+
+#### 데이터 받아오기
+
+<img src="C:\Users\a\Desktop\http1.PNG" style="zoom: 85%;" /><img src="C:\Users\a\Desktop\http2.PNG" alt="http2" style="zoom: 89%;" />
+
+- IOT장비에서 측정중인 센서값을 받아오기 위해 클래스 생성
+
+
+
+![](C:\Users\a\Desktop\http3.PNG)
+
+- JSON형식으로 수집한 데이터를 각각의 뷰로 지정해주고 값에 따라 이미지를 변화 할 수 있게 설정 
+
+
+
+
+
+#### Google Map
 
 
 
