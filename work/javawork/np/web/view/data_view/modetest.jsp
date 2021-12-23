@@ -43,12 +43,12 @@ form{
 				</form> -->
 				
 				<form  name="mode2" onclick="click()" method='GET'>
-				      <input type = 'hidden' name='MODE' value='Y'>
+				      <input type = 'hidden' name='MODE' value='X'>
 				      <input class = "btn2" type='submit' value='Obstacle Detection' />
 				</form>
 				
 				<form  name="mode3" onclick="click()" method='GET' >
-				      <input type = 'hidden' name='MODE' value='Z'>
+				      <input type = 'hidden' name='MODE' value='Y'>
 				      <input class = "btn3" type='submit' value='Manual Operation' />
 				</form>
 			</div><br/><br/>

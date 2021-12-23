@@ -70,23 +70,29 @@
 		            }
 		         });
 		      };
-	      function getSensor() {
-	 	        $.ajax({
-		            url:'recentsensor.mc',
-		            success:function(sensor){
-		            	alert(sensor.temp);
-		            	$('#test').html(sensor.temp);
-		            }
-		         });
-		      };
-		  var sensor = getSensor();
-		  var data = getData();
-		  $(document).ready(function(){
-				setInterval(function(){
-					getData();
-					getSensor();
-				}, 5000);
-			});		
+		      function getSensor() {
+	               $.ajax({
+	                  url:'recentsensor.mc',
+	                  success:function(sensor){
+	                   
+	                     $('#areatemp').html(sensor.temp+"°C");
+	                     $('#areagas').html(sensor.gas+"ppm");
+	                     if( sensor.flame == 1){
+	                    	 $('#areaflame').html("WARNING!!!!!")
+	                     }else if(sensor.flame == 0){
+	                    	 $('#areaflame').html("SAFE")
+	                     }
+	                  }
+	               });
+	            };
+		      var sensor = getSensor();
+			  var data = getData();
+			  $(document).ready(function(){
+					 setInterval(function(){
+					 getData();
+					 getSensor();
+					}, 1000);
+				});		
 			}); 		
 	</script>
 <body>
