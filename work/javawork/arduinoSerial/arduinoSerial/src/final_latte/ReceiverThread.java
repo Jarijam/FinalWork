@@ -16,8 +16,10 @@ public class ReceiverThread extends Thread{
    
    public ReceiverThread(Socket client, OutputStream serialout) {
       super();
+      
       this.client = client;
       this.serialout = serialout;
+      
       try {
          clientin = new BufferedReader(new InputStreamReader(this.client.getInputStream()));
          clientout = new PrintWriter(this.client.getOutputStream(),true);
@@ -26,31 +28,27 @@ public class ReceiverThread extends Thread{
          e.printStackTrace();
       }
    }
-   @Override
-   public void run() {
-      super.run();
-      while(true) {
-         try {
-        	 String msg = clientin.readLine();
-            if(msg!=null) {
-            	System.out.println("≈¨∂Û¿Ãæ∆Æ∞° ∫∏≥Ω ∏ﬁºº¡ˆ : "+msg);
-            	if(msg.equals("X")) {
-                    serialout.write('X');
-                 }else if(msg.equals("Y")) {
-                    serialout.write('Y');
-                    System.out.println("Ω√∏ÆæÛ y");
-                 }else if(msg.equals("Z")) {
-                    serialout.write('Z');
-                    System.out.println("Ω√∏ÆæÛ z");
-                 }
-            }
-            
-         } catch (IOException e) {
-            e.printStackTrace();
-         }
-         
-      }
-   }
-   
+	   @Override
+	   public void run() {
+	      super.run();
+	      while(true) {
+	         try {
+	        	 String msg = clientin.readLine();
+	            if(msg!=null) {
+	            	System.out.println("ÌÅ¥ÎùºÏù¥Ïñ∏Ìä∏Í∞Ä Î≥¥ÎÇ∏ Î©îÏÑ∏ÏßÄ : "+msg);
+	            	if(msg.equals("X")) {
+	                    serialout.write('X');
+	                 }else if(msg.equals("Y")) {
+	                    serialout.write('Y');
+	                 }else if(msg.equals("Z")) {
+	                    serialout.write('Z');
+	                 }
+	            }
+	         } catch (IOException e) {
+	            e.printStackTrace();
+	         }
+	         
+	      }
+	   }
 }
 
