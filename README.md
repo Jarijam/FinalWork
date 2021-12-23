@@ -72,9 +72,10 @@
 
 ## Web
 
-![``](img/member_login.PNG)
+![``](img/member_login.PNG) ![``](img/member_signup.PNG)
 
-<h4>로그인 페이지 - DB에 저장된 데이터를 통하여 로그인이 가능</h4>
+<h4>로그인 페이지 </h4>
+- DB에 저장된 데이터를 통하여 로그인이 가능
 
 ![``](img/member_signup.PNG)
 
