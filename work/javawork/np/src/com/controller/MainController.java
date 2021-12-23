@@ -86,7 +86,7 @@ public class MainController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-//			String id = user.getId();
+
 			return "redirect:main.mc";
 		}
 		
