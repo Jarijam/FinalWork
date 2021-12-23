@@ -63,6 +63,7 @@
 		            success:function(data){
 		         
 		            	codi(data);
+		               
 		            }
 		         });
 		      };
@@ -237,4 +238,10 @@
 				</div>
 			</div>
 		</div>
-</div>
+		
+		
+		
+	</div>
+	
+
+	
