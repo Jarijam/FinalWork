@@ -577,7 +577,8 @@ a3 <- function(){
 }
 ```
 
-![](C:\Final\FinalWork\img\A3.png)
+
+<img src="img\A3.png"/>
 
 - 연/월/일/시/분/초 단위 가스값,온도값 평균 추출하기
 
@@ -596,7 +597,7 @@ a4 <- function(){
 }
 ```
 
-![](C:\Final\FinalWork\img\A4.png)
+<img src="img\A4.png"/>
 
 - 일 단위로 가스 평균값, 온도 평균값이 일정값 이상일때 Count 하기
 
@@ -627,9 +628,9 @@ a7 <- function(){
 }
 ```
 
-![](C:\Final\FinalWork\img\A6.png)
+<img src="img\A6.png"/>
 
-![](C:\Final\FinalWork\img\A7.png)
+<img src="img\A7.png"/>
 
 - 가스, 온도, 불꽃감지 센서 최신 값 추출하기
 
@@ -649,7 +650,7 @@ b5 <- function(){
 }
 ```
 
-![](C:\Final\FinalWork\img\B5.png)
+<img src="img\B5.png"/>
 
 ## Arduino
 
