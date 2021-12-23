@@ -94,9 +94,7 @@
 					}, 1000);
 				});		
 			}); 		
-	</script>
-<body>
-		
+
 		<div id="canvas_body" >
 			<canvas id="canvas" width="600" height= "600"  >
 			
