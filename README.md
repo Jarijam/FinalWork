@@ -67,7 +67,7 @@
 ![``](img/system.PNG)
 
 ### 작품사진
-<img src="img\model.jpg"/>
+<img src="img\model.jpg" style="zoom: 80%;"/>
 
 -----
 
