@@ -30,9 +30,7 @@
 		<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
 		<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d1fec8d8766a8a6cd6d1d7a100d376e0"></script>
-		<!--[if IE]>
-  		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
+		
 		
 		<style type="text/css">
 		@import
@@ -45,7 +43,7 @@
 		.warning {
 		/* 	width: 100px; */
 			/* height: 100px; */
-			size: 10%;
+			size: 50%;
 			display: inline-block;
 		}
 		.default {
@@ -70,54 +68,13 @@
 		}
 		.highcharts-figure .chart-container {
 		    /* width: 220px; */
-		    height: 130px;
+		    height: 370px;
 		    margin: auto;
 		    
 		}
 				
 		
-		#container_tot {
-		    height: 425px;
-		    border: 2px solid blue;
-		    margin : auto 20px;
-		    font-family: 'Titillium Web', sans-serif; 
-		}
-		#container_gas {
-		    height: 190px;
-		    border: 2px solid red;
-		    margin : auto 20px;
-		}
-		#container_temp {
-		    height: 190px;
-		    border: 2px solid purple;
-		    margin : auto 20px;
-		}
-
-		.ex-layout{ height: 550px;}
-		.menu{
-			width: 100%;
-			height: 30px;
-			border:2px solid #09c;
-			background: #d7f5ff;
-		}
-		.main .left-menu{
-			float: left;
-			width: 50%;
-			height: 500px;
-		}
-		.main .contents {
-			float: left;
-			width: 50%;
-			height: 250px;
-		}
-		
-		.main .contents .arcticle{
-			height: 200px;
-			
-		}
-		.main .contents .comment{
-			height: 200px;
-			
+	
 		}
 		.section{
 		margin:0 auto;
@@ -127,17 +84,29 @@
 		}
 		
 		.nav{
-		border: 2px solid yellow;
+		
 		height: 100px;
 		background: #A2A2A2;
 		
 		}
 		
 		.imgtest{
-		width: 30px;
-		height: 30px;
+		width: 60px;
+		height: 60px;
 		}
-		
+		#container_tot {
+	   	    height: 425px;
+		    margin : auto 20px;
+		    font-family: 'Titillium Web', sans-serif; 
+		}
+		#container_gas {
+		    height: 420px;
+		    margin : auto 20px;
+		}
+		#container_temp {
+		    height: 420px;
+		    margin : auto 20px;
+		}
 	
 		
 		</style>
@@ -146,22 +115,18 @@
 		<div class="box">
 			<div class="menu-wrap">
 				<nav class="menu-top">
-					<div class="profile"><img class="imgtest" src="img/cap01.jpg" alt="Matthew Greenberg"/><span style="color: white;">2조프로젝트</span></div>
+					<div class="profile"><img class="imgtest" src="img/gorb.png" alt="Matthew Greenberg"/><span style="color: white; font-size: 30px;">${loginid} 님</span></div>
 					<div class="icon-list">
-						<a href="update.mc">회원정보 수정<i class="fa fa-fw fa-star-o"></i></a>
-						<a href="#"><i class="fa fa-fw fa-bell-o"></i></a>
-						<a href="#"><i class="fa fa-fw fa-envelope-o"></i></a>
-						<a href="#"><i class="fa fa-fw fa-comment-o"></i></a>
+						<a href="update.mc">회원정보 수정</a>
+						
 					</div>
+					
+			
 				</nav>
 				<nav class="menu-side">
 					<a href="main.mc">Main</a>
 					<a href="recentdata.mc">Recent Data</a>
-					<a href="#">Accumulated Data</a>
 					<a href="graphics.mc">Canvas Test</a>
-					<a href="testgraph2.mc">testgrapgh2</a>
-					<a href="testgraph3.mc">testgrapgh3</a>
-					<a href="test01.mc">테스트중입니다</a>
 				</nav>
 			</div>
 			<button class="menu-button" id="open-button">Open Menu</button>
@@ -170,7 +135,7 @@
 					<div class="nav">
 						<a href ="login.mc"><img src="/np/img/login2.png" style = "width: 70px; height: 70px; float:right;"/></a>
 					</div>
-					<header class="codrops-header" style="border: 2px solid red;">
+					<header class="codrops-header" >
 						
 						<h1 class="eng-font">Industrial Fire Detector<span>Real-time status</span></h1>
 						

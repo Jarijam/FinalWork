@@ -71,10 +71,9 @@ public class MainController {
 				System.out.println("update모델엔뷰 try왔니?");
 				
 				dbuser = userservice.get(id);
-				
 				mv.addObject("uuser", dbuser);
-				mv.addObject("center","update");
-				mv.setViewName("main");
+				
+				mv.setViewName("update");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -87,7 +86,7 @@ public class MainController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-//			String id = user.getId();
+
 			return "redirect:main.mc";
 		}
 		
@@ -170,7 +169,7 @@ public class MainController {
 				BufferedReader in = null;
 				PrintWriter out = null;
 				try {
-					server = new Socket("192.168.0.29", 12346);
+					server = new Socket("192.168.0.131", 12346);
 					System.out.println("서버에 접속 성공");
 					//네트워크를 통해서 입출력을 하기 위한 IO스트림객체를 생성
 					in = new BufferedReader(new InputStreamReader(server.getInputStream()));
