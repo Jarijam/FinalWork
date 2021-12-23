@@ -88,6 +88,368 @@
 
 
 
+#### ■ Arduino 센서값  Http 통신으로 Main Server로 가져오기
+
+![](C:\Final\FinalWork\img\console.png)
+
+
+
+####  Data Controller (메인 서버)
+
+https://github.com/Jarijam/FinalWork/blob/8bda858031d70f3f7f9070bbaeb52c3ee591279c/work/javawork/np/src/com/controller/DataController.java#L49-L71
+
+####  Send Data (Latte panda 에서 메인서버로 HTTP 통신으로 센서값 보내기)
+
+```java
+package final_test;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+
+public class SendHttp {
+	public SendHttp() {
+		super();
+		
+	}
+	
+	class SendThread extends Thread{
+
+		String flame;
+		String gas;
+		String temp;
+		String crash;
+		
+		
+		String urlstr = "http://192.168.0.29/np/data.mc";
+		URL url = null;
+		HttpURLConnection con = null;
+
+		BufferedReader br = null;
+		
+		public SendThread() {
+			
+		}
+		
+		public SendThread(String btn,String gas,String flame,String dis, String temp) {
+		
+			
+			this.flame = flame;
+			this.temp = temp;
+            this.gas = gas;
+			this.temp = crash;
+		}
+		
+		@Override
+		public void run() {
+			//request $ response
+			try {
+				
+				url = new URL(urlstr + "?btn="+btn + "&gas="+gas+ "&flame="+flame+ "&dis="+dis+ "&temp="+temp);
+				con = (HttpURLConnection) url.openConnection();
+				con.setReadTimeout(10000);
+				con.setRequestMethod("POST");
+				//con.getInputStream();
+
+				br = new BufferedReader(
+						new InputStreamReader(
+								con.getInputStream()));
+
+				String str = "";
+
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				con.disconnect();
+				if (br != null) {
+					try {
+						br.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+
+			}
+		}
+	}
+	public void sendData(String btn,String gas,String flame,String dis, String temp) {
+		SendThread st = new SendThread(btn,gas,flame,dis,temp);
+		st.start();
+	
+	}
+}
+
+```
+
+
+
+#### ■ 불꽃 감지시 이미지 변경 및 CCTV
+
+![](C:\Final\FinalWork\img\sequrity.png)
+
+![](C:\Final\FinalWork\img\warning.png)
+
+
+
+``` java
+<script>
+	function getData3() {
+		
+		$.ajax({
+			url:'flame.mc',
+			success:function(data){			
+				$(data).each(function(idx,item){
+					console.log(item.flame);
+					if( item.flame == 1){
+						$('#flame').html("<br/><img class='warning' src='/np/img/warning3.png'>");
+					}else if ( item.flame == 0){
+						$('#flame').html("<br/><img class='default' src='/np/img/security2.png'>");
+					}
+				});
+			}
+		});
+	};
+	$(document).ready(function(){
+			getData3();
+		setInterval(function(){
+			getData3();
+		},5000);
+	});
+
+ <div class="row">
+				    <div class="col-sm-4" >
+					    <div class="tbox"  >
+						    <h5 class="tbox-head" style="background-color: blue;"  >Flame Detection&nbsp;&nbsp;
+						    </h5>
+							    <div class="tbox-body">
+									 <a id="flame"></a> 
+								</div>
+						</div>
+				    </div>
+				    <div class="col-sm-5" ><br/>
+   			 			<div class="cbox">
+						    <h3 class="cbox-body">CCTV</h3>
+						    <div id = "cam" style="text-align: center;" >
+						    <iframe src="https://www.youtube.com/embed/7EndDbSl-0k/7EndDbSl-0k?autoplay=1&mute=1&amp;playlist=7EndDbSl-0k&amp;loop=1" frameborder="0" width="90%" height="350px" scrolling="no" style="margin: auto;  align-content: center;"></iframe>
+						    </div>
+					    </div>
+ 					</div>
+            </div>
+```
+
+
+
+#### ■ 가스, 온도값 데이터 시각화 (R, HighChart 활용)
+
+* 로그파일 저장을 위한 Log4j 설정
+
+```xml
+log4j.logger.data = DEBUG, console, data
+
+# data
+log4j.appender.data.Threadhold=DEBUG
+log4j.appender.data = org.apache.log4j.FileAppender
+log4j.appender.data.layout = org.apache.log4j.PatternLayout 
+log4j.appender.data.layout.ConversionPattern = %d{YYYY,MM,dd,HH,mm,ss},%m%n
+log4j.appender.data.File = c:/logs/finaldata.log
+```
+
+* Http 통신을 통해 받은 센서값을 로그 파일로 저장하는 controller
+
+```java
+private Logger data_log = 
+				Logger.getLogger("data");
+				
+ @RequestMapping("/data.mc")
+		@ResponseBody
+		public void data(HttpServletRequest request) throws Exception {
+	    	String flame = request.getParameter("flame");
+	    	String temp = request.getParameter("temp");
+			String gas = request.getParameter("gas");
+	    	String crash = request.getParameter("crash");
+	    	
+			int f_flame = Integer.parseInt(flame);
+			System.out.println("불꽃감지센서 : "+flame+" 온도 : "+temp+" 가스 : "
+                               +gas+" 충돌감지 : "+crash);
+			
+			data_log.debug(flame+","+temp+","+gas+","+crash);
+			
+			if(f_flame > 0) {
+				try {
+					FcmUtil.sendServer(flame);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+```
+
+* 저장된 로그 파일 
+
+![](C:\Final\FinalWork\img\logcapture.PNG)
+
+
+
+* 웹의 highcharts 가 필요한 data를 요청하는 javascript
+
+```javascript
+<script>
+function display(d){
+			Highcharts.getJSON(
+			  'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
+			  function(data) {
+
+				  var chart2 = new Highcharts.chart('container_gas', {
+			      chart: {
+			        zoomType: 'x'
+			      },
+			      title: {
+			        text: 'Gas over time'
+			      },
+			      subtitle: {
+			        text: document.ontouchstart === undefined ?
+			          'Click and drag to zoom in' : 'Pinch the chart to zoom in'
+			      },
+			      xAxis: {
+			        type: 'datetime'
+			      },
+			      yAxis: {
+			        title: {
+			          text: 'Gas'
+			        }
+			      },
+			      legend: {
+			        enabled: false
+			      },
+			      plotOptions: {
+			        area: {
+			          fillColor: {
+			            linearGradient: {
+			              x1: 0,
+			              y1: 0,
+			              x2: 0,
+			              y2: 1
+			            },
+			            stops: [
+			              [0, Highcharts.getOptions().colors[6]],
+			              [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+			            ]
+			          },
+			          marker: {
+			            radius: 2
+			          },
+			          lineWidth: 1,
+			          states: {
+			            hover: {
+			              lineWidth: 1
+			            }
+			          },
+			          threshold: null
+			        }
+			      },
+
+			      series: [{
+			        type: 'area',
+			        name: 'Gas',
+			        data: d
+			      }]
+			    });
+			  });
+}
+function getdata(){
+	$.ajax({
+		url:'rchartgas.mc',
+		success:function(d){
+			display(d);
+		}
+	});
+};
+
+$(document).ready(function(){
+		getdata(); 
+	setInterval(function(){
+		getdata();
+	},5000);
+});
+</script>
+```
+
+- R Studio를 활용해 log파일 가공
+
+![](C:\Final\FinalWork\img\R.png)
+
+- 요청을 받는 controller
+
+  https://github.com/Jarijam/FinalWork/blob/50f8ad60edd3bf3d3aef119943b26625ada100b9/work/javawork/np/src/com/controller/ChartController.java#L1-L154
+
+
+
+- 결과화면
+
+![](C:\Final\FinalWork\img\data.png)
+
+![](C:\Final\FinalWork\img\data2.png)
+
+
+
+#### ■ 구역별 데이터 시각화 (Canvas를 활용해 IoT장비 위치추적)
+
+- Canvas를 활용하기 위한 좌표값 받아오기
+
+https://github.com/Jarijam/FinalWork/blob/8bda858031d70f3f7f9070bbaeb52c3ee591279c/work/javawork/np/src/com/controller/DataController.java#L115-L136
+
+- Canvas 띄우기
+
+https://github.com/Jarijam/FinalWork/blob/8bda858031d70f3f7f9070bbaeb52c3ee591279c/work/javawork/np/web/view/graphics_view/graphics_test.jsp#L6-L69
+
+- 온도값, 가스값, 현재시간
+
+  ```java
+  	      function getSensor() {
+  	               $.ajax({
+  	                  url:'recentsensor.mc',
+  	                  success:function(sensor){
+  	                   
+  	                     $('#areatemp').html(sensor.temp+"°C");
+  	                     $('#areagas').html(sensor.gas+"ppm");
+  	                     if( sensor.flame == 1){
+  	                    	 $('#areaflame').html("WARNING!!!!!")
+  	                     }else if(sensor.flame == 0){
+  	                    	 $('#areaflame').html("SAFE")
+  	                     }
+  	                  }
+  	               });
+  	            };
+  		      var sensor = getSensor();
+  			  var data = getData();
+  			  $(document).ready(function(){
+  					 setInterval(function(){
+  					 getData();
+  					 getSensor();
+  					}, 1000);
+  				});		
+  			}); 
+  		
+  		//=============================time========================
+  		 function time(){
+  			  var time= new Date(); //시간받기위해서 new date
+  			      document.getElementById("now").innerHTML="2021년 12월 17일 "+time.getHours()+"시 "+time.getMinutes()+"분 	     "+time.getSeconds()+"초";
+  			     setInterval("time()",1000);     //1초 지난후 time()실행
+  			  }
+  ```
+
+- 결과화면
+
+![](C:\Final\FinalWork\img\canvas.png)
+
+
+
+
+
+
 
 
 -----
