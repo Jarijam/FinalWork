@@ -102,6 +102,20 @@
 
 https://github.com/Jarijam/FinalWork/blob/8bda858031d70f3f7f9070bbaeb52c3ee591279c/work/javawork/np/src/com/controller/DataController.java#L49-L71
 
+#### 시리얼 통신을 위한 서버/클라이언트 파일
+
+```
+link plz (srs전체)
+```
+
+#### 웹으로 부터 요청을 받아 아두이노로 메세지를 보내는 thread
+
+```
+link plz (receiver Thread)
+```
+
+
+
 ####  Send Data (Latte panda 에서 메인서버로 HTTP 통신으로 센서값 보내기)
 
 ```java
