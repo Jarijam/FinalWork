@@ -104,16 +104,14 @@ https://github.com/Jarijam/FinalWork/blob/8bda858031d70f3f7f9070bbaeb52c3ee59127
 
 #### 시리얼 통신을 위한 서버/클라이언트 파일
 
-```
+
 https://github.com/Jarijam/FinalWork/blob/2d1c554411d25d9c45b5a14cc5056ef9413cb047/work/javawork/arduinoSerial/arduinoSerial/src/final_latte/SendAndReceiveSerial.java#L28-L187
-```
+
 
 #### 웹으로 부터 요청을 받아 아두이노로 메세지를 보내는 thread
 
-```
-link plz (receiver Thread)
-```
 
+https://github.com/Jarijam/FinalWork/blob/cc200a155b5d9607af17a694c5802e6765649158/work/javawork/arduinoSerial/arduinoSerial/src/final_latte/ReceiverThread.java#L10-L53
 
 
 ####  Send Data (Latte panda 에서 메인서버로 HTTP 통신으로 센서값 보내기)
