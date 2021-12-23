@@ -90,7 +90,7 @@
 
 #### ■ Arduino 센서값  Http 통신으로 Main Server로 가져오기
 
-![``](img\console.png)
+<img src="img\console.png"/>
 
 
 
@@ -189,10 +189,9 @@ public class SendHttp {
 
 #### ■ 불꽃 감지시 이미지 변경 및 CCTV
 
-![``](img\sequrity.png)
+<img src="img\sequrity.png"/>
 
-![``](img\warning.png)
-
+<img src="img\warning.png"/>
 
 
 ``` java
@@ -289,7 +288,7 @@ private Logger data_log =
 
 * 저장된 로그 파일 
 
-![``](img\logcapture.PNG)
+<img src="img\logcapture.PNG"/>
 
 
 
@@ -379,7 +378,7 @@ $(document).ready(function(){
 
 - R Studio를 활용해 log파일 가공
 
-![``](img\R.png)
+<img src="img\R.png"/>
 
 - 요청을 받는 controller
 
@@ -389,9 +388,9 @@ $(document).ready(function(){
 
 - 결과화면
 
-![``](img\data.png)
+<img src="img\data.png"/>
 
-![``](img\data2.png)
+<img src="img\data2.png"/>
 
 
 
@@ -443,7 +442,7 @@ https://github.com/Jarijam/FinalWork/blob/8bda858031d70f3f7f9070bbaeb52c3ee59127
 
 - 결과화면
 
-![``](img\canvas.png)
+<img src="img\canvas.png"/>
 
 
 
