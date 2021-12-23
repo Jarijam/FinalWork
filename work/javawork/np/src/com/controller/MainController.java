@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,9 +37,67 @@ public class MainController {
 		
 		MyMqtt_Pub_client client;
 		
+		 @Resource(name="cdservice")
+		   Service<String, CoordinateVO> cdservice;
+		   @Resource(name="userservice")
+		   Service<String, UserVO> userservice;
+		
 		public MainController() {
 			client = new MyMqtt_Pub_client();
 			
+		}
+		
+		@RequestMapping("/uadd.mc")
+		public ModelAndView add(ModelAndView mv) {
+			mv.setViewName("register");
+			return mv;
+		}
+		
+		
+		@RequestMapping("/uaddimpl.mc")
+		public String addimpl(UserVO user) {
+			try {
+				userservice.register(user);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return "redirect:main.mc";
+		}
+		
+		@RequestMapping("/update.mc")
+		public ModelAndView update(ModelAndView mv,String id) {
+			UserVO dbuser = null;
+			try {
+				System.out.println("update모델엔뷰 try왔니?");
+				
+				dbuser = userservice.get(id);
+				mv.addObject("uuser", dbuser);
+				
+				mv.setViewName("update");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return mv;
+		}
+		@RequestMapping("/uupdateimpl.mc")
+		public String updateimpl(UserVO user) {
+			try {
+				userservice.modify(user);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return "redirect:main.mc";
+		}
+		
+		@RequestMapping("/udel.mc")
+		public String delete(String id) {
+			try {
+				userservice.remove(id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return "redirect:ulist.mc";
 		}
 		
 		@RequestMapping("/login.mc")
@@ -48,10 +108,7 @@ public class MainController {
 			return mv;
 		}
 	
-	   @Resource(name="cdservice")
-	   Service<String, CoordinateVO> cdservice;
-	   @Resource(name="userservice")
-	   Service<String, UserVO> userservice;
+	  
 	
 	   @RequestMapping("/main.mc")
 	   public ModelAndView main() {
@@ -161,8 +218,20 @@ public class MainController {
 			mv.setViewName("main");
 			return mv;
 		}
-	    
-	    
+		@RequestMapping("/test01.mc")
+		public ModelAndView test01() {
+			ModelAndView mv = new ModelAndView();  
+			mv.addObject("center","test_view/testview");
+	    	mv.setViewName("main");
+			return mv;
+			}
+		@RequestMapping("/test02.mc")
+		public ModelAndView test02() {
+			ModelAndView mv = new ModelAndView();  		
+			mv.addObject("center","test_view/testview2");
+	    	mv.setViewName("main");
+			return mv;
+			}    
 	}
 	
 	  

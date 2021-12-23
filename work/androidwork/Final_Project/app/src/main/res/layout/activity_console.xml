@@ -79,7 +79,6 @@
                 android:layout_gravity="right"
                 android:text="Data OFF"
                 android:backgroundTint="@color/black"/>
->
         </LinearLayout>
 
         <LinearLayout
@@ -113,7 +112,6 @@
                 android:layout_height="50dp"
                 android:layout_gravity="right"
                 android:layout_marginRight="100dp"
-                android:text="36Cº"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="30dp" />
@@ -161,7 +159,7 @@
                 android:layout_marginLeft="100dp"
                 android:layout_marginTop="80dp"
                 android:layout_marginRight="100dp"
-                android:src="@drawable/gassensor" />
+                android:src="@drawable/gassensor2" />
 
             <TextView
                 android:layout_width="100dp"
@@ -179,7 +177,6 @@
                 android:layout_height="50dp"
                 android:layout_gravity="right"
                 android:layout_marginRight="100dp"
-                android:text="500ppm"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="22dp" />
@@ -192,7 +189,7 @@
                 android:layout_marginLeft="100dp"
                 android:layout_marginTop="100dp"
                 android:layout_marginRight="100dp"
-                android:src="@drawable/firesensor" />
+                android:src="@drawable/firesensor2" />
 
             <TextView
                 android:layout_width="100dp"
@@ -210,7 +207,6 @@
                 android:layout_height="50dp"
                 android:layout_gravity="right"
                 android:layout_marginRight="100dp"
-                android:text="Warning!!"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="22dp" />

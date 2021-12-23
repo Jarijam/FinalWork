@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V2</title>
+	<title>Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -57,8 +57,9 @@
 							<div class="login100-form-bgbtn"></div>
 							<button class="login100-form-btn" value="LOGIN">
 								Login
-							</button>
+							</button>							
 						</div>
+						<a href="uadd.mc">register</a>					
 					</div>
 				</form>
 			</div>

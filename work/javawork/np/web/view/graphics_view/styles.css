@@ -1,15 +1,16 @@
 @charset "UTF-8";
 
-#canvas_body {
-	margin: 0;
+/*   #canvas_body {
+	
 	padding: 30px;
 	font-size: 14px;
 	font-family: sens-serif;
 	color: #000;
 	background-color: #eee;
-}
+}  */ 
 
 #canvas {
 	background-color: #eee;
 	border: 5px solid #333;
+	margin-left: 200px;
 }

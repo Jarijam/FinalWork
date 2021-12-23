@@ -23,7 +23,7 @@
 
 
 img {
-	size: 30px;
+	/* size: 30px; */
 }
 
 .cbox {
@@ -34,21 +34,26 @@ img {
 
 .cbox-body {
 	text-decoration: underline;
+	text-align: center;
 }
 
 .tbox {
 	background-color: white;
 	margin: 30px;
-	height: 190px;
+	height: 400px;
 }
 
 .tbox-head {
-	
+	text-align: center;
+	margin-top: 30px;
+	font-size: 20px;
+	height: 30px;
 }
 
 .tbox-body {
 	margin: auto;
-	height: 300px;
+	height: 600px;
+	text-align: center;
 }
 
 .wrap {
@@ -200,18 +205,10 @@ img {
 		},5000);
 	});
 	
-	var imgArray = new Array();
-	imgArray[0] = "warning.png";
-	imgArray[1] = "default.png";
+	
 	
 	
 	function getData3() {
-		
-		var imgArray = new Array();
-		imgArray[0] = "warning.png";
-		imgArray[1] = "default.png";
-		
-		var defalutimg = document.getElementById('warning');
 		
 		$.ajax({
 			url:'flame.mc',
@@ -219,22 +216,15 @@ img {
 				
 				
 				$(data).each(function(idx,item){
-					
-					if( item.flame >= 65){
-						/* $('#flame').html(item.flame+"<br/><img class='warning' src='/np/img/warning.png'>"); */
-						$('#flame').html("<br/><img class='warning' src='/np/img/warning.png'>");
-					}else if ( item.flame < 65){
-						/* $('#flame').html(item.flame+"<br/><img class='default' src='/np/img/default.png'>"); */
-						$('#flame').html("<br/><img class='default' src='/np/img/default.png'>");
+					console.log(item.flame);
+					if( item.flame == 1){
+						$('#flame').html("<br/><img class='warning' src='/np/img/warning3.png'>");
+					}else if ( item.flame == 0){
+						$('#flame').html("<br/><img class='default' src='/np/img/security2.png'>");
 					}
 					
 					
-				/* 	if ( item.flame > 30 ){ 
-						 $('#flame').document.write("<img src='/np/img/warning.png'>");
-						
-					}else if ( item.flame < 30){
-						 $('#flame').document.write("<img src='/np/img/default.png'>");
-					} */
+			
 					
 					
 					
@@ -478,61 +468,30 @@ img {
     </script>
     
 	 <div class="row">
-	    <div class="col-sm-6">
-					  <div class="tbox"  >
-						     <div class="tbox-body">
-							 	<div id="map" style="width:100%;height:200px;"></div>
-						    </div>
-					    	
-				   	  </div>
-            	 </div>
-				    <div class="col-sm-2">
+				    <div class="col-sm-4" >
 					    <div class="tbox"  >
 						    <h5 class="tbox-head" style="background-color: blue;"  >Flame Detection&nbsp;&nbsp;
-						    <!-- <img src="/np/img/graph.png" width="30px" height="30px" > --></h5>
-						     <!--  <img src="/np/img/warning.png" width="100px" height="100px"  id="warning"><br/>
-						      <img src="/np/img/default.png" width="100px" height="100px" id="default"> -->
+						    </h5>
 							    <div class="tbox-body">
-							   		<!-- <  <a class="kr-font">기준치 초과 횟수</a> -->
 									 <a id="flame"></a> 
 								</div>
 						</div>
 				    </div>
-			   <div class="col-sm-2" >
-				<!-- 	 <div class="tbox">
-						<h5 class="tbox-head" style="background-color: #E39600;" >Gas Info&nbsp;&nbsp;
-						 <img src="/np/img/graph2.png" width="30px" height="30px" ></h5>
-							<div class="tbox-body">
-							  <a class="kr-font">기준치 초과 횟수</a>
-							  <a id="gas"></a>
-						    <div class="highcharts-figure">
-							    <div id="container-gas" class="chart-container"></div>
-							</div>
-						 </div>
-					</div> -->
-				</div>
-				<!--     <div class="col-sm-2" >
-				     <div class="tbox" >
-						<h5 class="tbox-head" style="background-color: #03C65A;" >Temp Info &nbsp;&nbsp;
-						 <img src="/np/img/graph.png" width="30px" height="30px" > </h5>
-						   <div class="tbox-body">
-							  <a class="kr-font">기준치 초과 횟수</a>
-							  <a id="temp"></a>
-						   <div class="highcharts-figure">
-							    <div id="container-speed" class="chart-container"></div>
-							</div>
+				    <div class="col-sm-5" ><br/>
+   			 			<div class="cbox">
+						    <h3 class="cbox-body">CCTV</h3>
+						    <div id = "cam" style="text-align: center;" >
+						    <iframe src="https://www.youtube.com/embed/7EndDbSl-0k/7EndDbSl-0k?autoplay=1&mute=1&amp;playlist=7EndDbSl-0k&amp;loop=1" frameborder="0" width="90%" height="350px" scrolling="no" style="margin: auto;  align-content: center;"></iframe>
+						    
+						    </div>
 					    </div>
-					</div>
-			    </div> -->
-			    
-				 
-            	 
+ 					</div>
             </div> 
            <script>
            var mapContainer = document.getElementById('map'), // 지도의 중심좌표
            mapOption = { 
         	    
-               center: new kakao.maps.LatLng(37.50972007166255, 127.05555398447125), // 지도의 중심좌표
+               center: new kakao.maps.LatLng(37.504312276264464, 127.04276519310413), // 지도의 중심좌표
                level: 2 // 지도의 확대 레벨
            }; 
 

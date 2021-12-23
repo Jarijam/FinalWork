@@ -165,8 +165,8 @@
 				        dataLabels: {
 				            format:
 				                '<div style="text-align:center">' +
-				                '<span style="font-size:25px">{y}</span><br/>' +
-				                '<span style="font-size:12px;opacity:0.4">°C</span>' +
+				                '<span style="font-size:60px">{y}</span><br/>' +
+				                '<span style="font-size:20px;opacity:0.4">°C</span>' +
 				                '</div>'
 				        },
 				        tooltip: {
@@ -201,11 +201,9 @@
 	<div class="row">
 			<div class="col-sm-4" >
 				     <div class="tbox">
-						<h5 class="tbox-head" style="background-color: #03C65A;" >Temp Info &nbsp;&nbsp;
-						 <!-- <img src="/np/img/graph.png" width="30px" height="30px" > --> </h5>
+						<h5 class="tbox-head" style="background-color: #03C65A;" >Temp Info &nbsp;&nbsp;</h5>
 						   <div class="tbox-body">
-							<!--   <a class="kr-font">기준치 초과 횟수</a>
-							  <a id="temp"></a> -->
+							
 						   <div class="highcharts-figure">
 							    <div id="container-speed" class="chart-container"></div>
 							</div>

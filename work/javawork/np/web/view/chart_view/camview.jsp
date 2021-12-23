@@ -172,9 +172,4 @@ $(document).ready(function(){
 </script> -->
 </head>
 <body>
-<div class="cbox">
-    <h3 class="cbox-body">CCTV</h3>
-    <div id = "cam" style="text-align: center;" >
-    <iframe src='http://192.168.0.16:81/stream' frameborder='0' width='90%' height='420px' scrolling='no' style='margin: auto;  border: solid red 2px; align-content: center;'></iframe>
-    </div>
-  </div>
+

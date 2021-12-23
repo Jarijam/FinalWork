@@ -7,6 +7,9 @@
     android:background="@drawable/fire3"
     android:orientation="vertical">
 
-
+    <ImageView
+        android:layout_width="239dp"
+        android:layout_height="124dp"
+        android:src="@drawable/logo" />
 
 </LinearLayout>

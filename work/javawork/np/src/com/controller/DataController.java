@@ -47,19 +47,16 @@ public class DataController {
 	    @RequestMapping("/data.mc")
 		@ResponseBody
 		public void data(HttpServletRequest request) throws Exception {
-//			String btn = request.getParameter("btn");
+	    	String flame = request.getParameter("flame");
+	    	String temp = request.getParameter("temp");
 			String gas = request.getParameter("gas");
-			String flame = request.getParameter("flame");
-//			String dis = request.getParameter("dis");
-			String temp = request.getParameter("temp");
 	    	String crash = request.getParameter("crash");
 	    	
 			int f_flame = Integer.parseInt(flame);
-			
-			
-		//	System.out.println(btn+","+gas+","+flame+","+dis);
+			System.out.println("불꽃감지센서 : "+flame+" 온도 : "+temp+" 가스 : "+gas+" 충돌감지 : "+crash);
 			
 			data_log.debug(flame+","+temp+","+gas+","+crash);
+			
 			if(f_flame > 0) {
 				try {
 					FcmUtil.sendServer(flame);
@@ -68,13 +65,11 @@ public class DataController {
 				}
 			}
 			
-//			if(btn.equals(1+"")) {
-//			cdservice.remove(btn);
-//		}
+
 		}
 	    @RequestMapping("/data2.mc")
 		@ResponseBody
-		public void data2(HttpServletRequest request) throws Exception {
+		public void data2(HttpServletRequest request)  {
 			
 			String X = request.getParameter("X");
 			String Y = request.getParameter("Y");
@@ -82,14 +77,19 @@ public class DataController {
 			 * int X1 = Integer.parseInt(X); int Y1 = Integer.parseInt(Y);
 			 */
 			System.out.println(X+","+Y);
+			
+			coord_log.debug(X+","+Y);
 			CoordinateVO coord1 = new CoordinateVO(X, Y);
-			cdservice.modify(coord1);
+			try {
+				cdservice.modify(coord1);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 				
 			
-//			if(btn.equals(1+"")) {
-//			cdservice.remove(btn);
-//		}
+
 		}
 	    
 	    
@@ -143,20 +143,8 @@ public class DataController {
     	}
     
     
-    //test용 (sendhttp)
-    	@RequestMapping("/iot1.mc")
-		@ResponseBody
-		public void iotdata(HttpServletRequest request, CoordinateVO coord) throws Exception {
-			String temp = request.getParameter("temp");
-			String humi = request.getParameter("humi");
-			int f_temp = Integer.parseInt(temp);
-			int f_humi = Integer.parseInt(humi);
-			System.out.println(f_temp+" : "+f_humi);
-			CoordinateVO coord1 = new CoordinateVO(temp, humi);
-			
-			cdservice.register(coord1);
-			//data_log.debug(f_temp+" : "+f_humi);
-		}
+    
+   
 		
 		@RequestMapping("/gas.mc")
 		@ResponseBody
@@ -242,11 +230,11 @@ public class DataController {
 	
 			rconn.eval("source('C:/logs/final_test.R',encoding='UTF-8')");
 			// R의 계산 결과를 리스트로 리턴 받음(소스를 로딩하고 함수를 호출하는 과정, 어레이리스트아님)
-			RList list = rconn.eval("a8()").asList();
+			RList list = rconn.eval("b5()").asList();
 	
 			// 리스트의 첫 번째 요소를 double 배열로 리턴
 			double[] n1 = list.at(0).asDoubles();
-			double[] n2 = list.at(1).asDoubles();
+			double[] n2 = list.at(4).asDoubles();
 			
 			
 			JSONObject jo = new JSONObject();
@@ -302,6 +290,49 @@ public class DataController {
 			out.close();
 			rconn.close();
 		}
+		@RequestMapping("/recentsensor.mc")
+	      @ResponseBody
+	      public void recent(HttpServletResponse response) throws IOException, RserveException, REXPMismatchException {
+	         response.setContentType("text/json;charset=UTF-8");
+	         PrintWriter out = response.getWriter();
+	         RConnection rconn = new RConnection("192.168.0.29");
+	         rconn.setStringEncoding("utf8");
+	   
+	         rconn.eval("source('C:/logs/final_test.R',encoding='UTF-8')");
+	         // R의 계산 결과를 리스트로 리턴 받음(소스를 로딩하고 함수를 호출하는 과정, 어레이리스트아님)
+	         RList list = rconn.eval("b5()").asList();
+	   
+	         // 리스트의 첫 번째 요소를 double 배열로 리턴
+	         double[] n1 = list.at(0).asDoubles();
+	         double[] n2 = list.at(1).asDoubles();
+	         double[] n3 = list.at(2).asDoubles();
+	         double[] n4 = list.at(3).asDoubles();
+	         double[] n5 = list.at(4).asDoubles();
+	         
+	         JSONObject jo = new JSONObject();
+	         JSONArray tdata = new JSONArray();
+	         for(double num:n3) {
+	            tdata.add(num);
+	         }
+	         jo.put("temp",tdata);
+	         
+	         JSONArray tdata2 = new JSONArray();
+	         for(double num:n4) {
+	            tdata2.add(num);
+	         }
+	         jo.put("gas", tdata2);
+	         
+	         JSONArray tdata3 = new JSONArray();
+	         for(double num:n5) {
+	            tdata3.add(num);
+	         }
+	         jo.put("flame", tdata3);
+
+	         out.print(jo.toJSONString());
+	         out.close();
+	         rconn.close();
+	      }
+
 		
 		@RequestMapping("/androidtemp.mc")
 		@ResponseBody
@@ -332,15 +363,6 @@ public class DataController {
 			rconn.close();
 		}
 		
-//		@RequestMapping("/data2.mc")
-//		@ResponseBody
-//		public void data2(HttpServletRequest request) throws Exception {
-////			Double X = Double.parseDouble(request.getParameter("X"));
-//			String X = request.getParameter("X");
-//			String Y = request.getParameter("Y");
-//	    	
-//			System.out.println(X+","+Y);
-//			coord_log.debug(X+","+Y);
-//		}
+
 		
 	}
