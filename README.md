@@ -105,7 +105,7 @@ https://github.com/Jarijam/FinalWork/blob/8bda858031d70f3f7f9070bbaeb52c3ee59127
 #### 시리얼 통신을 위한 서버/클라이언트 파일
 
 ```
-link plz (srs전체)
+https://github.com/Jarijam/FinalWork/blob/2d1c554411d25d9c45b5a14cc5056ef9413cb047/work/javawork/arduinoSerial/arduinoSerial/src/final_latte/SendAndReceiveSerial.java#L28-L187
 ```
 
 #### 웹으로 부터 요청을 받아 아두이노로 메세지를 보내는 thread
