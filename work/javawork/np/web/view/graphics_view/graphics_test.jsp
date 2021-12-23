@@ -93,26 +93,24 @@
 					 getSensor();
 					}, 1000);
 				});		
-			}); 		
-
+	}); 
+		
+		//=============================time========================
+		 function time(){
+			  var time= new Date(); //시간받기위해서 new date
+			      document.getElementById("now").innerHTML="2021년 12월 17일 "+time.getHours()+"시 "+time.getMinutes()+"분 "+time.getSeconds()+"초";
+			     setInterval("time()",1000);     //1초 지난후 time()실행
+			  }
+		     
+	</script>
+	<style>
 	
-	
-	//=============================time========================
-	 function time(){
-		  var time= new Date(); //시간받기위해서 new date
-		      document.getElementById("now").innerHTML="2021년 12월 17일 "+time.getHours()+"시 "+time.getMinutes()+"분 "+time.getSeconds()+"초";
-		     setInterval("time()",1000);     //1초 지난후 time()실행
-		  }
-	     
-</script>
-<style>
-
-	.areahead{
-		text-align: center;
-		border-radius: 20px;
-		background-color: #FFCD42;
-		margin: 60px auto;
-		width: 400px;
+		.areahead{
+			text-align: center;
+			border-radius: 20px;
+			background-color: #FFCD42;
+			margin: 60px auto;
+			width: 400px;
 			
 			</canvas>
 		</div>
