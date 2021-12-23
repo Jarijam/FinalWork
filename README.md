@@ -66,7 +66,8 @@
 ### 시스템 구성도
 ![``](img/system.PNG)
 
-
+### 작품사진
+<img src="img\model.png"/>
 
 -----
 
