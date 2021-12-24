@@ -101,7 +101,7 @@
 
 ####  Data Controller (메인 서버)
 
-https://github.com/Jarijam/FinalWork/blob/8bda858031d70f3f7f9070bbaeb52c3ee591279c/work/javawork/np/src/com/controller/DataController.java#L49-L71
+[text](https://github.com/Jarijam/FinalWork/blob/8bda858031d70f3f7f9070bbaeb52c3ee591279c/work/javawork/np/src/com/controller/DataController.java#L49-L71)
 
 #### 시리얼 통신을 위한 서버/클라이언트 파일
 
